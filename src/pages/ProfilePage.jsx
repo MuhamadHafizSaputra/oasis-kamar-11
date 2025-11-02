@@ -43,37 +43,23 @@ const formatCurrency = (value) =>
   }).format(value);
 
 export default function ProfilePage() {
-  const { id } = useParams(); // Ambil ID dari URL
-  const umkm = umkmData.find((item) => item.id === parseInt(id)); // Cari UMKM yang sesuai
+  const { id } = useParams();
 
-  const [isDescExpanded, setIsDescExpanded] = useState(false); // State untuk deskripsi
+  // DIUBAH: Cari UMKM yang sesuai. 
+  // Kita ubah 'id' dari string URL menjadi angka (Number)
+  const umkm = umkmData.find(item => item.id === Number(id));
 
-  // (Poin 4) Tampilkan pesan jika UMKM tidak ditemukan
+  // DIUBAH: Tambahkan penanganan jika UMKM tidak ditemukan
   if (!umkm) {
     return (
       <div className="container mx-auto max-w-6xl px-4 py-10 text-center">
-        <h1 className="text-2xl font-bold">UMKM tidak ditemukan</h1>
-        <p className="text-gray-600 mt-2">
-          Maaf, kami tidak dapat menemukan data untuk UMKM yang Anda cari.
+        <h1 className="text-4xl font-bold">UMKM tidak ditemukan</h1>
+        <p className="text-xl text-gray-600 mt-4">
+          Maaf, data untuk UMKM dengan ID {id} tidak ada.
         </p>
       </div>
     );
   }
-
-  // (Poin 5) Format data baru untuk ditampilkan
-  const priceRange = umkm.priceRange
-    ? `${formatCurrency(umkm.priceRange[0])} - ${formatCurrency(
-        umkm.priceRange[1]
-      )}`
-    : "Informasi harga tidak tersedia";
-
-  const paymentMethods = umkm.paymentMethods
-    ? umkm.paymentMethods.join(", ")
-    : "Tidak ada data";
-
-  const totalRatingAvg = umkm.rating / 20; // Asumsi rating 100% = 5 bintang
-  const shortDescription = umkm.description.split(".").slice(0, 1).join(".") + ".";
-
   return (
     <div className="container mx-auto max-w-6xl px-4 py-10">
       {/* ===== BAGIAN 1: HEADER & GALERI (HERO) ===== */}
