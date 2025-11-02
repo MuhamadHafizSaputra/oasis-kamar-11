@@ -6,10 +6,23 @@ import PhotoGrid from "../components/PhotoGrid";
 import { StarIcon, MapPinIcon } from "@heroicons/react/24/solid";
 
 export default function ProfilePage() {
-  // Dalam aplikasi nyata, Anda akan fetch data berdasarkan ID
-  // Di sini kita ambil data pertama sebagai contoh
-  const umkm = umkmData[0]; 
+  const { id } = useParams();
 
+  // DIUBAH: Cari UMKM yang sesuai. 
+  // Kita ubah 'id' dari string URL menjadi angka (Number)
+  const umkm = umkmData.find(item => item.id === Number(id));
+
+  // DIUBAH: Tambahkan penanganan jika UMKM tidak ditemukan
+  if (!umkm) {
+    return (
+      <div className="container mx-auto max-w-6xl px-4 py-10 text-center">
+        <h1 className="text-4xl font-bold">UMKM tidak ditemukan</h1>
+        <p className="text-xl text-gray-600 mt-4">
+          Maaf, data untuk UMKM dengan ID {id} tidak ada.
+        </p>
+      </div>
+    );
+  }
   return (
     <div className="container mx-auto max-w-6xl px-4 py-10">
       {/* Header (Nama, Rating, Lokasi) */}

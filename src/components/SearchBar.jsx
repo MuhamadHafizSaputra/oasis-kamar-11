@@ -1,5 +1,7 @@
-// src/components/SearchBar.js
+// src/components/SearchBar.jsx
 import React, { useState } from "react";
+// DIUBAH: Impor useNavigate
+import { useNavigate } from "react-router-dom";
 import {
   MapPinIcon,
   MagnifyingGlassIcon,
@@ -30,12 +32,31 @@ const categories = [
 
 export default function SearchBar() {
   const [isFocused, setIsFocused] = useState(false);
+  // DIUBAH: Tambahkan state untuk query & panggil hook navigate
+  const [query, setQuery] = useState("");
+  const navigate = useNavigate();
+
+  // DIUBAH: Fungsi untuk menangani submit pencarian
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    if (query.trim()) {
+      // Pindah ke /list dengan membawa query pencarian
+      navigate(`/list?q=${encodeURIComponent(query)}`);
+    }
+  };
+
+  // DIUBAH: Fungsi untuk menangani klik "UMKM Terdekat"
+  const handleNearMeClick = () => {
+    // Pindah ke /list dengan parameter khusus
+    navigate(`/list?loc=terdekat`);
+  };
 
   return (
     <div className="bg-white p-6 rounded-xl shadow-lg w-full max-w-3xl mx-auto">
-      {/* Bagian Kategori (Poin 1) */}
+      {/* Bagian Kategori (tidak berubah) */}
       <div className="flex justify-around mb-4">
         {categories.map((category) => (
+          // ... (JSX Kategori tidak berubah)
           <div key={category.name} className="relative group">
             <button className="flex flex-col items-center w-20 text-center text-gray-700 hover:text-indigo-600">
               <div className="p-3 bg-gray-100 rounded-full group-hover:bg-indigo-100">
@@ -43,15 +64,10 @@ export default function SearchBar() {
               </div>
               <span className="mt-1 text-sm font-medium">{category.name}</span>
             </button>
-            {/* Dropdown Sub-kategori (Poin 1) */}
             <div className="absolute left-1/2 -translate-x-1/2 mt-2 w-48 bg-white border rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
               <div className="py-1">
                 {category.subcategories.map((sub) => (
-                  <a
-                    key={sub}
-                    href="#"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  >
+                  <a key={sub} href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                     {sub}
                   </a>
                 ))}
@@ -61,24 +77,32 @@ export default function SearchBar() {
         ))}
       </div>
 
-      {/* Bagian Search Box (Poin 3) */}
-      <div className="relative">
+      {/* DIUBAH: Bungkus search box dengan <form> */}
+      <form className="relative" onSubmit={handleSearchSubmit}>
         <div className="flex items-center w-full">
           <MagnifyingGlassIcon className="absolute left-4 w-5 h-5 text-gray-400" />
           <input
             type="text"
             placeholder="Mau cari apa di Jogja?"
             className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            // DIUBAH: Hubungkan ke state
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
             onFocus={() => setIsFocused(true)}
-            onBlur={() => setTimeout(() => setIsFocused(false), 200)} // delay on blur
+            onBlur={() => setTimeout(() => setIsFocused(false), 200)}
           />
+          <button type="submit" className="hidden">Cari</button>
         </div>
 
-        {/* Dropdown "UMKM Terdekat" (Poin 3) */}
+        {/* Dropdown "UMKM Terdekat" */}
         {isFocused && (
           <div className="absolute top-full mt-2 w-full bg-white border rounded-lg shadow-lg z-40">
             <ul>
-              <li className="flex items-center px-4 py-3 hover:bg-gray-100 cursor-pointer">
+              {/* DIUBAH: Gunakan onMouseDown agar dieksekusi sebelum onBlur */}
+              <li 
+                className="flex items-center px-4 py-3 hover:bg-gray-100 cursor-pointer"
+                onMouseDown={handleNearMeClick}
+              >
                 <MapPinIcon className="w-6 h-6 mr-3 text-indigo-600" />
                 <div>
                   <p className="font-semibold">UMKM Terdekat</p>
@@ -87,11 +111,10 @@ export default function SearchBar() {
                   </p>
                 </div>
               </li>
-              {/* Anda bisa tambahkan "Recent Searches" di sini */}
             </ul>
           </div>
         )}
-      </div>
+      </form>
     </div>
   );
 }
