@@ -1,3 +1,4 @@
+/* src/index.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -11,3 +12,25 @@
     @apply bg-brand-beige min-h-screen;
   }
 }
+
+/* --- TAMBAHKAN STYLE INI --- */
+
+/* Ini memastikan container peta mengambil tinggi yang tersedia */
+.map-container {
+  width: 100%;
+  height: 100%;
+}
+
+/* Styling kustom untuk popup Maplibre */
+.maplibregl-popup-content {
+  @apply rounded-lg shadow-lg p-3 border border-gray-200;
+  padding: 12px 15px !important; /* Timpa style bawaan */
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+.maplibregl-popup-close-button {
+  @apply text-gray-700 hover:text-gray-900;
+  font-size: 20px;
+  padding: 0 5px;
+}
+/* --- AKHIR TAMBAHAN --- */

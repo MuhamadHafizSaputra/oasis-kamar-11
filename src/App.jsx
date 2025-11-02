@@ -1,10 +1,10 @@
 // src/App.js
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import HomePage from "./pages/HomePage";
-import ListPage from "./pages/ListPage";
-import ProfilePage from "./pages/ProfilePage";
-import Navbar from "./components/Navbar";
+import HomePage from "./pages/HomePage.jsx";
+import ListPage from "./pages/ListPage.jsx";
+import ProfilePage from "./pages/ProfilePage.jsx";
+import Navbar from "./components/Navbar.jsx";
 
 function App() {
   return (

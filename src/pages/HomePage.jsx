@@ -1,8 +1,8 @@
 // src/pages/HomePage.js
 import React from "react";
-import SearchBar from "../components/SearchBar";
-import FeaturedCard from "../components/FeaturedCard";
-import { featuredData } from "../data/mockData"; // Data dummy
+import SearchBar from "../components/SearchBar.jsx";
+import FeaturedCard from "../components/FeaturedCard.jsx";
+import { umkmData } from "../data/mockData"; // Data dummy
 
 export default function HomePage() {
   return (
@@ -21,7 +21,7 @@ export default function HomePage() {
 
       {/* Featured Cards (Poin 2) */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {featuredData.map((item) => (
+        {umkmData.map((item) => (
           <FeaturedCard
             key={item.id}
             title={item.title}
