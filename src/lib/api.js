@@ -1,14 +1,32 @@
 // src/lib/api.js
 import { JOGJA_BOUNDING_BOX } from "./constants.js";
-
-// PENTING: Impor data statis UMKM dari file-mu
-// Pastikan path-nya benar dan berakhiran .js
 import { umkmData } from '../data/mockData.jsx'; 
 
+// --- FUNGSI BARU UNTUK MENCARI UMKM LOKAL ---
 /**
- * Mengambil data geocoding, DIBATASI HANYA DI DALAM JOGJA.
+ * Mencari UMKM secara lokal dari mockData.js berdasarkan nama.
+ * @param {string} query Teks pencarian
+ * @returns {object | null} Objek UMKM yang ditemukan atau null
+ */
+export function searchLocalUmkm(query) {
+  console.log(`Mencari lokal untuk: "${query}"`);
+  const normalizedQuery = query.toLowerCase();
+  
+  // Cari di dalam umkmData apakah ada nama yang cocok
+  const foundUmkm = umkmData.find(umkm => 
+    umkm.name.toLowerCase().includes(normalizedQuery)
+  );
+
+  return foundUmkm || null; // Kembalikan UMKM yang ditemukan atau null
+}
+// --- AKHIR FUNGSI BARU ---
+
+
+/**
+ * Mengambil data geocoding (LOKASI), DIBATASI HANYA DI DALAM JOGJA.
  */
 export async function geocode(query) {
+  // ... (Fungsi ini tidak berubah)
   const url = new URL("https://nominatim.openstreetmap.org/search");
   url.searchParams.set("q", query);
   url.searchParams.set("format", "json");
@@ -34,31 +52,20 @@ export async function geocode(query) {
   }
 }
 
-/**
- * Mock API untuk mengambil Listings (Data Camp/Sewa).
- * Saat ini kita belum punya data, jadi kembalikan array kosong.
- */
+// ... (Fungsi getListingsInBounds dan getUmkmInBounds tidak berubah) ...
 export async function getListingsInBounds(bounds) {
   console.log("Mock API: Fetching listings...");
-  await new Promise(resolve => setTimeout(resolve, 100)); // Simulasi delay
-  
+  await new Promise(resolve => setTimeout(resolve, 100));
   const visibleListings = []; 
-  
   console.log(`Mock API: Found ${visibleListings.length} listings.`);
   return visibleListings;
 }
 
-/**
- * Mock API untuk mengambil UMKM.
- * FUNGSI INI MEMBACA DAN MEMFILTER 'umkmData' DARI 'mockData.js'.
- */
 export async function getUmkmInBounds(bounds) {
   console.log("Mock API: Fetching UMKM from mockData.js...");
-  await new Promise(resolve => setTimeout(resolve, 300)); // Simulasi delay
+  await new Promise(resolve => setTimeout(resolve, 300));
 
-  // Filter data berdasarkan latitude/longitude
   const visibleUmkm = umkmData.filter(umkm => {
-    // Pastikan data-mu punya latitude & longitude
     if (!umkm.latitude || !umkm.longitude) { 
       return false;
     }
