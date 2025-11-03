@@ -44,6 +44,7 @@ const formatCurrency = (value) =>
 
 export default function ProfilePage() {
   const { id } = useParams();
+  const [isDescExpanded, setIsDescExpanded] = useState(false); 
 
   // DIUBAH: Cari UMKM yang sesuai. 
   // Kita ubah 'id' dari string URL menjadi angka (Number)
@@ -60,6 +61,19 @@ export default function ProfilePage() {
       </div>
     );
   }
+  const shortDescription = umkm.description.substring(0, 200) + "...";
+  const priceRange = umkm.details.priceRange
+  ? `${formatCurrency(umkm.details.priceRange[0])} - ${formatCurrency(umkm.details.priceRange[1])}`
+  : "Harga tidak tersedia"; // Or use formatCurrency(0) if you prefer
+  // Line 66 Fix:
+const paymentMethods = umkm.details.paymentMethods 
+  ? umkm.details.paymentMethods.join(", ") 
+  : "Tidak ada data pembayaran";
+
+// Line 67 Fix:
+const totalRatingAvg = umkm.reviewsList && umkm.reviewsList.length > 0
+  ? umkm.reviewsList.reduce((acc, r) => acc + r.rating, 0) / umkm.reviewsList.length
+  : 0; // Default to 0 if no reviews
   return (
     <div className="container mx-auto max-w-6xl px-4 py-10">
       {/* ===== BAGIAN 1: HEADER & GALERI (HERO) ===== */}
