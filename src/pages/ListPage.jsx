@@ -5,6 +5,7 @@ import FilterBar from "../components/FilterBar.jsx";
 import UmkmCard from "../components/UmkmCard.jsx";
 
 import maplibregl from "maplibre-gl"; 
+// --- PERUBAHAN 1: Impor 'useMap' ---
 import { Map, Marker, Popup, GeolocateControl, useMap } from "@vis.gl/react-maplibre";
 import MapGeocoder from "../components/MapGeocoder.jsx";
 import DynamicDataLoader from "../components/DynamicDataLoader.jsx";
@@ -77,10 +78,9 @@ function InitialMapAction({ geolocateControlRef, setUmkm, setIsInSearchMode }) {
       const foundUmkmList = await searchApiUmkm(q, lat, lon);
 
       if (foundUmkmList && foundUmkmList.length > 0) {
-        // --- ATURAN 3: DITEMUKAN UMKM ---
         console.log(`Ditemukan ${foundUmkmList.length} UMKM:`, foundUmkmList);
         setUmkm(foundUmkmList);
-        setIsInSearchMode(true); // <-- KUNCI DAFTAR (Masuk Mode Pencarian)
+        setIsInSearchMode(true); 
 
         if (foundUmkmList.length === 1) {
           const umkm = foundUmkmList[0];
@@ -94,8 +94,7 @@ function InitialMapAction({ geolocateControlRef, setUmkm, setIsInSearchMode }) {
         }
 
       } else {
-        // --- ATURAN 2: DITEMUKAN LOKASI ---
-        setIsInSearchMode(false); // <-- LEPAS KUNCI (Masuk Mode Eksplorasi)
+        setIsInSearchMode(false); 
         const result = await geocode(q);
         if (result) {
           const largeAreaTypes = ['administrative', 'boundary', 'city', 'region'];
@@ -116,9 +115,8 @@ function InitialMapAction({ geolocateControlRef, setUmkm, setIsInSearchMode }) {
       console.log("Menjalankan pencarian awal untuk:", query);
       runSearch(query);
     } else if (location === 'terdekat' && geolocateControlRef.current) {
-      // --- ATURAN 1 (Terdekat): Masuk Mode Eksplorasi ---
       console.log("Menjalankan pencarian lokasi terdekat...");
-      setIsInSearchMode(false); // <-- LEPAS KUNCI
+      setIsInSearchMode(false); 
       geolocateControlRef.current.trigger(); 
       setHasRun(true); 
       setSearchParams({}, { replace: true }); 
@@ -138,6 +136,9 @@ export default function ListPage() {
   const [isInSearchMode, setIsInSearchMode] = useState(false);
   
   const geolocateControlRef = useRef(null);
+  
+  // --- PERUBAHAN 2: Dapatkan instance 'map' di sini ---
+  const { default: map } = useMap();
 
   const initialViewState = {
     longitude: 110.3777,
@@ -185,13 +186,31 @@ export default function ListPage() {
             }}
           />
           
+          {/* --- PERUBAHAN 3: Modifikasi GeolocateControl --- */}
           <GeolocateControl 
             ref={geolocateControlRef}
             position="top-right"
             positionOptions={{ enableHighAccuracy: true }}
-            fitBoundsOptions={{ maxZoom: 15 }}
             showUserLocation={true}
+            
+            // 1. HAPUS 'fitBoundsOptions' agar tidak zoom-out otomatis
+            // fitBoundsOptions={{ maxZoom: 15 }} 
+            
+            // 2. TAMBAHKAN 'onGeolocate' untuk mengontrol zoom manual
+            onGeolocate={(e) => {
+              // 'e' berisi koordinat yang ditemukan
+              if (map) {
+                // 3. Perintahkan peta untuk terbang ke lokasi
+                //    dengan zoom level 17 (sekitar 1km)
+                map.flyTo({
+                  center: [e.coords.longitude, e.coords.latitude],
+                  zoom: 17, // <-- Ini adalah zoom level 1km
+                  duration: 2000 // Animasi 2 detik
+                });
+              }
+            }}
           />
+          {/* --- AKHIR PERUBAHAN --- */}
           
           <InitialMapAction 
             geolocateControlRef={geolocateControlRef} 
@@ -224,9 +243,6 @@ export default function ListPage() {
                 <h3 className="font-bold">{selectedUmkm.name}</h3>
                 <p className="text-sm">{selectedUmkm.category}</p>
                 
-                {/* --- PERBAIKAN DI SINI --- */}
-                {/* Tampilkan 'calculated_distance' (angka) jika ada, */}
-                {/* jika tidak, baru tampilkan 'distance' (teks) */}
                 {selectedUmkm.calculated_distance ? (
                   <p className="text-xs text-gray-500">
                     {selectedUmkm.calculated_distance.toFixed(2)} km dari Anda
@@ -236,8 +252,6 @@ export default function ListPage() {
                     {selectedUmkm.distance}
                   </p>
                 )}
-                {/* --- AKHIR PERBAIKAN --- */}
-
               </div>
             </Popup>
           )}
