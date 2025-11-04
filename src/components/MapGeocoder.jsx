@@ -2,40 +2,14 @@
 import { useState } from 'react';
 import maplibregl from 'maplibre-gl'; 
 import { useMap } from '@vis.gl/react-maplibre';
-// Perbaiki path impor ini
 import { geocode, searchApiUmkm } from '../lib/api.js';
 
 const MAP_PADDING = { top: 100, bottom: 40, left: 40, right: 40 };
 const SPECIFIC_LOCATION_ZOOM = 16.5;
 
-// Helper untuk mendapatkan lokasi (menggunakan Promise)
-const getUserLocation = () => new Promise((resolve) => {
-  if (!navigator.geolocation) {
-    console.warn("Geolocation tidak didukung.");
-    resolve(null);
-  }
-  
-  navigator.geolocation.getCurrentPosition(
-    (position) => {
-      resolve({ 
-        lat: position.coords.latitude, 
-        lon: position.coords.longitude 
-      });
-    },
-    (error) => {
-      console.warn("Gagal mendapatkan lokasi:", error.message);
-      resolve(null); // Gagal atau pengguna menolak
-    },
-    { 
-      enableHighAccuracy: false, 
-      timeout: 5000, 
-      maximumAge: 60000 
-    }
-  );
-});
+// (Helper getUserLocation TIDAK DIPERLUKAN LAGI DI FILE INI)
+// ... (Hapus atau biarkan saja, tidak akan dipanggil)
 
-
-// --- UBAH PROPS: Terima 'setIsInSearchMode' ---
 export default function MapGeocoder({ setUmkm, setIsInSearchMode }) {
   const { default: map } = useMap();
   const [query, setQuery] = useState('');
@@ -45,31 +19,26 @@ export default function MapGeocoder({ setUmkm, setIsInSearchMode }) {
     e.preventDefault();
     if (!map) return;
     
-    // --- ATURAN BARU: Keluar dari Mode Pencarian jika query kosong ---
     if (query.trim().length === 0) {
-      setIsInSearchMode(false); // Lepas Kunci
-      // Minta peta untuk memuat ulang data di area saat ini
+      setIsInSearchMode(false);
       map.fire('moveend'); 
       return;
     }
-    // --- AKHIR ATURAN BARU ---
 
     setIsLoading(true);
 
-    console.log("Mencoba mendapatkan lokasi pengguna...");
-    const location = await getUserLocation();
-    const lat = location ? location.lat : null;
-    const lon = location ? location.lon : null;
-    
-    const foundUmkmList = await searchApiUmkm(query, lat, lon);
+    // --- PERBAIKAN MASALAH 2 ---
+    // JANGAN minta lokasi saat mencari berdasarkan teks.
+    // Cukup panggil searchApiUmkm dengan 'null' untuk lat/lon.
+    console.log(`Mencari teks: ${query}`);
+    const foundUmkmList = await searchApiUmkm(query, null, null);
+    // --- AKHIR PERBAIKAN ---
 
     if (foundUmkmList && foundUmkmList.length > 0) {
-      // --- ATURAN 3: UMKM DITEMUKAN ---
+      // (Logika Aturan 3 tidak berubah)
       console.log(`Ditemukan ${foundUmkmList.length} UMKM:`, foundUmkmList);
-      
       setUmkm(foundUmkmList);
-      setIsInSearchMode(true); // <-- KUNCI DAFTAR (Masuk Mode Pencarian)
-
+      setIsInSearchMode(true); 
       if (foundUmkmList.length === 1) {
         const umkm = foundUmkmList[0];
         map.flyTo({
@@ -85,17 +54,15 @@ export default function MapGeocoder({ setUmkm, setIsInSearchMode }) {
         });
         map.fitBounds(bounds, { padding: {top: 150, bottom: 50, left: 50, right: 50}, duration: 2000 });
       }
-
     } else {
-      // --- ATURAN 2: UMKM TIDAK DITEMUKAN, CARI LOKASI ---
+      // (Logika Aturan 2 tidak berubah)
       console.log("UMKM API tidak ditemukan. Mencari sebagai lokasi...");
-      setIsInSearchMode(false); // <-- LEPAS KUNCI (Masuk Mode Eksplorasi)
+      setIsInSearchMode(false);
       const result = await geocode(query);
 
       if (result) {
         const largeAreaTypes = ['administrative', 'boundary', 'city', 'region'];
         const isLargeArea = largeAreaTypes.includes(result.type);
-
         if (isLargeArea && result.boundingbox) {
           const [minLat, maxLat, minLng, maxLng] = result.boundingbox.map(parseFloat);
           const bounds = [[minLng, minLat], [maxLng, maxLat]];
@@ -120,6 +87,7 @@ export default function MapGeocoder({ setUmkm, setIsInSearchMode }) {
 
   return (
     <div className="absolute top-4 left-1/2 -translate-x-1/2 z-10 w-full max-w-sm px-4">
+      {/* (Form tidak berubah) */}
       <form onSubmit={handleSubmit} className="relative">
         <input
           type="text"

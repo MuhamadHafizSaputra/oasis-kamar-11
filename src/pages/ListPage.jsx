@@ -4,40 +4,36 @@ import { useSearchParams } from "react-router-dom";
 import FilterBar from "../components/FilterBar.jsx";
 import UmkmCard from "../components/UmkmCard.jsx";
 
-import maplibregl from "maplibre-gl"; 
-// --- PERUBAHAN 1: Impor 'useMap' ---
+import maplibregl from "maplibre-gl";
+// --- PERUBAHAN: Impor Ikon Baru ---
 import { Map, Marker, Popup, GeolocateControl, useMap } from "@vis.gl/react-maplibre";
+import { CursorArrowRaysIcon } from "@heroicons/react/24/outline";
+// ---
 import MapGeocoder from "../components/MapGeocoder.jsx";
 import DynamicDataLoader from "../components/DynamicDataLoader.jsx";
 
-import { geocode, searchApiUmkm } from "../lib/api.js"; 
+import { geocode, searchApiUmkm } from "../lib/api.js";
 
 const MAP_PADDING = { top: 100, bottom: 40, left: 40, right: 40 };
 const SPECIFIC_LOCATION_ZOOM = 16.5;
 
-// --- Helper untuk Ikon Kategori ---
+// (Helper getCategoryMarker tidak berubah)
 function getCategoryMarker(category) {
   switch (category) {
-    case "Makanan":
-      return <span className="text-2xl">🍜</span>;
-    case "Produk":
-      return <span className="text-2xl">🎨</span>;
-    case "Jasa":
-      return <span className="text-2xl">🔧</span>;
-    case "Belanja":
-      return <span className="text-2xl">🏪</span>;
-    default:
-      return <span className="text-2xl">🛍️</span>;
+    case "Makanan": return <span className="text-2xl">🍜</span>;
+    case "Produk": return <span className="text-2xl">🎨</span>;
+    case "Jasa": return <span className="text-2xl">🔧</span>;
+    case "Belanja": return <span className="text-2xl">🏪</span>;
+    default: return <span className="text-2xl">🛍️</span>;
   }
 }
 
-// Helper untuk mendapatkan lokasi (menggunakan Promise)
+// (Helper getUserLocation tidak berubah)
 const getUserLocation = () => new Promise((resolve) => {
   if (!navigator.geolocation) {
     console.warn("Geolocation tidak didukung.");
     resolve(null);
   }
-  
   navigator.geolocation.getCurrentPosition(
     (position) => {
       resolve({ 
@@ -47,13 +43,9 @@ const getUserLocation = () => new Promise((resolve) => {
     },
     (error) => {
       console.warn("Gagal mendapatkan lokasi:", error.message);
-      resolve(null); // Gagal atau pengguna menolak
+      resolve(null);
     },
-    { 
-      enableHighAccuracy: false, 
-      timeout: 5000, 
-      maximumAge: 60000 
-    }
+    { enableHighAccuracy: false, timeout: 5000, maximumAge: 60000 }
   );
 });
 
@@ -61,7 +53,7 @@ const getUserLocation = () => new Promise((resolve) => {
 function InitialMapAction({ geolocateControlRef, setUmkm, setIsInSearchMode }) {
   const { default: map } = useMap();
   const [searchParams, setSearchParams] = useSearchParams();
-  const [hasRun, setHasRun] = useState(false); 
+  const [hasRun, setHasRun] = useState(false);
 
   useEffect(() => {
     if (!map || hasRun) return;
@@ -70,18 +62,18 @@ function InitialMapAction({ geolocateControlRef, setUmkm, setIsInSearchMode }) {
     const location = searchParams.get('loc');
 
     const runSearch = async (q) => {
-      console.log("Mencoba mendapatkan lokasi pengguna (dari Initial Action)...");
-      const userLoc = await getUserLocation();
-      const lat = userLoc ? userLoc.lat : null;
-      const lon = userLoc ? userLoc.lon : null;
-      
-      const foundUmkmList = await searchApiUmkm(q, lat, lon);
+      // --- PERBAIKAN MASALAH 2 ---
+      // JANGAN minta lokasi saat mencari berdasarkan teks.
+      // Cukup kirim 'null' untuk lat/lon.
+      console.log(`Menjalankan pencarian awal untuk teks: ${q}`);
+      const foundUmkmList = await searchApiUmkm(q, null, null);
+      // --- AKHIR PERBAIKAN ---
 
       if (foundUmkmList && foundUmkmList.length > 0) {
+        // (Logika Aturan 3 tidak berubah)
         console.log(`Ditemukan ${foundUmkmList.length} UMKM:`, foundUmkmList);
         setUmkm(foundUmkmList);
-        setIsInSearchMode(true); 
-
+        setIsInSearchMode(true);
         if (foundUmkmList.length === 1) {
           const umkm = foundUmkmList[0];
           map.flyTo({ center: [umkm.longitude, umkm.latitude], zoom: SPECIFIC_LOCATION_ZOOM, padding: MAP_PADDING, duration: 1500 });
@@ -92,9 +84,9 @@ function InitialMapAction({ geolocateControlRef, setUmkm, setIsInSearchMode }) {
           });
           map.fitBounds(bounds, { padding: {top: 150, bottom: 50, left: 50, right: 50}, duration: 1500 });
         }
-
       } else {
-        setIsInSearchMode(false); 
+        // (Logika Aturan 2 tidak berubah)
+        setIsInSearchMode(false);
         const result = await geocode(q);
         if (result) {
           const largeAreaTypes = ['administrative', 'boundary', 'city', 'region'];
@@ -107,37 +99,34 @@ function InitialMapAction({ geolocateControlRef, setUmkm, setIsInSearchMode }) {
           }
         }
       }
-      setHasRun(true); 
-      setSearchParams({}, { replace: true }); 
+      setHasRun(true);
+      setSearchParams({}, { replace: true });
     };
 
     if (query) {
-      console.log("Menjalankan pencarian awal untuk:", query);
+      // Ini HANYA akan menjalankan pencarian teks (sesuai Masalah 2)
       runSearch(query);
     } else if (location === 'terdekat' && geolocateControlRef.current) {
+      // Ini akan MEMICU permintaan lokasi (sesuai Masalah 2)
       console.log("Menjalankan pencarian lokasi terdekat...");
-      setIsInSearchMode(false); 
-      geolocateControlRef.current.trigger(); 
-      setHasRun(true); 
-      setSearchParams({}, { replace: true }); 
+      setIsInSearchMode(false);
+      geolocateControlRef.current.trigger();
+      setHasRun(true);
+      setSearchParams({}, { replace: true });
     }
 
   }, [map, searchParams, setSearchParams, hasRun, geolocateControlRef, setUmkm, setIsInSearchMode]);
 
-  return null; 
+  return null;
 }
 
 
 export default function ListPage() {
-  const [listings, setListings] = useState([]); 
+  const [listings, setListings] = useState([]);
   const [umkm, setUmkm] = useState([]);
   const [selectedUmkm, setSelectedUmkm] = useState(null);
-  
   const [isInSearchMode, setIsInSearchMode] = useState(false);
-  
   const geolocateControlRef = useRef(null);
-  
-  // --- PERUBAHAN 2: Dapatkan instance 'map' di sini ---
   const { default: map } = useMap();
 
   const initialViewState = {
@@ -147,9 +136,10 @@ export default function ListPage() {
   };
 
   return (
-    <div className="flex h-[calc(100vh-80px)]"> 
-      
+    <div className="flex h-[calc(100vh-80px)]">
+      {/* Kolom Kiri (Daftar) */}
       <div className="w-full lg:w-3/5 overflow-y-auto px-6 py-4">
+        {/* (Judul H2 tidak berubah) */}
         <h2 className="text-2xl font-bold mb-2">
           {isInSearchMode 
             ? `${umkm.length} Hasil Pencarian`
@@ -165,6 +155,7 @@ export default function ListPage() {
         </div>
       </div>
 
+      {/* Kolom Kanan (Peta) */}
       <div className="hidden lg:block w-2/5 h-full relative">
         <Map
           id="default"
@@ -186,31 +177,46 @@ export default function ListPage() {
             }}
           />
           
-          {/* --- PERUBAHAN 3: Modifikasi GeolocateControl --- */}
+          {/* --- PERBAIKAN MASALAH 1 & 3 --- */}
           <GeolocateControl 
             ref={geolocateControlRef}
             position="top-right"
             positionOptions={{ enableHighAccuracy: true }}
             showUserLocation={true}
             
-            // 1. HAPUS 'fitBoundsOptions' agar tidak zoom-out otomatis
-            // fitBoundsOptions={{ maxZoom: 15 }} 
+            // 1. (Masalah 1) Nonaktifkan lingkaran biru besar
+            showAccuracyCircle={false} 
             
-            // 2. TAMBAHKAN 'onGeolocate' untuk mengontrol zoom manual
+            // 2. (Masalah 3) Sembunyikan tombol default
+            className="!hidden" 
+            
             onGeolocate={(e) => {
-              // 'e' berisi koordinat yang ditemukan
               if (map) {
-                // 3. Perintahkan peta untuk terbang ke lokasi
-                //    dengan zoom level 17 (sekitar 1km)
                 map.flyTo({
                   center: [e.coords.longitude, e.coords.latitude],
-                  zoom: 17, // <-- Ini adalah zoom level 1km
-                  duration: 2000 // Animasi 2 detik
+                  zoom: 17, // Zoom 1km
+                  duration: 2000
                 });
               }
             }}
           />
-          {/* --- AKHIR PERUBAHAN --- */}
+
+          {/* 3. (Masalah 3) Tombol Kustom Baru */}
+          <button
+            onClick={() => {
+              // Ini akan memicu GeolocateControl & meminta izin
+              if (geolocateControlRef.current) {
+                geolocateControlRef.current.trigger();
+              }
+            }}
+            className="absolute top-[76px] right-2.5 bg-white p-2.5 rounded-lg shadow-md border border-gray-200 hover:bg-gray-100 z-10
+                       transition-all duration-200 hover:scale-110 active:scale-95"
+            aria-label="Find my location"
+            title="Temukan lokasi saya"
+          >
+            <CursorArrowRaysIcon className="w-6 h-6 text-gray-700" />
+          </button>
+          {/* --- AKHIR PERBAIKAN --- */}
           
           <InitialMapAction 
             geolocateControlRef={geolocateControlRef} 
@@ -218,6 +224,7 @@ export default function ListPage() {
             setIsInSearchMode={setIsInSearchMode} 
           />
 
+          {/* (Marker & Popup tidak berubah) */}
           {umkm.map((item) => (
             <Marker
               key={item.id}
@@ -229,7 +236,6 @@ export default function ListPage() {
               {getCategoryMarker(item.category)}
             </Marker>
           ))}
-
           {selectedUmkm && (
             <Popup
               longitude={selectedUmkm.longitude}
@@ -242,7 +248,6 @@ export default function ListPage() {
               <div>
                 <h3 className="font-bold">{selectedUmkm.name}</h3>
                 <p className="text-sm">{selectedUmkm.category}</p>
-                
                 {selectedUmkm.calculated_distance ? (
                   <p className="text-xs text-gray-500">
                     {selectedUmkm.calculated_distance.toFixed(2)} km dari Anda

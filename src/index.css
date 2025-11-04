@@ -13,24 +13,28 @@
   }
 }
 
-/* --- TAMBAHKAN STYLE INI --- */
-
-/* Ini memastikan container peta mengambil tinggi yang tersedia */
+/* (Style popup maplibre-mu yang sudah ada) */
 .map-container {
   width: 100%;
   height: 100%;
 }
-
-/* Styling kustom untuk popup Maplibre */
 .maplibregl-popup-content {
   @apply rounded-lg shadow-lg p-3 border border-gray-200;
-  padding: 12px 15px !important; /* Timpa style bawaan */
+  padding: 12px 15px !important;
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
-
 .maplibregl-popup-close-button {
   @apply text-gray-700 hover:text-gray-900;
   font-size: 20px;
   padding: 0 5px;
 }
-/* --- AKHIR TAMBAHAN --- */
+
+/* --- TAMBAHKAN KODE DI BAWAH INI --- */
+
+/* PERBAIKAN: Sembunyikan Tombol Geolocate Bawaan
+  Tombol ini ditambahkan oleh maplibre-gl secara langsung, 
+  jadi kita sembunyikan via CSS global menggunakan class aslinya.
+*/
+.maplibregl-ctrl-geolocate {
+  display: none !important;
+}
