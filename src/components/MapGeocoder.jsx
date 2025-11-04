@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import maplibregl from 'maplibre-gl'; 
 import { useMap } from '@vis.gl/react-maplibre';
+// Perbaiki path impor ini
 import { geocode, searchApiUmkm } from '../lib/api.js';
 
 const MAP_PADDING = { top: 100, bottom: 40, left: 40, right: 40 };
@@ -34,33 +35,40 @@ const getUserLocation = () => new Promise((resolve) => {
 });
 
 
-export default function MapGeocoder({ setUmkm }) {
+// --- UBAH PROPS: Terima 'setIsInSearchMode' ---
+export default function MapGeocoder({ setUmkm, setIsInSearchMode }) {
   const { default: map } = useMap();
   const [query, setQuery] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!map || query.trim().length === 0) return;
+    if (!map) return;
+    
+    // --- ATURAN BARU: Keluar dari Mode Pencarian jika query kosong ---
+    if (query.trim().length === 0) {
+      setIsInSearchMode(false); // Lepas Kunci
+      // Minta peta untuk memuat ulang data di area saat ini
+      map.fire('moveend'); 
+      return;
+    }
+    // --- AKHIR ATURAN BARU ---
 
     setIsLoading(true);
 
-    // --- PERUBAHAN DI SINI: Dapatkan lokasi dulu! ---
     console.log("Mencoba mendapatkan lokasi pengguna...");
     const location = await getUserLocation();
     const lat = location ? location.lat : null;
     const lon = location ? location.lon : null;
-    // --- AKHIR PERUBAHAN ---
-
-    // 1. Coba cari sebagai nama UMKM
-    // --- PERUBAHAN DI SINI: Kirim lat/lon ke API ---
+    
     const foundUmkmList = await searchApiUmkm(query, lat, lon);
 
     if (foundUmkmList && foundUmkmList.length > 0) {
-      // --- KASUS 1: UMKM DITEMUKAN (via API) ---
+      // --- ATURAN 3: UMKM DITEMUKAN ---
       console.log(`Ditemukan ${foundUmkmList.length} UMKM:`, foundUmkmList);
       
       setUmkm(foundUmkmList);
+      setIsInSearchMode(true); // <-- KUNCI DAFTAR (Masuk Mode Pencarian)
 
       if (foundUmkmList.length === 1) {
         const umkm = foundUmkmList[0];
@@ -79,8 +87,9 @@ export default function MapGeocoder({ setUmkm }) {
       }
 
     } else {
-      // --- KASUS 2: UMKM TIDAK DITEMUKAN, cari sebagai LOKASI ---
+      // --- ATURAN 2: UMKM TIDAK DITEMUKAN, CARI LOKASI ---
       console.log("UMKM API tidak ditemukan. Mencari sebagai lokasi...");
+      setIsInSearchMode(false); // <-- LEPAS KUNCI (Masuk Mode Eksplorasi)
       const result = await geocode(query);
 
       if (result) {

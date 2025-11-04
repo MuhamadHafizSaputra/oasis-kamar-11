@@ -1,15 +1,22 @@
 // src/components/UmkmCard.jsx
 import React from "react";
-// DIUBAH: Impor UmkmCarousel.jsx (dengan ekstensi)
 import UmkmCarousel from "./UmkmCarousel.jsx"; 
 import { StarIcon } from "@heroicons/react/24/solid";
 import { MapPinIcon } from "@heroicons/react/24/outline";
-// DIUBAH: Impor Link
 import { Link } from "react-router-dom"; 
 
 export default function UmkmCard({ umkm }) {
+  
+  // --- PERBAIKAN DI SINI ---
+  // Cek apakah 'calculated_distance' (angka) ada.
+  // Jika ada, format menjadi "1.23 km".
+  // Jika tidak, gunakan 'distance' (teks "10 min")
+  const distanceText = umkm.calculated_distance
+    ? `${umkm.calculated_distance.toFixed(2)} km`
+    : umkm.distance;
+  // --- AKHIR PERBAIKAN ---
+
   return (
-    // DIUBAH: Bungkus semua dengan Link dinamis
     <Link to={`/umkm/${umkm.id}`} className="block">
       <div className="bg-white rounded-lg shadow-md overflow-hidden 
                      transition-all duration-300 hover:shadow-xl
@@ -27,7 +34,8 @@ export default function UmkmCard({ umkm }) {
           <div className="flex items-center text-sm text-gray-600 mb-2">
             <MapPinIcon className="w-4 h-4 mr-1.5" />
             <span>
-              {umkm.location} &middot; {umkm.distance}
+              {/* Tampilkan 'distanceText' yang sudah diformat */}
+              {umkm.location} &middot; {distanceText}
             </span>
           </div>
           <p className="text-gray-700 mt-auto">
@@ -37,9 +45,9 @@ export default function UmkmCard({ umkm }) {
                 style: "currency",
                 currency: "IDR",
                 minimumFractionDigits: 0,
-              }).format(umkm.priceFrom)}
+              }).format(umkm.price_from || umkm.priceFrom)} 
+              {/* (Menambahkan fallback price_from) */}
             </span>
-            {/* DIUBAH: Hapus "/ malam" jika tidak relevan untuk semua UMKM */}
           </p>
         </div>
       </div>
