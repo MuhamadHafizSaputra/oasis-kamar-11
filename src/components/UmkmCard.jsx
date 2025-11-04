@@ -11,9 +11,11 @@ export default function UmkmCard({ umkm }) {
   return (
     // DIUBAH: Bungkus semua dengan Link dinamis
     <Link to={`/umkm/${umkm.id}`} className="block">
-      <div className="bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl">
+      <div className="bg-white rounded-lg shadow-md overflow-hidden 
+                     transition-all duration-300 hover:shadow-xl
+                     h-full flex flex-col">
         <UmkmCarousel images={umkm.images} />
-        <div className="p-4">
+        <div className="p-4 flex flex-col flex-1">
           <div className="flex justify-between items-start mb-1">
             <h3 className="text-lg font-bold text-gray-800">{umkm.name}</h3>
             <div className="flex items-center gap-1 flex-shrink-0">
@@ -28,7 +30,7 @@ export default function UmkmCard({ umkm }) {
               {umkm.location} &middot; {umkm.distance}
             </span>
           </div>
-          <p className="text-gray-700">
+          <p className="text-gray-700 mt-auto">
             Mulai dari{" "}
             <span className="font-semibold">
               {new Intl.NumberFormat("id-ID", {

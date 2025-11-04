@@ -1,13 +1,40 @@
 // src/components/MapGeocoder.jsx
 import { useState } from 'react';
+import maplibregl from 'maplibre-gl'; 
 import { useMap } from '@vis.gl/react-maplibre';
-// DIUBAH: Impor 'geocode' DAN 'searchLocalUmkm'
-import { geocode, searchLocalUmkm } from '../lib/api.js'; 
+import { geocode, searchApiUmkm } from '../lib/api.js';
 
 const MAP_PADDING = { top: 100, bottom: 40, left: 40, right: 40 };
 const SPECIFIC_LOCATION_ZOOM = 16.5;
 
-export default function MapGeocoder() {
+// Helper untuk mendapatkan lokasi (menggunakan Promise)
+const getUserLocation = () => new Promise((resolve) => {
+  if (!navigator.geolocation) {
+    console.warn("Geolocation tidak didukung.");
+    resolve(null);
+  }
+  
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      resolve({ 
+        lat: position.coords.latitude, 
+        lon: position.coords.longitude 
+      });
+    },
+    (error) => {
+      console.warn("Gagal mendapatkan lokasi:", error.message);
+      resolve(null); // Gagal atau pengguna menolak
+    },
+    { 
+      enableHighAccuracy: false, 
+      timeout: 5000, 
+      maximumAge: 60000 
+    }
+  );
+});
+
+
+export default function MapGeocoder({ setUmkm }) {
   const { default: map } = useMap();
   const [query, setQuery] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -18,30 +45,45 @@ export default function MapGeocoder() {
 
     setIsLoading(true);
 
-    // --- LOGIKA PENCARIAN BARU (HYBRID) ---
+    // --- PERUBAHAN DI SINI: Dapatkan lokasi dulu! ---
+    console.log("Mencoba mendapatkan lokasi pengguna...");
+    const location = await getUserLocation();
+    const lat = location ? location.lat : null;
+    const lon = location ? location.lon : null;
+    // --- AKHIR PERUBAHAN ---
 
-    // 1. Coba cari sebagai nama UMKM lokal
-    const foundUmkm = searchLocalUmkm(query);
+    // 1. Coba cari sebagai nama UMKM
+    // --- PERUBAHAN DI SINI: Kirim lat/lon ke API ---
+    const foundUmkmList = await searchApiUmkm(query, lat, lon);
 
-    if (foundUmkm) {
-      // --- KASUS 1: UMKM DITEMUKAN ---
-      // Langsung terbang ke lokasi UMKM
-      console.log("UMKM lokal ditemukan:", foundUmkm);
+    if (foundUmkmList && foundUmkmList.length > 0) {
+      // --- KASUS 1: UMKM DITEMUKAN (via API) ---
+      console.log(`Ditemukan ${foundUmkmList.length} UMKM:`, foundUmkmList);
       
-      map.flyTo({
-        center: [foundUmkm.longitude, foundUmkm.latitude],
-        zoom: SPECIFIC_LOCATION_ZOOM, // Zoom langsung ke UMKM
-        padding: MAP_PADDING,
-        duration: 2000,
-      });
+      setUmkm(foundUmkmList);
+
+      if (foundUmkmList.length === 1) {
+        const umkm = foundUmkmList[0];
+        map.flyTo({
+          center: [umkm.longitude, umkm.latitude],
+          zoom: SPECIFIC_LOCATION_ZOOM,
+          padding: MAP_PADDING,
+          duration: 2000,
+        });
+      } else {
+        const bounds = new maplibregl.LngLatBounds();
+        foundUmkmList.forEach(umkm => {
+          bounds.extend([umkm.longitude, umkm.latitude]);
+        });
+        map.fitBounds(bounds, { padding: {top: 150, bottom: 50, left: 50, right: 50}, duration: 2000 });
+      }
 
     } else {
       // --- KASUS 2: UMKM TIDAK DITEMUKAN, cari sebagai LOKASI ---
-      console.log("UMKM lokal tidak ditemukan. Mencari sebagai lokasi...");
+      console.log("UMKM API tidak ditemukan. Mencari sebagai lokasi...");
       const result = await geocode(query);
 
       if (result) {
-        // Logika flyTo vs fitBounds (yang sudah ada)
         const largeAreaTypes = ['administrative', 'boundary', 'city', 'region'];
         const isLargeArea = largeAreaTypes.includes(result.type);
 
@@ -65,7 +107,6 @@ export default function MapGeocoder() {
     }
     
     setIsLoading(false);
-    // --- AKHIR LOGIKA PENCARIAN BARU ---
   };
 
   return (
@@ -75,12 +116,10 @@ export default function MapGeocoder() {
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          // DIUBAH: Ganti placeholder
           placeholder="Cari UMKM atau lokasi di Jogja..."
           className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-full shadow-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
           disabled={isLoading}
         />
-        {/* ... (Sisa JSX tidak berubah) ... */}
         <button 
           type="submit" 
           disabled={isLoading} 

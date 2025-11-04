@@ -1,26 +1,55 @@
 // src/lib/api.js
 import { JOGJA_BOUNDING_BOX } from "./constants.js";
-import { umkmData } from '../data/mockData.jsx'; 
+// Hapus impor mockData, sudah tidak terpakai di sini
+// import { umkmData } from '../data/mockData.jsx'; 
+import axios from 'axios';
 
-// --- FUNGSI BARU UNTUK MENCARI UMKM LOKAL ---
 /**
- * Mencari UMKM secara lokal dari mockData.js berdasarkan nama.
+ * Mencari UMKM dari API.
  * @param {string} query Teks pencarian
- * @returns {object | null} Objek UMKM yang ditemukan atau null
+ * @param {number | null} lat Garis lintang pengguna (opsional)
+ * @param {number | null} lon Garis bujur pengguna (opsional)
+ * @returns {Array | null} Array UMKM yang ditemukan atau null
  */
-export function searchLocalUmkm(query) {
-  console.log(`Mencari lokal untuk: "${query}"`);
-  const normalizedQuery = query.toLowerCase();
+export async function searchApiUmkm(query, lat, lon) {
+  console.log(`Mencari dari API untuk: "${query}"`);
   
-  // Cari di dalam umkmData apakah ada nama yang cocok
-  const foundUmkm = umkmData.find(umkm => 
-    umkm.name.toLowerCase().includes(normalizedQuery)
-  );
+  // --- PERUBAHAN DI SINI: Tambahkan lat/lon ke parameter ---
+  const params = { q: query };
+  if (lat && lon) {
+    params.lat = lat;
+    params.lon = lon;
+    console.log(`Dengan lokasi: ${lat}, ${lon}`);
+  }
+  // --- AKHIR PERUBAHAN ---
 
-  return foundUmkm || null; // Kembalikan UMKM yang ditemukan atau null
+  try {
+    // Panggil endpoint /api/umkm/search
+    const response = await axios.get('http://localhost:3001/api/umkm/search', { params });
+    
+    const umkmList = response.data; // Ini adalah array
+
+    // Jika array kosong, kembalikan null agar geocoder bisa lanjut
+    if (umkmList.length === 0) {
+      console.log("UMKM tidak ditemukan via API, akan lanjut mencari lokasi.");
+      return null;
+    }
+
+    // Transformasi data untuk setiap item dalam array
+    return umkmList.map(umkm => ({
+      ...umkm,
+      priceFrom: umkm.price_from,
+      // Perbaiki juga parsing JSON untuk images
+      images: Array.isArray(umkm.images) ? umkm.images : JSON.parse(umkm.images || '[]'),
+      // Tambahkan 'distance' jika ada (dari backend)
+      distance: umkm.distance || null 
+    }));
+
+  } catch (error) {
+    console.log("UMKM tidak ditemukan via API, akan lanjut mencari lokasi.");
+    return null;
+  }
 }
-// --- AKHIR FUNGSI BARU ---
-
 
 /**
  * Mengambil data geocoding (LOKASI), DIBATASI HANYA DI DALAM JOGJA.
@@ -52,7 +81,7 @@ export async function geocode(query) {
   }
 }
 
-// ... (Fungsi getListingsInBounds dan getUmkmInBounds tidak berubah) ...
+// ... (Fungsi getListingsInBounds tidak berubah) ...
 export async function getListingsInBounds(bounds) {
   console.log("Mock API: Fetching listings...");
   await new Promise(resolve => setTimeout(resolve, 100));
@@ -62,21 +91,31 @@ export async function getListingsInBounds(bounds) {
 }
 
 export async function getUmkmInBounds(bounds) {
-  console.log("Mock API: Fetching UMKM from mockData.js...");
-  await new Promise(resolve => setTimeout(resolve, 300));
-
-  const visibleUmkm = umkmData.filter(umkm => {
-    if (!umkm.latitude || !umkm.longitude) { 
-      return false;
-    }
-    return (
-      umkm.longitude >= bounds.getWest() &&
-      umkm.longitude <= bounds.getEast() &&
-      umkm.latitude >= bounds.getSouth() &&
-      umkm.latitude <= bounds.getNorth()
-    );
-  });
+  console.log("Live API: Fetching UMKM from backend...");
   
-  console.log(`Mock API: Found ${visibleUmkm.length} UMKM.`);
-  return visibleUmkm;
+  // Get the corners from the map
+  const minLng = bounds.getWest();
+  const maxLng = bounds.getEast();
+  const minLat = bounds.getSouth();
+  const maxLat = bounds.getNorth();
+
+  try {
+    const response = await axios.get('http://localhost:3001/api/umkm', {
+      params: { minLng, minLat, maxLng, maxLat }
+    });
+    
+    const transformedData = response.data.map(umkm => ({
+      ...umkm,
+      priceFrom: umkm.price_from,
+      // Perbaiki juga parsing JSON di sini
+      images: Array.isArray(umkm.images) ? umkm.images : JSON.parse(umkm.images || '[]'),
+    }));
+    
+    console.log(`Live API: Found ${transformedData.length} UMKM.`);
+    return transformedData; // <-- Return the new, fixed data
+
+  } catch (error) {
+    console.error("Error fetching UMKM in bounds:", error);
+    return [];
+  }
 }
