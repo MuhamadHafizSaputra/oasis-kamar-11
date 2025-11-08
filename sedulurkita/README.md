@@ -14,6 +14,7 @@ cd oasis-kamar-11
 ```
 npm install
 npm install @vis.gl/react-maplibre maplibre-gl
+npm install axios
 ```
 3. Jalankan project
 ```
@@ -21,4 +22,4 @@ npm run dev
 ```
 4. Akses di browser<br>
 Buka http://localhost:5173 untuk melihat aplikasi berjalan.
-## **Current Progress (2 November 2025)**
+

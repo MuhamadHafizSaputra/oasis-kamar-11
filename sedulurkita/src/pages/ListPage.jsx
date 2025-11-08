@@ -3,12 +3,11 @@ import React, { useState, useEffect, useRef } from "react";
 import { useSearchParams } from "react-router-dom";
 import FilterBar from "../components/FilterBar.jsx";
 import UmkmCard from "../components/UmkmCard.jsx";
+import FilterModal from "../components/FilterModal.jsx"; // <-- 1. IMPOR MODAL
 
 import maplibregl from "maplibre-gl";
-// --- PERUBAHAN: Impor Ikon Baru ---
 import { Map, Marker, Popup, GeolocateControl, useMap } from "@vis.gl/react-maplibre";
 import { CursorArrowRaysIcon } from "@heroicons/react/24/outline";
-// ---
 import MapGeocoder from "../components/MapGeocoder.jsx";
 import DynamicDataLoader from "../components/DynamicDataLoader.jsx";
 
@@ -20,11 +19,11 @@ const SPECIFIC_LOCATION_ZOOM = 16.5;
 // (Helper getCategoryMarker tidak berubah)
 function getCategoryMarker(category) {
   switch (category) {
-    case "Makanan": return <span className="text-2xl">🍜</span>;
-    case "Produk": return <span className="text-2xl">🎨</span>;
-    case "Jasa": return <span className="text-2xl">🔧</span>;
-    case "Belanja": return <span className="text-2xl">🏪</span>;
-    default: return <span className="text-2xl">🛍️</span>;
+    case "Makanan": return <span className="text-2xl">🍲</span>;
+    case "Produk": return <span className="text-2xl">📦</span>;
+    case "Jasa": return <span className="text-2xl">🛠️</span>;
+    case "Belanja": return <span className="text-2xl">🛍️</span>;
+    default: return <span className="text-2xl">📍</span>;
   }
 }
 
@@ -49,30 +48,22 @@ const getUserLocation = () => new Promise((resolve) => {
   );
 });
 
-
-function InitialMapAction({ geolocateControlRef, setUmkm, setIsInSearchMode }) {
+// (InitialMapAction tidak berubah)
+function InitialMapAction({ geolocateControlRef, setOriginalUmkm, setIsInSearchMode }) {
   const { default: map } = useMap();
   const [searchParams, setSearchParams] = useSearchParams();
   const [hasRun, setHasRun] = useState(false);
 
   useEffect(() => {
     if (!map || hasRun) return;
-
     const query = searchParams.get('q');
     const location = searchParams.get('loc');
-
     const runSearch = async (q) => {
-      // --- PERBAIKAN MASALAH 2 ---
-      // JANGAN minta lokasi saat mencari berdasarkan teks.
-      // Cukup kirim 'null' untuk lat/lon.
       console.log(`Menjalankan pencarian awal untuk teks: ${q}`);
       const foundUmkmList = await searchApiUmkm(q, null, null);
-      // --- AKHIR PERBAIKAN ---
-
       if (foundUmkmList && foundUmkmList.length > 0) {
-        // (Logika Aturan 3 tidak berubah)
         console.log(`Ditemukan ${foundUmkmList.length} UMKM:`, foundUmkmList);
-        setUmkm(foundUmkmList);
+        setOriginalUmkm(foundUmkmList); 
         setIsInSearchMode(true);
         if (foundUmkmList.length === 1) {
           const umkm = foundUmkmList[0];
@@ -85,7 +76,6 @@ function InitialMapAction({ geolocateControlRef, setUmkm, setIsInSearchMode }) {
           map.fitBounds(bounds, { padding: {top: 150, bottom: 50, left: 50, right: 50}, duration: 1500 });
         }
       } else {
-        // (Logika Aturan 2 tidak berubah)
         setIsInSearchMode(false);
         const result = await geocode(q);
         if (result) {
@@ -102,28 +92,35 @@ function InitialMapAction({ geolocateControlRef, setUmkm, setIsInSearchMode }) {
       setHasRun(true);
       setSearchParams({}, { replace: true });
     };
-
     if (query) {
-      // Ini HANYA akan menjalankan pencarian teks (sesuai Masalah 2)
       runSearch(query);
     } else if (location === 'terdekat' && geolocateControlRef.current) {
-      // Ini akan MEMICU permintaan lokasi (sesuai Masalah 2)
       console.log("Menjalankan pencarian lokasi terdekat...");
       setIsInSearchMode(false);
       geolocateControlRef.current.trigger();
       setHasRun(true);
       setSearchParams({}, { replace: true });
     }
-
-  }, [map, searchParams, setSearchParams, hasRun, geolocateControlRef, setUmkm, setIsInSearchMode]);
-
+  }, [map, searchParams, setSearchParams, hasRun, geolocateControlRef, setOriginalUmkm, setIsInSearchMode]);
   return null;
 }
 
 
 export default function ListPage() {
   const [listings, setListings] = useState([]);
-  const [umkm, setUmkm] = useState([]);
+  const [originalUmkm, setOriginalUmkm] = useState([]);
+  const [filteredUmkm, setFilteredUmkm] = useState([]);
+  const [activeFilters, setActiveFilters] = useState({
+    category: 'all',
+    price: 'all',
+    rating: 0,
+  });
+  
+  // --- 2. TAMBAHKAN STATE BARU UNTUK MODAL & TAGS ---
+  const [activeTags, setActiveTags] = useState(new Set());
+  const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
+  // --- AKHIR STATE BARU ---
+
   const [selectedUmkm, setSelectedUmkm] = useState(null);
   const [isInSearchMode, setIsInSearchMode] = useState(false);
   const geolocateControlRef = useRef(null);
@@ -135,133 +132,197 @@ export default function ListPage() {
     zoom: 12,
   };
 
+  
+  // --- 3. PERBARUI LOGIKA FILTER DI SINI ---
+  useEffect(() => {
+    let itemsToFilter = [...originalUmkm];
+
+    // 1. Terapkan filter Kategori (Tidak berubah)
+    if (activeFilters.category !== 'all') {
+      itemsToFilter = itemsToFilter.filter(
+        (umkm) => umkm.category === activeFilters.category
+      );
+    }
+
+    // 2. Terapkan filter Harga (Tidak berubah)
+    if (activeFilters.price !== 'all') {
+      itemsToFilter = itemsToFilter.filter((umkm) => {
+        const price = umkm.price_from || umkm.priceFrom;
+        if (!price) return false;
+        if (activeFilters.price === 'murah') return price < 20000;
+        if (activeFilters.price === 'sedang') return price >= 20000 && price <= 50000;
+        if (activeFilters.price === 'mahal') return price > 50000;
+        return true;
+      });
+    }
+
+    // 3. Terapkan filter Rating (Tidak berubah)
+    if (activeFilters.rating > 0) {
+      itemsToFilter = itemsToFilter.filter(
+        (umkm) => umkm.rating >= activeFilters.rating
+      );
+    }
+
+    // 4. LOGIKA BARU: Terapkan filter Tags Lanjutan
+    if (activeTags.size > 0) {
+      const selectedTags = Array.from(activeTags);
+
+      itemsToFilter = itemsToFilter.filter((umkm) => {
+        // Cek dulu apakah UMKM ini punya data 'tags'
+        // Jika tidak, otomatis false (tidak lolos filter)
+        if (!umkm.tags || !Array.isArray(umkm.tags)) {
+          return false;
+        }
+        
+        // Cek apakah data 'tags' UMKM ini punya SEMUA tag yang dipilih
+        return selectedTags.every((tag) => umkm.tags.includes(tag));
+      });
+    }
+    // --- AKHIR LOGIKA BARU ---
+
+    setFilteredUmkm(itemsToFilter);
+
+    // 5. TAMBAHKAN 'activeTags' KE DEPENDENCY ARRAY
+  }, [originalUmkm, activeFilters, activeTags]); 
+  // --- AKHIR LOGIKA FILTER ---
+
+
   return (
-    <div className="flex h-[calc(100vh-80px)]">
-      {/* Kolom Kiri (Daftar) */}
-      <div className="w-full lg:w-3/5 overflow-y-auto px-6 py-4">
-        {/* (Judul H2 tidak berubah) */}
-        <h2 className="text-2xl font-bold mb-2">
-          {isInSearchMode 
-            ? `${umkm.length} Hasil Pencarian`
-            : umkm.length > 0 
-              ? `${umkm.length} UMKM ditemukan di peta`
-              : "Memuat UMKM di area peta..."}
-        </h2>
-        <FilterBar />
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-          {umkm.map((item) => (
-            <UmkmCard key={item.id} umkm={item} />
-          ))}
+    // --- 6. GUNAKAN FRAGMENT (<>) ---
+    <>
+      <div className="flex h-[calc(100vh-80px)]">
+        {/* Kolom Kiri (Daftar) */}
+        <div className="w-full lg:w-3/5 overflow-y-auto px-6 py-4">
+          
+          <h2 className="text-2xl font-bold mb-2">
+            {isInSearchMode 
+              ? `${filteredUmkm.length} Hasil Pencarian`
+              : filteredUmkm.length > 0 
+                ? `${filteredUmkm.length} UMKM ditemukan di peta`
+                : "Memuat UMKM di area peta..."}
+          </h2>
+          
+          {/* --- 7. TAMBAHKAN PROP 'onAdvancedFilterClick' --- */}
+          <FilterBar 
+            activeFilters={activeFilters}
+            setActiveFilters={setActiveFilters}
+            onAdvancedFilterClick={() => setIsFilterModalOpen(true)}
+          />
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+            {filteredUmkm.map((item) => (
+              <UmkmCard key={item.id} umkm={item} />
+            ))}
+          </div>
+        </div>
+
+        {/* Kolom Kanan (Peta) (Tidak berubah) */}
+        <div className="hidden lg:block w-2/5 h-full relative">
+          <Map
+            id="default"
+            initialViewState={initialViewState}
+            mapStyle="https://tiles.openfreemap.org/styles/liberty"
+            className="map-container"
+          >
+            <MapGeocoder 
+              setUmkm={setOriginalUmkm} 
+              setIsInSearchMode={setIsInSearchMode} 
+            />
+            
+            <DynamicDataLoader 
+              onDataLoaded={({ listings, umkm }) => {
+                if (!isInSearchMode) {
+                  setListings(listings);
+                  setOriginalUmkm(umkm);
+                }
+              }}
+            />
+            
+            <GeolocateControl 
+              ref={geolocateControlRef}
+              position="top-right"
+              positionOptions={{ enableHighAccuracy: true }}
+              showUserLocation={true}
+              showAccuracyCircle={false} 
+              className="!hidden" 
+              onGeolocate={(e) => {
+                if (map) {
+                  map.flyTo({
+                    center: [e.coords.longitude, e.coords.latitude],
+                    zoom: 17, 
+                    duration: 2000
+                  });
+                }
+              }}
+            />
+
+            <button
+              onClick={() => {
+                if (geolocateControlRef.current) {
+                  geolocateControlRef.current.trigger();
+                }
+              }}
+              className="absolute top-[76px] right-2.5 bg-white p-2.5 rounded-lg shadow-md border border-gray-200 hover:bg-gray-100 z-10
+                         transition-all duration-200 hover:scale-110 active:scale-95"
+              aria-label="Find my location"
+              title="Temukan lokasi saya"
+            >
+              <CursorArrowRaysIcon className="w-6 h-6 text-gray-700" />
+            </button>
+            
+            <InitialMapAction 
+              geolocateControlRef={geolocateControlRef} 
+              setOriginalUmkm={setOriginalUmkm} 
+              setIsInSearchMode={setIsInSearchMode} 
+            />
+
+            {filteredUmkm.map((item) => (
+              <Marker
+                key={item.id}
+                longitude={item.longitude}
+                latitude={item.latitude}
+                anchor="bottom"
+                onClick={() => setSelectedUmkm(item)}
+              >
+                {getCategoryMarker(item.category)}
+              </Marker>
+            ))}
+            
+            {selectedUmkm && (
+              <Popup
+                longitude={selectedUmkm.longitude}
+                latitude={selectedUmkm.latitude}
+                anchor="bottom"
+                onClose={() => setSelectedUmkm(null)}
+                closeOnClick={false}
+                offset={40}
+              >
+                <div>
+                  <h3 className="font-bold">{selectedUmkm.name}</h3>
+                  <p className="text-sm">{selectedUmkm.category}</p>
+                  {selectedUmkm.calculated_distance ? (
+                    <p className="text-xs text-gray-500">
+                      {selectedUmkm.calculated_distance.toFixed(2)} km dari Anda
+                    </p>
+                  ) : (
+                    <p className="text-xs text-gray-500">
+                      {selectedUmkm.distance}
+                    </p>
+                  )}
+                </div>
+              </Popup>
+            )}
+          </Map>
         </div>
       </div>
 
-      {/* Kolom Kanan (Peta) */}
-      <div className="hidden lg:block w-2/5 h-full relative">
-        <Map
-          id="default"
-          initialViewState={initialViewState}
-          mapStyle="https://tiles.openfreemap.org/styles/liberty"
-          className="map-container"
-        >
-          <MapGeocoder 
-            setUmkm={setUmkm} 
-            setIsInSearchMode={setIsInSearchMode} 
-          />
-          
-          <DynamicDataLoader 
-            onDataLoaded={({ listings, umkm }) => {
-              if (!isInSearchMode) {
-                setUmkm(umkm);
-                setListings(listings);
-              }
-            }}
-          />
-          
-          {/* --- PERBAIKAN MASALAH 1 & 3 --- */}
-          <GeolocateControl 
-            ref={geolocateControlRef}
-            position="top-right"
-            positionOptions={{ enableHighAccuracy: true }}
-            showUserLocation={true}
-            
-            // 1. (Masalah 1) Nonaktifkan lingkaran biru besar
-            showAccuracyCircle={false} 
-            
-            // 2. (Masalah 3) Sembunyikan tombol default
-            className="!hidden" 
-            
-            onGeolocate={(e) => {
-              if (map) {
-                map.flyTo({
-                  center: [e.coords.longitude, e.coords.latitude],
-                  zoom: 17, // Zoom 1km
-                  duration: 2000
-                });
-              }
-            }}
-          />
-
-          {/* 3. (Masalah 3) Tombol Kustom Baru */}
-          <button
-            onClick={() => {
-              // Ini akan memicu GeolocateControl & meminta izin
-              if (geolocateControlRef.current) {
-                geolocateControlRef.current.trigger();
-              }
-            }}
-            className="absolute top-[76px] right-2.5 bg-white p-2.5 rounded-lg shadow-md border border-gray-200 hover:bg-gray-100 z-10
-                       transition-all duration-200 hover:scale-110 active:scale-95"
-            aria-label="Find my location"
-            title="Temukan lokasi saya"
-          >
-            <CursorArrowRaysIcon className="w-6 h-6 text-gray-700" />
-          </button>
-          {/* --- AKHIR PERBAIKAN --- */}
-          
-          <InitialMapAction 
-            geolocateControlRef={geolocateControlRef} 
-            setUmkm={setUmkm} 
-            setIsInSearchMode={setIsInSearchMode} 
-          />
-
-          {/* (Marker & Popup tidak berubah) */}
-          {umkm.map((item) => (
-            <Marker
-              key={item.id}
-              longitude={item.longitude}
-              latitude={item.latitude}
-              anchor="bottom"
-              onClick={() => setSelectedUmkm(item)}
-            >
-              {getCategoryMarker(item.category)}
-            </Marker>
-          ))}
-          {selectedUmkm && (
-            <Popup
-              longitude={selectedUmkm.longitude}
-              latitude={selectedUmkm.latitude}
-              anchor="bottom"
-              onClose={() => setSelectedUmkm(null)}
-              closeOnClick={false}
-              offset={40}
-            >
-              <div>
-                <h3 className="font-bold">{selectedUmkm.name}</h3>
-                <p className="text-sm">{selectedUmkm.category}</p>
-                {selectedUmkm.calculated_distance ? (
-                  <p className="text-xs text-gray-500">
-                    {selectedUmkm.calculated_distance.toFixed(2)} km dari Anda
-                  </p>
-                ) : (
-                  <p className="text-xs text-gray-500">
-                    {selectedUmkm.distance}
-                  </p>
-                )}
-              </div>
-            </Popup>
-          )}
-        </Map>
-      </div>
-    </div>
+      {/* --- 8. RENDER MODAL DI SINI --- */}
+      <FilterModal
+        isOpen={isFilterModalOpen}
+        onClose={() => setIsFilterModalOpen(false)}
+        activeTags={activeTags}
+        setActiveTags={setActiveTags}
+      />
+    </>
   );
 }

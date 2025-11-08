@@ -51,23 +51,49 @@ export default function SearchBar() {
     navigate(`/list?loc=terdekat`);
   };
 
+  // Handle klik kategori dan subkategori 
+  const handleCategoryClick = (categoryName) => {
+    navigate(`/list?q=${encodeURIComponent(categoryName)}`);
+    // Opsi: Reset isFocused agar dropdown tertutup jika perlu
+    setIsFocused(false);
+  }
+
+  const handleSubcategoryClick = (subcategoryName) => {
+    navigate(`/list?q=${encodeURIComponent(subcategoryName)}`);
+    // Opsi: Reset isFocused agar dropdown tertutup jika perlu
+    setIsFocused(false);
+  }
+  // --- AKHIR PERUBAHAN BARU ---
+
   return (
     <div className="bg-white p-6 rounded-xl shadow-lg w-full max-w-3xl mx-auto">
-      {/* Bagian Kategori (tidak berubah) */}
+      {/* Bagian Kategori (DIBUAT FUNGSIONAL) */}
       <div className="flex justify-around mb-4">
         {categories.map((category) => (
-          // ... (JSX Kategori tidak berubah)
           <div key={category.name} className="relative group">
-            <button className="flex flex-col items-center w-20 text-center text-gray-700 hover:text-indigo-600">
+            {/* Tombol Kategori Utama: Sekarang memanggil handleCategoryClick */}
+            <button 
+              className="flex flex-col items-center w-20 text-center text-gray-700 hover:text-indigo-600"
+              onClick={() => handleCategoryClick(category.name)}
+            >
               <div className="p-3 bg-gray-100 rounded-full group-hover:bg-indigo-100">
                 <category.icon className="w-6 h-6" />
               </div>
               <span className="mt-1 text-sm font-medium">{category.name}</span>
             </button>
+            {/* Dropdown Subkategori: Sekarang memanggil handleSubcategoryClick */}
             <div className="absolute left-1/2 -translate-x-1/2 mt-2 w-48 bg-white border rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
               <div className="py-1">
                 {category.subcategories.map((sub) => (
-                  <a key={sub} href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                  <a 
+                    key={sub} 
+                    href={`/list?q=${encodeURIComponent(sub)}`} // Link untuk SEO/fallback
+                    onClick={(e) => {
+                      e.preventDefault(); // Mencegah navigasi <a> default
+                      handleSubcategoryClick(sub); // Menggunakan fungsi navigate
+                    }}
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
                     {sub}
                   </a>
                 ))}

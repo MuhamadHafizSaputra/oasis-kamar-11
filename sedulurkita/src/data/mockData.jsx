@@ -14,14 +14,14 @@ export const umkmData = [
         id: "r1",
         user: "Budi Santoso",
         rating: 5,
-        text: "Gudegnya paling legendaris! Rasa kreceknya pas, tidak terlalu pedas tapi nendang. Wajib coba kalau ke Jogja.",
+        text: "Gudegnya paling legendaris! ...",
         date: "2025-10-28",
       },
       {
         id: "r2",
         user: "Anita Wijaya",
         rating: 4,
-        text: "Tempatnya klasik dan otentik. Selalu ramai, jadi harus sabar antri. Tapi rasanya sepadan.",
+        text: "Tempatnya klasik dan otentik. ...",
         date: "2025-10-25",
       },
     ],
@@ -44,11 +44,13 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
     description:
-      "Pusat gudeg kering legendaris di Yogyakarta, berlokasi di area Wijilan yang otentik sejak tahun 1950. Dikenal dengan cita rasanya yang khas, gurih, dan manisnya pas.",
+      "Pusat gudeg kering legendaris di Yogyakarta...",
     details: {
       type: "Restoran",
       facilities: ["Parkir", "Toilet", "Area Makan Luas", "Mushola"],
     },
+    // --- TAGS DITAMBAHKAN ---
+    tags: ["family_owned", "preserves_cultural_heritage", "locally_sourced_materials"]
   },
   {
     id: 2,
@@ -59,15 +61,7 @@ export const umkmData = [
     priceRange: [3000, 15000],
     paymentMethods: ["Tunai", "QRIS"],
     lastUpdated: "2025-11-01",
-    reviewsList: [
-      {
-        id: "r1",
-        user: "Rian",
-        rating: 5,
-        text: "Kopi joss-nya mantap betul, arangnya panas. Suasana malam di Jogja dapet banget di sini.",
-        date: "2025-10-30",
-      },
-    ],
+    reviewsList: [/* ... */],
     owner: {
       name: "Lik Man",
       joined: "2024-02-10",
@@ -85,11 +79,13 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1511920183353-52326045634b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
     description:
-      "Pelopor Kopi Joss (kopi dengan arang) di Yogyakarta. Tempat nongkrong legendaris dengan aneka sate dan nasi kucing.",
+      "Pelopor Kopi Joss (kopi dengan arang) di Yogyakarta. ...",
     details: {
       type: "Angkringan",
       facilities: ["Tempat Duduk Lesehan", "Toilet Umum Terdekat"],
     },
+    // --- TAGS DITAMBAHKAN ---
+    tags: ["preserves_cultural_heritage", "small_batch"]
   },
   {
     id: 3,
@@ -100,22 +96,7 @@ export const umkmData = [
     priceRange: [15000, 1000000],
     paymentMethods: ["Tunai", "QRIS", "Debit", "Kartu Kredit"],
     lastUpdated: "2025-10-15",
-    reviewsList: [
-      {
-        id: "r1",
-        user: "Susan",
-        rating: 5,
-        text: "Tempat belanja oleh-oleh terlengkap di Malioboro. Dari batik, daster, sampai kerajinan, semua ada. Harganya pas.",
-        date: "2025-10-22",
-      },
-      {
-        id: "r2",
-        user: "Michael",
-        rating: 4,
-        text: "Selalu ramai, tapi koleksinya lengkap banget. Bau dupa di dalamnya khas banget.",
-        date: "2025-10-20",
-      },
-    ],
+    reviewsList: [/* ... */],
     owner: {
       name: "Mirota Group",
       joined: "2024-01-20",
@@ -133,11 +114,13 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1620799140414-b291c3d9b736?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
     description:
-      "Toko souvenir dan batik terlengkap di Malioboro. Menjual kerajinan, pakaian, dan oleh-oleh khas dengan suasana toko yang unik.",
+      "Toko souvenir dan batik terlengkap di Malioboro. ...",
     details: {
       type: "Toko Oleh-oleh",
       facilities: ["AC", "Toilet", "Lift", "Rest Area"],
     },
+    // --- TAGS DITAMBAHKAN ---
+    tags: ["locally_sourced_materials", "preserves_cultural_heritage", "empowers_women", "family_owned"]
   },
   {
     id: 4,
@@ -148,15 +131,7 @@ export const umkmData = [
     priceRange: [5000, 500000],
     paymentMethods: ["Tunai", "QRIS (Sebagian Tenant)"],
     lastUpdated: "2025-10-01",
-    reviewsList: [
-      {
-        id: "r1",
-        user: "Dewi",
-        rating: 5,
-        text: "Surga batik ada di lantai 2! Harus pintar menawar. Jajanan pasarnya juga enak-enak.",
-        date: "2025-10-18",
-      },
-    ],
+    reviewsList: [/* ... */],
     owner: {
       name: "Pemerintah Kota Yogyakarta",
       joined: "2024-01-01",
@@ -174,11 +149,13 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1599586120428-c6f34a26e033?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
     description:
-      "Pasar tradisional terbesar dan tertua di Yogyakarta. Pusat batik, jajanan pasar, dan rempah. Tempat wajib untuk merasakan denyut nadi ekonomi Jogja.",
+      "Pasar tradisional terbesar dan tertua di Yogyakarta. ...",
     details: {
       type: "Pasar Tradisional",
       facilities: ["Toilet Umum", "Area Parkir Luas", "ATM Center"],
     },
+    // --- TAGS DITAMBAHKAN ---
+    tags: ["locally_sourced_materials", "preserves_cultural_heritage", "community_empowerment"]
   },
   {
     id: 5,
@@ -189,15 +166,7 @@ export const umkmData = [
     priceRange: [60000, 150000],
     paymentMethods: ["Tunai", "Transfer Bank"],
     lastUpdated: "2025-10-28",
-    reviewsList: [
-      {
-        id: "r1",
-        user: "Alex",
-        rating: 5,
-        text: "Pelayanan cepat, motor baru dan terawat. Helm bersih. Sangat direkomendasikan untuk keliling Jogja.",
-        date: "2025-10-27",
-      },
-    ],
+    reviewsList: [/* ... */],
     owner: {
       name: "Pak Mandiri",
       joined: "2024-03-05",
@@ -215,11 +184,13 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1623871638006-e26b133c4ead?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
     description:
-      "Jasa penyewaan motor harian di Yogyakarta. Unit terawat dan pelayanan ramah. Siap antar jemput di stasiun atau hotel.",
+      "Jasa penyewaan motor harian di Yogyakarta. ...",
     details: {
       type: "Rental Motor",
       facilities: ["Helm", "Jas Hujan", "Layanan Antar Jemput"],
     },
+    // --- TAGS DITAMBAHKAN ---
+    tags: ["family_owned"]
   },
   {
     id: 6,
@@ -230,15 +201,7 @@ export const umkmData = [
     priceRange: [30000, 50000],
     paymentMethods: ["Tunai", "QRIS", "Debit"],
     lastUpdated: "2025-10-29",
-    reviewsList: [
-      {
-        id: "r1",
-        user: "Cynthia",
-        rating: 5,
-        text: "Bakpia basahnya paling enak! Varian keju dan cokelat favorit saya. Bisa lihat proses pembuatannya langsung.",
-        date: "2025-10-28",
-      },
-    ],
+    reviewsList: [/* ... */],
     owner: {
       name: "Keluarga Pathok 25",
       joined: "2024-01-12",
@@ -256,11 +219,13 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1563805042-7684c019e1cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
     description:
-      "Salah satu merek Bakpia Pathok paling terkenal. Menyediakan berbagai varian rasa, baik bakpia basah maupun kering.",
+      "Salah satu merek Bakpia Pathok paling terkenal. ...",
     details: {
       type: "Toko Oleh-oleh",
       facilities: ["Area Produksi Terbuka", "Parkir Bus", "Toilet"],
     },
+    // --- TAGS DITAMBAHKAN ---
+    tags: ["family_owned", "locally_sourced_materials", "small_batch", "preserves_cultural_heritage"]
   },
   {
     id: 7,
@@ -271,15 +236,7 @@ export const umkmData = [
     priceRange: [50000, 150000],
     paymentMethods: ["Tunai"],
     lastUpdated: "2025-10-20",
-    reviewsList: [
-      {
-        id: "r1",
-        user: "Kenji",
-        rating: 4,
-        text: "Pengalaman unik keliling Kraton. Bapak becaknya ramah dan banyak cerita. Harga harus nego di awal biar jelas.",
-        date: "2025-10-19",
-      },
-    ],
+    reviewsList: [/* ... */],
     owner: {
       name: "Paguyuban Becak Wisata",
       joined: "2024-05-15",
@@ -297,11 +254,13 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1594480545281-c7f76b05264b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
     description:
-      "Keliling area Kraton, Tamansari, dan Wijilan menggunakan becak tradisional. Driver becak biasanya merangkap sebagai pemandu lokal.",
+      "Keliling area Kraton, Tamansari, dan Wijilan menggunakan becak tradisional. ...",
     details: {
       type: "Jasa Tur",
       facilities: ["Pemandu Lokal", "Spot Foto"],
     },
+    // --- TAGS DITAMBAHKAN ---
+    tags: ["preserves_cultural_heritage", "community_empowerment", "custom_orders", "locally_sourced_materials"]
   },
   {
     id: 8,
@@ -312,15 +271,7 @@ export const umkmData = [
     priceRange: [6000, 7000],
     paymentMethods: ["Tunai", "QRIS"],
     lastUpdated: "2025-11-01",
-    reviewsList: [
-      {
-        id: "r1",
-        user: "Sinta",
-        rating: 5,
-        text: "Lumpia terenak di Malioboro! Antrinya panjang tapi sepadan. Isian ayamnya berasa banget.",
-        date: "2025-10-30",
-      },
-    ],
+    reviewsList: [/* ... */],
     owner: {
       name: "Samijaya",
       joined: "2024-02-18",
@@ -338,11 +289,13 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1618190920038-7698d6c75b06?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
     description:
-      "Lumpia legendaris di Malioboro. Terkenal dengan antriannya yang panjang dan rasa yang khas. Hanya melayani takeaway.",
+      "Lumpia legendaris di Malioboro. ...",
     details: {
       type: "Kaki Lima",
       facilities: ["Hanya Takeaway"],
     },
+    // --- TAGS DITAMBAHKAN ---
+    tags: ["small_batch", "family_owned"]
   },
   {
     id: 9,
@@ -353,15 +306,7 @@ export const umkmData = [
     priceRange: [15000, 70000],
     paymentMethods: ["Tunai", "QRIS", "Debit", "Kartu Kredit"],
     lastUpdated: "2025-10-25",
-    reviewsList: [
-      {
-        id: "r1",
-        user: "Sarah",
-        rating: 5,
-        text: "Roti sourdough-nya juara! Banyak pilihan roti sehat dan selai homemade. Tempatnya cozy.",
-        date: "2025-10-24",
-      },
-    ],
+    reviewsList: [/* ... */],
     owner: {
       name: "ViaVia Group",
       joined: "2024-03-11",
@@ -379,11 +324,13 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1509735837536-83d38b552d0e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
     description:
-      "Bakery yang menjual roti-roti artisan, kue, dan produk organik. Terkenal di kalangan turis dan ekspatriat.",
+      "Bakery yang menjual roti-roti artisan, kue, dan produk organik. ...",
     details: {
       type: "Bakery",
       facilities: ["Kafe", "Toko Organik", "Wifi"],
     },
+    // --- TAGS DITAMBAHKAN ---
+    tags: ["social_enterprise", "eco_friendly", "small_batch", "locally_sourced_materials", "empowers_women", "natural_dyes"]
   },
   {
     id: 10,
@@ -394,22 +341,7 @@ export const umkmData = [
     priceRange: [25000, 50000],
     paymentMethods: ["Tunai", "QRIS", "Debit"],
     lastUpdated: "2025-10-30",
-    reviewsList: [
-      {
-        id: "r1",
-        user: "Fajar",
-        rating: 5,
-        text: "Gelato terenak di Jogja, titik. Banyak pilihan rasa unik, favorit saya rasa Kemangi dan Jahe.",
-        date: "2025-10-29",
-      },
-      {
-        id: "r2",
-        user: "Linda",
-        rating: 4,
-        text: "Tempatnya selalu penuh, tapi pelayanannya cepat. Porsinya besar. Layak dicoba!",
-        date: "2025-10-27",
-      },
-    ],
+    reviewsList: [/* ... */],
     owner: {
       name: "Tempo Gelato",
       joined: "2024-01-30",
@@ -427,11 +359,13 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1627999138243-91285731f82f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
     description:
-      "Kedai gelato paling populer di Jogja dengan desain interior industrial yang unik. Menyajikan puluhan varian rasa otentik.",
+      "Kedai gelato paling populer di Jogja ...",
     details: {
       type: "Kedai Gelato",
       facilities: ["AC", "Toilet", "Area Duduk Indoor & Outdoor"],
     },
+    // --- TAGS DITAMBAHKAN ---
+    tags: ["family_owned", "small_batch"]
   },
   {
     id: 11,
@@ -442,15 +376,7 @@ export const umkmData = [
     priceRange: [10000, 300000],
     paymentMethods: ["Tunai", "QRIS", "Debit", "Kartu Kredit"],
     lastUpdated: "2025-10-22",
-    reviewsList: [
-      {
-        id: "r1",
-        user: "Mahasiswa",
-        rating: 5,
-        text: "Toko buku andalan! Selalu diskon, koleksi buku kuliah dan novelnya lengkap.",
-        date: "2025-10-20",
-      },
-    ],
+    reviewsList: [/* ... */],
     owner: {
       name: "Toga Mas",
       joined: "2024-02-14",
@@ -468,11 +394,13 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
     description:
-      "Toko buku besar dengan koleksi lengkap dan harga diskon. Tempat favorit mahasiswa dan pelajar mencari buku.",
+      "Toko buku besar dengan koleksi lengkap dan harga diskon. ...",
     details: {
       type: "Toko Buku",
       facilities: ["AC", "Area Baca", "Toilet"],
     },
+    // --- TAGS DITAMBAHKAN ---
+    tags: []
   },
   {
     id: 12,
@@ -483,15 +411,7 @@ export const umkmData = [
     priceRange: [5000, 8000],
     paymentMethods: ["Tunai", "QRIS"],
     lastUpdated: "2025-11-01",
-    reviewsList: [
-      {
-        id: "r1",
-        user: "Anak Kost",
-        rating: 4,
-        text: "Cepat dan murah. Sesuai namanya, 1 hari jadi. Wanginya standar tapi bersih.",
-        date: "2025-10-31",
-      },
-    ],
+    reviewsList: [/* ... */],
     owner: {
       name: "Pak Budi",
       joined: "2024-06-01",
@@ -509,11 +429,13 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1610557892470-55d7e80c0b7a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
     description:
-      "Jasa laundry kiloan cepat 1 hari jadi. Cocok untuk turis dan anak kost yang butuh pakaian bersih mendadak.",
+      "Jasa laundry kiloan cepat 1 hari jadi. ...",
     details: {
       type: "Laundry",
       facilities: ["Setrika Uap", "Layanan Antar Jemput"],
     },
+    // --- TAGS DITAMBAHKAN ---
+    tags: []
   },
   {
     id: 13,
@@ -524,15 +446,7 @@ export const umkmData = [
     priceRange: [20000, 30000],
     paymentMethods: ["Tunai", "QRIS"],
     lastUpdated: "2025-10-27",
-    reviewsList: [
-      {
-        id: "r1",
-        user: "Dimas",
-        rating: 5,
-        text: "Bakmi godog-nya medok banget bumbunya. Dimasak pakai arang jadi aromanya khas. Sabar antri ya.",
-        date: "2025-10-26",
-      },
-    ],
+    reviewsList: [/* ... */],
     owner: {
       name: "Pak Pele",
       joined: "2024-02-22",
@@ -550,11 +464,13 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1625938135216-9b1611c38d37?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
     description:
-      "Bakmi Jawa legendaris di dekat Kraton. Dimasak menggunakan arang (anglo) sehingga menghasilkan aroma yang khas.",
+      "Bakmi Jawa legendaris di dekat Kraton. ...",
     details: {
       type: "Warung Kaki Lima",
       facilities: ["Lesehan", "Area Makan Terbuka"],
     },
+    // --- TAGS DITAMBAHKAN ---
+    tags: ["preserves_cultural_heritage", "small_batch", "family_owned"]
   },
   {
     id: 14,
@@ -565,15 +481,7 @@ export const umkmData = [
     priceRange: [80000, 200000],
     paymentMethods: ["Tunai", "QRIS", "Debit", "Kartu Kredit"],
     lastUpdated: "2025-10-18",
-    reviewsList: [
-      {
-        id: "r1",
-        user: "Kevin",
-        rating: 5,
-        text: "Kaos oleh-oleh paling keren. Desainnya cerdas dan beda dari yang lain. Bahannya juga adem.",
-        date: "2025-10-17",
-      },
-    ],
+    reviewsList: [/* ... */],
     owner: {
       name: "PT. Aseli Dagadu Djokdja",
       joined: "2024-01-10",
@@ -591,11 +499,13 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
     description:
-      "Merek kaos ikonik Yogyakarta dengan desain yang cerdas, humoris, dan 'njawani'. Wajib beli sebagai oleh-oleh.",
+      "Merek kaos ikonik Yogyakarta dengan desain yang cerdas...",
     details: {
       type: "Toko Pakaian",
       facilities: ["AC", "Kamar Pas", "Desain Toko Unik"],
     },
+    // --- TAGS DITAMBAHKAN ---
+    tags: ["preserves_cultural_heritage", "locally_sourced_materials"]
   },
   {
     id: 15,
@@ -606,15 +516,7 @@ export const umkmData = [
     priceRange: [15000, 25000],
     paymentMethods: ["Tunai"],
     lastUpdated: "2025-10-24",
-    reviewsList: [
-      {
-        id: "r1",
-        user: "Eko",
-        rating: 5,
-        text: "Sate lemak (gajih) paling juara. Bumbunya meresap, dibakar sampai agak kering. Sambalnya mantap!",
-        date: "2025-10-23",
-      },
-    ],
+    reviewsList: [/* ... */],
     owner: {
       name: "Mbah Suwarni",
       joined: "2024-04-10",
@@ -632,11 +534,13 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1603052210283-a989f661fb3a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
     description:
-      "Sate 'kere' (terbuat dari gajih/lemak sapi) dengan bumbu yang kaya rasa. Salah satu kuliner unik Jogja.",
+      "Sate 'kere' (terbuat dari gajih/lemak sapi)...",
     details: {
       type: "Warung Tenda",
       facilities: ["Lesehan"],
     },
+    // --- TAGS DITAMBAHKAN ---
+    tags: ["female_founded", "small_batch", "preserves_cultural_heritage", "family_owned"]
   },
   {
     id: 16,
@@ -647,15 +551,7 @@ export const umkmData = [
     priceRange: [20000, 100000],
     paymentMethods: ["Tunai", "QRIS", "Debit", "Kartu Kredit"],
     lastUpdated: "2025-10-26",
-    reviewsList: [
-      {
-        id: "r1",
-        user: "Julia",
-        rating: 5,
-        text: "Cokelat premium asli Jogja. Varian rasa rendang dan cabainya unik! Kemasannya juga cantik.",
-        date: "2025-10-25",
-      },
-    ],
+    reviewsList: [/* ... */],
     owner: {
       name: "Cokelat Monggo",
       joined: "2024-02-17",
@@ -673,11 +569,13 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1605287413136-253c55bd1cb3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
     description:
-      "Cokelat premium asli Jogja dengan berbagai varian rasa unik khas Indonesia. Menggunakan biji kakao lokal berkualitas.",
+      "Cokelat premium asli Jogja dengan berbagai varian rasa unik...",
     details: {
       type: "Toko Cokelat",
       facilities: ["AC", "Tester Produk", "Kafe Kecil"],
     },
+    // --- TAGS DITAMBAHKAN ---
+    tags: ["locally_sourced_materials", "small_batch", "eco_friendly", "social_enterprise", "preserves_cultural_heritage"]
   },
   {
     id: 17,
@@ -688,15 +586,7 @@ export const umkmData = [
     priceRange: [100000, 500000],
     paymentMethods: ["Tunai", "QRIS", "Transfer Bank"],
     lastUpdated: "2025-10-23",
-    reviewsList: [
-      {
-        id: "r1",
-        user: "Wisudawan",
-        rating: 5,
-        text: "Foto wisuda di sini hasilnya bagus. Fotografernya profesional dan bisa mengarahkan gaya.",
-        date: "2025-10-22",
-      },
-    ],
+    reviewsList: [/* ... */],
     owner: {
       name: "Java Foto",
       joined: "2024-03-20",
@@ -714,11 +604,13 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1600096194534-960fada6207f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
     description:
-      "Jasa foto studio profesional dan foto wisuda. Terkenal di kalangan mahasiswa dan keluarga.",
+      "Jasa foto studio profesional dan foto wisuda. ...",
     details: {
       type: "Studio Foto",
       facilities: ["Studio AC", "Properti Foto", "Ruang Ganti"],
     },
+    // --- TAGS DITAMBAHKAN ---
+    tags: ["family_owned"]
   },
   {
     id: 18,
@@ -729,15 +621,7 @@ export const umkmData = [
     priceRange: [15000, 25000],
     paymentMethods: ["Tunai", "QRIS"],
     lastUpdated: "2025-10-28",
-    reviewsList: [
-      {
-        id: "r1",
-        user: "Bapak-bapak",
-        rating: 5,
-        text: "Pecel legendaris, rasanya tidak berubah sejak dulu. Bumbu kacangnya kental dan pas. Selalu jadi pilihan sarapan.",
-        date: "2025-10-27",
-      },
-    ],
+    reviewsList: [/* ... */],
     owner: {
       name: "Keluarga Bu Wiryo",
       joined: "2024-02-01",
@@ -755,11 +639,13 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1628102322441-21c9b6f8c37c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
     description:
-      "Nasi pecel legendaris yang sudah ada sejak puluhan tahun lalu. SGPC adalah singkatan dari 'Sego Pecel'.",
+      "Nasi pecel legendaris yang sudah ada sejak puluhan tahun lalu. ...",
     details: {
       type: "Warung Makan",
       facilities: ["Area Makan Luas", "Parkir"],
     },
+    // --- TAGS DITAMBAHKAN ---
+    tags: ["family_owned", "preserves_cultural_heritage", "female_founded"]
   },
   {
     id: 19,
@@ -770,15 +656,7 @@ export const umkmData = [
     priceRange: [1000, 1000000],
     paymentMethods: ["Tunai", "QRIS", "Debit", "Kartu Kredit"],
     lastUpdated: "2025-10-15",
-    reviewsList: [
-      {
-        id: "r1",
-        user: "Ibu Rumah Tangga",
-        rating: 4,
-        text: "Tempat belanja bulanan. Murah dan lengkap, tapi selalu antri panjang di kasir.",
-        date: "2025-10-14",
-      },
-    ],
+    reviewsList: [/* ... */],
     owner: {
       name: "Progo Group",
       joined: "2024-01-25",
@@ -796,11 +674,13 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
     description:
-      "Supermarket grosir yang menjual segala kebutuhan rumah tangga dengan harga miring. Selalu ramai.",
+      "Supermarket grosir yang menjual segala kebutuhan rumah tangga...",
     details: {
       type: "Grosir",
       facilities: ["Parkir Luas", "Food Court", "Toilet"],
     },
+    // --- TAGS DITAMBAHKAN ---
+    tags: ["family_owned"]
   },
   {
     id: 20,
@@ -811,15 +691,7 @@ export const umkmData = [
     priceRange: [3000, 10000],
     paymentMethods: ["Tunai"],
     lastUpdated: "2025-11-01",
-    reviewsList: [
-      {
-        id: "r1",
-        user: "Wati",
-        rating: 5,
-        text: "Jamu kunyit asemnya segar banget. Mbahnya ramah, ramuannya masih otentik.",
-        date: "2025-10-31",
-      },
-    ],
+    reviewsList: [/* ... */],
     owner: {
       name: "Mbah Waginem",
       joined: "2024-07-01",
@@ -837,11 +709,13 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1552392372-d591060b3780?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
     description:
-      "Penjual jamu gendong tradisional dengan ramuan otentik warisan leluhur. Biasa mangkal di area Pasar Kranggan.",
+      "Penjual jamu gendong tradisional dengan ramuan otentik...",
     details: {
       type: "Kaki Lima",
       facilities: ["Minum di tempat", "Bawa Pulang"],
     },
+    // --- TAGS DITAMBAHKAN ---
+    tags: ["fully_handmade", "natural_dyes", "female_founded", "preserves_cultural_heritage", "locally_sourced_materials", "empowers_women", "small_batch"]
   },
   {
     id: 21,
@@ -852,15 +726,7 @@ export const umkmData = [
     priceRange: [12000, 25000],
     paymentMethods: ["Tunai", "QRIS"],
     lastUpdated: "2025-10-29",
-    reviewsList: [
-      {
-        id: "r1",
-        user: "Pak Agung",
-        rating: 5,
-        text: "Soto ayam kampung paling legendaris. Kuah beningnya gurih pol. Tempatnya luas dan adem.",
-        date: "2025-10-28",
-      },
-    ],
+    reviewsList: [/* ... */],
     owner: {
       name: "Keluarga Kadipiro",
       joined: "2024-02-05",
@@ -878,11 +744,13 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1604251759491-3046f3378174?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
     description:
-      "Soto ayam kampung legendaris dengan kuah bening yang gurih. Sudah berdiri sejak 1921.",
+      "Soto ayam kampung legendaris dengan kuah bening...",
     details: {
       type: "Restoran",
       facilities: ["Parkir Luas", "Toilet", "Tempat Duduk Banyak"],
     },
+    // --- TAGS DITAMBAHKAN ---
+    tags: ["family_owned", "preserves_cultural_heritage"]
   },
   {
     id: 22,
@@ -893,15 +761,7 @@ export const umkmData = [
     priceRange: [50000, 5000000],
     paymentMethods: ["Tunai", "QRIS", "Debit", "Kartu Kredit"],
     lastUpdated: "2025-10-21",
-    reviewsList: [
-      {
-        id: "r1",
-        user: "Mrs. Smith",
-        rating: 5,
-        text: "Beautiful silver crafts. We can see the workshop and how they make it. Very detailed.",
-        date: "2025-10-20",
-      },
-    ],
+    reviewsList: [/* ... */],
     owner: {
       name: "Ansor Silver",
       joined: "2024-03-15",
@@ -919,11 +779,13 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1611956414163-0c464b19c23f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
     description:
-      "Pusat kerajinan perak di Kotagede. Menjual perhiasan, miniatur, dan hiasan dinding. Bisa melihat proses pembuatan.",
+      "Pusat kerajinan perak di Kotagede. ...",
     details: {
       type: "Toko Kerajinan",
       facilities: ["Workshop", "Showroom AC", "Parkir"],
     },
+    // --- TAGS DITAMBAHKAN ---
+    tags: ["hand_carved", "fully_handmade", "family_owned", "preserves_cultural_heritage", "small_batch", "made_to_order", "custom_orders"]
   },
   {
     id: 23,
@@ -934,15 +796,7 @@ export const umkmData = [
     priceRange: [60000, 150000],
     paymentMethods: ["Tunai", "QRIS", "Debit"],
     lastUpdated: "2025-10-27",
-    reviewsList: [
-      {
-        id: "r1",
-        user: "Rudi",
-        rating: 5,
-        text: "Habis keliling Jogja, pijat di sini langsung segar lagi. Terapisnya tahu titik-titik yang pegal.",
-        date: "2025-10-26",
-      },
-    ],
+    reviewsList: [/* ... */],
     owner: {
       name: "Pak Sehat",
       joined: "2024-05-10",
@@ -960,11 +814,13 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1617936132034-c3b8813d6404?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
     description:
-      "Jasa pijat refleksi dan pijat tradisional untuk kebugaran. Tempatnya bersih dan terapisnya profesional.",
+      "Jasa pijat refleksi dan pijat tradisional untuk kebugaran. ...",
     details: {
       type: "Jasa Kebugaran",
       facilities: ["Ruangan AC", "Terapis Profesional", "Minuman Jahe"],
     },
+    // --- TAGS DITAMBAHKAN ---
+    tags: ["family_owned"]
   },
   {
     id: 24,
@@ -975,15 +831,7 @@ export const umkmData = [
     priceRange: [25000, 40000],
     paymentMethods: ["Tunai", "QRIS"],
     lastUpdated: "2025-10-29",
-    reviewsList: [
-      {
-        id: "r1",
-        user: "Pecinta Pedas",
-        rating: 5,
-        text: "PEDESNYA NAMPOL! Benar-benar meledak di mulut kayak mercon. Dagingnya empuk. Wajib bawa minum banyak.",
-        date: "2025-10-28",
-      },
-    ],
+    reviewsList: [/* ... */],
     owner: {
       name: "Bu Narti",
       joined: "2024-03-01",
@@ -1001,11 +849,13 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1604251759491-3046f3378174?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
     description:
-      "Pelopor oseng-oseng super pedas (mercon) di Yogyakarta. Menu utamanya oseng daging, gajih, dan cabai rawit.",
+      "Pelopor oseng-oseng super pedas (mercon) di Yogyakarta. ...",
     details: {
       type: "Warung Tenda",
       facilities: ["Lesehan", "Minuman Dingin"],
     },
+    // --- TAGS DITAMBAHKAN ---
+    tags: ["female_founded", "preserves_cultural_heritage", "small_batch", "family_owned"]
   },
   {
     id: 25,
@@ -1016,15 +866,7 @@ export const umkmData = [
     priceRange: [15000, 40000],
     paymentMethods: ["Tunai", "QRIS", "Debit"],
     lastUpdated: "2025-10-25",
-    reviewsList: [
-      {
-        id: "r1",
-        user: "Vina",
-        rating: 5,
-        text: "Konsepnya unik, semua dari jamur. Sate jamurnya enak banget kayak sate ayam. Es krim jamurnya juga wajib coba!",
-        date: "2025-10-24",
-      },
-    ],
+    reviewsList: [/* ... */],
     owner: {
       name: "Jejamuran",
       joined: "2024-02-28",
@@ -1042,11 +884,13 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1600185810766-9d3e7e311c9e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
     description:
-      "Restoran unik dengan semua menu terbuat dari jamur. Dari sate jamur, rendang jamur, hingga es krim jamur.",
+      "Restoran unik dengan semua menu terbuat dari jamur. ...",
     details: {
       type: "Restoran",
       facilities: ["Parkir Luas", "Toko Oleh-oleh Jamur", "Mushola"],
     },
+    // --- TAGS DITAMBAHKAN ---
+    tags: ["locally_sourced_materials", "small_batch", "family_owned"]
   },
   {
     id: 26,
@@ -1057,15 +901,7 @@ export const umkmData = [
     priceRange: [100000, 2000000],
     paymentMethods: ["Tunai", "Transfer Bank"],
     lastUpdated: "2025-10-19",
-    reviewsList: [
-      {
-        id: "r1",
-        user: "Dita",
-        rating: 4,
-        text: "Banyak pilihan kerajinan rotan estetik. Harganya lumayan, tapi kualitasnya bagus.",
-        date: "2025-10-18",
-      },
-    ],
+    reviewsList: [/* ... */],
     owner: {
       name: "Pak Rotan",
       joined: "2024-06-11",
@@ -1083,11 +919,13 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1618220790829-c88f71a0636f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
     description:
-      "Pusat kerajinan mebel dan dekorasi rumah berbahan dasar rotan. Banyak barang estetik.",
+      "Pusat kerajinan mebel dan dekorasi rumah berbahan dasar rotan. ...",
     details: {
       type: "Toko Mebel",
       facilities: ["Workshop", "Showroom"],
     },
+    // --- TAGS DITAMBAHKAN ---
+    tags: ["fully_handmade", "locally_sourced_materials", "hand_woven", "custom_orders", "family_owned"]
   },
   {
     id: 27,
@@ -1098,15 +936,7 @@ export const umkmData = [
     priceRange: [30000, 100000],
     paymentMethods: ["Tunai", "QRIS"],
     lastUpdated: "2025-10-30",
-    reviewsList: [
-      {
-        id: "r1",
-        user: "Sneakerhead",
-        rating: 5,
-        text: "Sepatu jadi bersih kayak baru. Pelayanan cepat, bisa unyellowing juga.",
-        date: "2025-10-29",
-      },
-    ],
+    reviewsList: [/* ... */],
     owner: {
       name: "Mas Clean",
       joined: "2024-04-12",
@@ -1124,11 +954,13 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1608231387042-66d18ab3437a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
     description:
-      "Jasa cuci sepatu (sneakers, kanvas, kulit) profesional. Menyediakan layanan cuci cepat dan perawatan sepatu.",
+      "Jasa cuci sepatu (sneakers, kanvas, kulit) profesional. ...",
     details: {
       type: "Jasa Cuci",
       facilities: ["Cuci Cepat", "Repaint", "Unyellowing"],
     },
+    // --- TAGS DITAMBAHKAN ---
+    tags: []
   },
   {
     id: 28,
@@ -1139,15 +971,7 @@ export const umkmData = [
     priceRange: [5000, 100000],
     paymentMethods: ["Tunai", "QRIS", "Debit"],
     lastUpdated: "2025-10-26",
-    reviewsList: [
-      {
-        id: "r1",
-        user: "Tika",
-        rating: 4,
-        text: "Jual pernak-pernik unik, jamu, dan snack khas Raminten. Tempatnya satu lokasi sama resto.",
-        date: "2025-10-25",
-      },
-    ],
+    reviewsList: [/* ... */],
     owner: {
       name: "Raminten Group",
       joined: "2024-02-19",
@@ -1165,11 +989,13 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1599586120428-c6f34a26e033?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
     description:
-      "Toko oleh-oleh yang menjual pernak-pernik unik, jamu, dan makanan ringan khas Raminten.",
+      "Toko oleh-oleh yang menjual pernak-pernik unik...",
     details: {
       type: "Toko Oleh-oleh",
       facilities: ["AC", "Parkir"],
     },
+    // --- TAGS DITAMBAHKAN ---
+    tags: ["family_owned", "preserves_cultural_heritage", "female_founded"]
   },
   {
     id: 29,
@@ -1180,15 +1006,7 @@ export const umkmData = [
     priceRange: [8000, 10000],
     paymentMethods: ["Tunai"],
     lastUpdated: "2025-10-27",
-    reviewsList: [
-      {
-        id: "r1",
-        user: "Hadi",
-        rating: 5,
-        text: "Wedang ronde paling legendaris. Jahenya hangat, isian rondenya pas. Cocok untuk malam hari.",
-        date: "2025-10-26",
-      },
-    ],
+    reviewsList: [/* ... */],
     owner: {
       name: "Mbah Payem",
       joined: "2024-03-12",
@@ -1206,11 +1024,13 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1630440533342-6031d7e296a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
     description:
-      "Wedang Ronde legendaris yang menjadi langganan Sultan. Hangat dan nikmat untuk suasana malam Jogja.",
+      "Wedang Ronde legendaris yang menjadi langganan Sultan. ...",
     details: {
       type: "Kaki Lima",
       facilities: ["Lesehan"],
     },
+    // --- TAGS DITAMBAHKAN ---
+    tags: ["female_founded", "preserves_cultural_heritage", "small_batch", "family_owned"]
   },
   {
     id: 30,
@@ -1221,15 +1041,7 @@ export const umkmData = [
     priceRange: [50000, 200000],
     paymentMethods: ["Tunai", "QRIS"],
     lastUpdated: "2025-10-20",
-    reviewsList: [
-      {
-        id: "r1",
-        user: "Turis",
-        rating: 4,
-        text: "Cepat jadinya, sekitar 15 menit. Hasilnya lumayan mirip. Souvenir unik.",
-        date: "2025-10-19",
-      },
-    ],
+    reviewsList: [/* ... */],
     owner: {
       name: "Komunitas Pelukis",
       joined: "2024-07-07",
@@ -1247,11 +1059,13 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1482160549825-59ac1b23cb6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
     description:
-      "Para seniman jalanan yang menawarkan jasa lukis sketsa wajah cepat di sepanjang trotoar Malioboro.",
+      "Para seniman jalanan yang menawarkan jasa lukis sketsa wajah cepat...",
     details: {
       type: "Jasa Seni",
       facilities: ["Lukis di Tempat", "Bisa Pesan"],
     },
+    // --- TAGS DITAMBAHKAN ---
+    tags: ["fully_handmade", "made_to_order", "personalizable", "custom_orders", "community_empowerment"]
   },
   {
     id: 31,
@@ -1262,15 +1076,7 @@ export const umkmData = [
     priceRange: [50000, 500000],
     paymentMethods: ["Tunai", "QRIS", "Debit"],
     lastUpdated: "2025-10-22",
-    reviewsList: [
-      {
-        id: "r1",
-        user: "Doni",
-        rating: 5,
-        text: "Kulitnya asli, wangi. Beli dompet di sini awet banget. Harganya oke untuk kualitas kulit asli.",
-        date: "2025-10-21",
-      },
-    ],
+    reviewsList: [/* ... */],
     owner: {
       name: "Pak Kulit",
       joined: "2024-04-18",
@@ -1288,11 +1094,13 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1524580323223-a589077271b6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
     description:
-      "Toko yang menjual berbagai produk kerajinan kulit asli seperti tas, dompet, dan ikat pinggang. Banyak dijumpai di Malioboro.",
+      "Toko yang menjual berbagai produk kerajinan kulit asli...",
     details: {
       type: "Toko Kerajinan",
       facilities: ["Bisa Custom", "Showroom"],
     },
+    // --- TAGS DITAMBAHKAN ---
+    tags: ["fully_handmade", "small_batch", "locally_sourced_materials", "personalizable", "custom_orders"]
   },
   {
     id: 32,
@@ -1303,15 +1111,7 @@ export const umkmData = [
     priceRange: [10000, 15000],
     paymentMethods: ["Tunai", "QRIS"],
     lastUpdated: "2025-10-28",
-    reviewsList: [
-      {
-        id: "r1",
-        user: "Lia",
-        rating: 5,
-        text: "Kombinasi aneh tapi ENAK! Rujak buah pedas manis ketemu es krim puter gurih. Segar banget siang-siang.",
-        date: "2025-10-27",
-      },
-    ],
+    reviewsList: [/* ... */],
     owner: {
       name: "Pak Nardi",
       joined: "2024-03-25",
@@ -1329,11 +1129,13 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1579954115545-a95591f28bfc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
     description:
-      "Kombinasi unik rujak buah segar dengan es krim puter di atasnya. Segar dan pedas!",
+      "Kombinasi unik rujak buah segar dengan es krim puter...",
     details: {
       type: "Kaki Lima",
       facilities: ["Area Duduk Terbatas"],
     },
+    // --- TAGS DITAMBAHKAN ---
+    tags: ["small_batch", "family_owned"]
   },
   {
     id: 33,
@@ -1344,15 +1146,7 @@ export const umkmData = [
     priceRange: [300000, 10000000],
     paymentMethods: ["Tunai", "Debit", "Transfer Bank"],
     lastUpdated: "2025-10-23",
-    reviewsList: [
-      {
-        id: "r1",
-        user: "Ibu Endang",
-        rating: 5,
-        text: "Modelnya lengkap, dari yang klasik sampai modern. Harganya bersaing dibanding toko lain.",
-        date: "2025-10-22",
-      },
-    ],
+    reviewsList: [/* ... */],
     owner: {
       name: "Keluarga Kranggan",
       joined: "2024-02-11",
@@ -1370,11 +1164,13 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1611860363533-8ade5f4d88a4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
     description:
-      "Toko perhiasan emas dengan model lengkap dan harga bersaing. Terletak di area Pasar Kranggan.",
+      "Toko perhiasan emas dengan model lengkap dan harga bersaing. ...",
     details: {
       type: "Toko Perhiasan",
       facilities: ["Terima Jual Beli", "Sertifikat"],
     },
+    // --- TAGS DITAMBAHKAN ---
+    tags: ["family_owned"]
   },
   {
     id: 34,
@@ -1385,15 +1181,7 @@ export const umkmData = [
     priceRange: [50000, 500000],
     paymentMethods: ["Tunai", "QRIS", "Transfer Bank"],
     lastUpdated: "2025-10-29",
-    reviewsList: [
-      {
-        id: "r1",
-        user: "Mahasiswa Akhir",
-        rating: 5,
-        text: "Laptop mati total pas mau skripsi. Dibawa ke sini 2 jam selesai. Harganya jujur. Mantap!",
-        date: "2025-10-28",
-      },
-    ],
+    reviewsList: [/* ... */],
     owner: {
       name: "Mas Tekno",
       joined: "2024-05-01",
@@ -1411,11 +1199,13 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
     description:
-      "Jasa perbaikan laptop, instal ulang, dan upgrade hardware. Bisa ditunggu untuk kerusakan ringan.",
+      "Jasa perbaikan laptop, instal ulang, dan upgrade hardware. ...",
     details: {
       type: "Servis Elektronik",
       facilities: ["Gratis Cek Kerusakan", "Garansi Servis"],
     },
+    // --- TAGS DITAMBAHKAN ---
+    tags: []
   },
   {
     id: 35,
@@ -1426,15 +1216,7 @@ export const umkmData = [
     priceRange: [20000, 35000],
     paymentMethods: ["Tunai"],
     lastUpdated: "2025-10-26",
-    reviewsList: [
-      {
-        id: "r1",
-        user: "Pemburu Kuliner",
-        rating: 5,
-        text: "Pengalaman unik! Antri dari jam 10 malam, makan gudeg langsung dari dapurnya (pawon). Rasanya otentik banget.",
-        date: "2025-10-25",
-      },
-    ],
+    reviewsList: [/* ... */],
     owner: {
       name: "Keluarga Gudeg Pawon",
       joined: "2024-03-10",
@@ -1452,11 +1234,13 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&auto=format&fit=crop&w=1981&q=80",
     ],
     description:
-      "Pengalaman unik makan gudeg otentik langsung dari 'pawon' (dapur). Buka tengah malam dan terkenal antrinya.",
+      "Pengalaman unik makan gudeg otentik langsung dari 'pawon' (dapur). ...",
     details: {
       type: "Warung Makan",
       facilities: ["Suasana Tradisional", "Antri"],
     },
+    // --- TAGS DITAMBAHKAN ---
+    tags: ["family_owned", "preserves_cultural_heritage", "small_batch", "locally_sourced_materials"]
   },
   {
     id: 36,
@@ -1467,15 +1251,7 @@ export const umkmData = [
     priceRange: [20000, 100000],
     paymentMethods: ["Tunai", "Debit"],
     lastUpdated: "2025-10-17",
-    reviewsList: [
-      {
-        id: "r1",
-        user: "Penjahit",
-        rating: 4,
-        text: "Kain sisa garmen, harus jeli memilih. Tapi kalau dapat, harganya murah banget.",
-        date: "2025-10-16",
-      },
-    ],
+    reviewsList: [/* ... */],
     owner: {
       name: "Toko Kain",
       joined: "2024-04-20",
@@ -1493,11 +1269,13 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
     description:
-      "Menjual berbagai macam kain sisa garmen secara kiloan. Murah meriah untuk yang hobi jahit.",
+      "Menjual berbagai macam kain sisa garmen secara kiloan. ...",
     details: {
       type: "Toko Kain",
       facilities: ["Banyak Pilihan", "Parkir"],
     },
+    // --- TAGS DITAMBAHKAN ---
+    tags: []
   },
   {
     id: 37,
@@ -1508,15 +1286,7 @@ export const umkmData = [
     priceRange: [1000, 50000],
     paymentMethods: ["Tunai", "QRIS"],
     lastUpdated: "2025-10-24",
-    reviewsList: [
-      {
-        id: "r1",
-        user: "Desainer",
-        rating: 5,
-        text: "Toko alat jahit terlengkap dekat Beringharjo. Cari kancing model aneh-aneh pasti ada di sini.",
-        date: "2025-10-23",
-      },
-    ],
+    reviewsList: [/* ... */],
     owner: {
       name: "Benang Emas",
       joined: "2024-03-18",
@@ -1534,11 +1304,13 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1599723002633-87f583095034?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
     description:
-      "Toko kecil yang menjual segala kebutuhan menjahit. Kancing, benang, resleting, renda, dll.",
+      "Toko kecil yang menjual segala kebutuhan menjahit. ...",
     details: {
       type: "Toko Alat Jahit",
       facilities: ["Lengkap"],
     },
+    // --- TAGS DITAMBAHKAN ---
+    tags: ["family_owned"]
   },
   {
     id: 38,
@@ -1549,15 +1321,7 @@ export const umkmData = [
     priceRange: [5000, 40000],
     paymentMethods: ["Tunai", "QRIS", "Debit"],
     lastUpdated: "2025-10-29",
-    reviewsList: [
-      {
-        id: "r1",
-        user: "Wisatawan",
-        rating: 5,
-        text: "Suasananya Jawa banget, unik! Pelayannya pakai kemben. Makanannya murah dan porsinya jumbo. Es susunya enak.",
-        date: "2025-10-28",
-      },
-    ],
+    reviewsList: [/* ... */],
     owner: {
       name: "Raminten Group",
       joined: "2024-02-19",
@@ -1575,11 +1339,13 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1514933651103-005eec06c04b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
     description:
-      "Restoran dengan konsep Jawa yang sangat kental. Menu unik, penyajian menarik, dan harga terjangkau.",
+      "Restoran dengan konsep Jawa yang sangat kental. ...",
     details: {
       type: "Restoran",
       facilities: ["Suasana Unik", "Toilet", "Spot Foto", "Buka 24 Jam (TBC)"],
     },
+    // --- TAGS DITAMBAHKAN ---
+    tags: ["family_owned", "preserves_cultural_heritage", "female_founded"]
   },
   {
     id: 39,
@@ -1590,15 +1356,7 @@ export const umkmData = [
     priceRange: [800000, 3000000],
     paymentMethods: ["Tunai", "Transfer Bank"],
     lastUpdated: "2025-10-21",
-    reviewsList: [
-      {
-        id: "r1",
-        user: "Calon Pengantin",
-        rating: 5,
-        text: "Jahit jas di sini hasilnya rapi banget. Pas di badan. Bapaknya detail sekali ngukurnya.",
-        date: "2025-10-20",
-      },
-    ],
+    reviewsList: [/* ... */],
     owner: {
       name: "Pak Rapi",
       joined: "2024-04-14",
@@ -1616,11 +1374,13 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1497032628192-86f99079de7c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
     description:
-      "Jasa jahit (tailor) khusus jas pria. Hasil rapi dan presisi, terkenal di kalangan eksekutif.",
+      "Jasa jahit (tailor) khusus jas pria. ...",
     details: {
       type: "Tailor",
       facilities: ["Pengukuran di Tempat", "Pilihan Kain"],
     },
+    // --- TAGS DITAMBAHKAN ---
+    tags: ["made_to_order", "custom_orders", "fully_handmade", "family_owned"]
   },
   {
     id: 40,
@@ -1631,15 +1391,7 @@ export const umkmData = [
     priceRange: [20000, 35000],
     paymentMethods: ["Tunai", "QRIS"],
     lastUpdated: "2025-10-28",
-    reviewsList: [
-      {
-        id: "r1",
-        user: "Rina",
-        rating: 5,
-        text: "Ayam goreng kampung favorit! Empuk, kremesannya gurih, sambal bawangnya juara.",
-        date: "2025-10-27",
-      },
-    ],
+    reviewsList: [/* ... */],
     owner: {
       name: "Bu Tini",
       joined: "2024-02-25",
@@ -1657,11 +1409,13 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1562967914-01efa7e87832?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
     description:
-      "Ayam goreng kampung empuk dengan kremesan gurih. Sambal bawangnya mantap. Selalu ramai saat jam makan.",
+      "Ayam goreng kampung empuk dengan kremesan gurih. ...",
     details: {
       type: "Restoran",
       facilities: ["Parkir", "Toilet", "Lalapan Ambil Sendiri"],
     },
+    // --- TAGS DITAMBAHKAN ---
+    tags: ["female_founded", "family_owned", "preserves_cultural_heritage"]
   },
   {
     id: 41,
@@ -1672,15 +1426,7 @@ export const umkmData = [
     priceRange: [30000, 2000000],
     paymentMethods: ["Tunai", "Transfer Bank"],
     lastUpdated: "2025-10-20",
-    reviewsList: [
-      {
-        id: "r1",
-        user: "Budayawan",
-        rating: 5,
-        text: "Koleksi wayangnya lengkap, dari ukuran kecil untuk souvenir sampai ukuran standar dalang. Kualitas kulitnya bagus.",
-        date: "2025-10-19",
-      },
-    ],
+    reviewsList: [/* ... */],
     owner: {
       name: "Pak Dalang",
       joined: "2024-04-22",
@@ -1698,11 +1444,13 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1624622089304-45330368310e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
     description:
-      "Menjual wayang kulit asli berbagai ukuran, dari souvenir hingga standar dalang. Dibuat oleh pengrajin lokal.",
+      "Menjual wayang kulit asli berbagai ukuran...",
     details: {
       type: "Toko Kerajinan",
       facilities: ["Workshop", "Edukasi Singkat"],
     },
+    // --- TAGS DITAMBAHKAN ---
+    tags: ["fully_handmade", "hand_carved", "preserves_cultural_heritage", "family_owned", "made_to_order", "custom_orders", "personalizable"]
   },
   {
     id: 42,
@@ -1713,15 +1461,7 @@ export const umkmData = [
     priceRange: [10000, 15000],
     paymentMethods: ["Tunai", "QRIS"],
     lastUpdated: "2025-10-29",
-    reviewsList: [
-      {
-        id: "r1",
-        user: "Tari",
-        rating: 5,
-        text: "Es buah paling komplit isinya. Segar banget diminum pas Jogja lagi panas. Selalu jadi favorit.",
-        date: "2025-10-28",
-      },
-    ],
+    reviewsList: [/* ... */],
     owner: {
       name: "Keluarga PK",
       joined: "2024-03-02",
@@ -1739,11 +1479,13 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1504439031068-01d00c3c6f84?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
     description:
-      "Es buah legendaris dengan isian komplit dan kuah yang segar. Sangat populer di kalangan warga lokal.",
+      "Es buah legendaris dengan isian komplit...",
     details: {
       type: "Kaki Lima",
       facilities: ["Banyak Pilihan Topping", "Area Duduk"],
     },
+    // --- TAGS DITAMBAHKAN ---
+    tags: ["family_owned", "small_batch"]
   },
   {
     id: 43,
@@ -1754,15 +1496,7 @@ export const umkmData = [
     priceRange: [5000, 1000000],
     paymentMethods: ["Tunai", "QRIS (Sebagian Tenant)"],
     lastUpdated: "2025-10-18",
-    reviewsList: [
-      {
-        id: "r1",
-        user: "Dekorator",
-        rating: 5,
-        text: "Desa wisata yang isinya gerabah semua. Dari pot, guci, sampai hiasan dinding. Harganya miring, bisa borong.",
-        date: "2025-10-17",
-      },
-    ],
+    reviewsList: [/* ... */],
     owner: {
       name: "Paguyuban Kasongan",
       joined: "2024-02-01",
@@ -1780,11 +1514,13 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1578904764805-7f5378130835?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
     description:
-      "Desa wisata yang menjadi pusat kerajinan gerabah dan keramik di Yogyakarta. Banyak showroom di sepanjang jalan.",
+      "Desa wisata yang menjadi pusat kerajinan gerabah dan keramik...",
     details: {
       type: "Pasar Kerajinan",
       facilities: ["Banyak Showroom", "Workshop", "Parkir Luas"],
     },
+    // --- TAGS DITAMBAHKAN ---
+    tags: ["community_empowerment", "fully_handmade", "locally_sourced_materials", "rural_community", "preserves_cultural_heritage", "custom_orders"]
   },
   {
     id: 44,
@@ -1795,15 +1531,7 @@ export const umkmData = [
     priceRange: [15000, 300000],
     paymentMethods: ["Tunai", "QRIS"],
     lastUpdated: "2025-10-25",
-    reviewsList: [
-      {
-        id: "r1",
-        user: "Driver Ojol",
-        rating: 5,
-        text: "Bengkel jujur, tidak 'nembak' harga. Pak Man teliti banget ngeceknya. Servis ringan jadi enteng tarikannya.",
-        date: "2025-10-24",
-      },
-    ],
+    reviewsList: [/* ... */],
     owner: {
       name: "Pak Man",
       joined: "2024-05-16",
@@ -1821,11 +1549,13 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1621644752281-0f7238a063c1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
     description:
-      "Bengkel umum non-resmi yang jujur dan terpercaya. Spesialis motor matic dan servis ringan.",
+      "Bengkel umum non-resmi yang jujur dan terpercaya. ...",
     details: {
       type: "Bengkel",
       facilities: ["Ganti Oli", "Servis Ringan", "Tambal Ban"],
     },
+    // --- TAGS DITAMBAHKAN ---
+    tags: ["family_owned"]
   },
   {
     id: 45,
@@ -1836,15 +1566,7 @@ export const umkmData = [
     priceRange: [1000, 50000],
     paymentMethods: ["Tunai"],
     lastUpdated: "2025-11-01",
-    reviewsList: [
-      {
-        id: "r1",
-        user: "Warga Lokal",
-        rating: 5,
-        text: "Warung paling lengkap di kampung. Cari apa aja ada. Bu Sri ramah banget.",
-        date: "2025-10-31",
-      },
-    ],
+    reviewsList: [/* ... */],
     owner: {
       name: "Bu Sri",
       joined: "2024-01-11",
@@ -1862,11 +1584,13 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1588977221655-6638549e623c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
     description:
-      "Warung kelontong yang menjual kebutuhan sehari-hari, dari sembako, bensin eceran, hingga alat tulis.",
+      "Warung kelontong yang menjual kebutuhan sehari-hari...",
     details: {
       type: "Warung",
       facilities: ["Lengkap", "Harga Eceran"],
     },
+    // --- TAGS DITAMBAHKAN ---
+    tags: ["female_founded", "family_owned"]
   },
   {
     id: 46,
@@ -1877,15 +1601,7 @@ export const umkmData = [
     priceRange: [15000, 30000],
     paymentMethods: ["Tunai"],
     lastUpdated: "2025-10-24",
-    reviewsList: [
-      {
-        id: "r1",
-        user: "Backpacker",
-        rating: 3,
-        text: "Makan di Malioboro, harganya agak mahal untuk pecel lele. Rasanya standar, menang suasana aja.",
-        date: "2025-10-23",
-      },
-    ],
+    reviewsList: [/* ... */],
     owner: {
       name: "Pak Kumis",
       joined: "2024-08-01",
@@ -1903,11 +1619,13 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
     description:
-      "Salah satu dari banyak warung lesehan di Malioboro yang menyajikan pecel lele, gudeg, dan aneka lauk.",
+      "Salah satu dari banyak warung lesehan di Malioboro...",
     details: {
       type: "Lesehan",
       facilities: ["Makan di Tempat", "Live Music (Musisi Jalanan)"],
     },
+    // --- TAGS DITAMBAHKAN ---
+    tags: []
   },
   {
     id: 47,
@@ -1918,15 +1636,7 @@ export const umkmData = [
     priceRange: [10000, 500000],
     paymentMethods: ["Tunai", "QRIS", "Debit", "Kartu Kredit"],
     lastUpdated: "2025-10-25",
-    reviewsList: [
-      {
-        id: "r1",
-        user: "Pelajar",
-        rating: 5,
-        text: "Gramedia paling besar dan paling lengkap di Jogja. Tempatnya adem dan nyaman buat cari buku.",
-        date: "2025-10-24",
-      },
-    ],
+    reviewsList: [/* ... */],
     owner: {
       name: "Gramedia",
       joined: "2024-01-15",
@@ -1944,11 +1654,13 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1533669061430-65c2e0d7b835?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
     description:
-      "Toko buku Gramedia terbesar di Yogyakarta. Sangat lengkap, dari buku, alat tulis, hingga perlengkapan kantor.",
+      "Toko buku Gramedia terbesar di Yogyakarta. ...",
     details: {
       type: "Toko Buku",
       facilities: ["AC", "Kafe", "Alat Tulis", "Parkir"],
     },
+    // --- TAGS DITAMBAHKAN ---
+    tags: []
   },
   {
     id: 48,
@@ -1959,15 +1671,7 @@ export const umkmData = [
     priceRange: [80000, 1000000],
     paymentMethods: ["Tunai", "QRIS", "Debit"],
     lastUpdated: "2025-10-30",
-    reviewsList: [
-      {
-        id: "r1",
-        user: "Cat Lover",
-        rating: 5,
-        text: "Dokternya sabar dan teliti banget. Fasilitas lengkap, ada UGD 24 jam. Kucing saya sembuh di sini.",
-        date: "2025-10-29",
-      },
-    ],
+    reviewsList: [/* ... */],
     owner: {
       name: "Drh. Hewan",
       joined: "2024-03-30",
@@ -1985,11 +1689,13 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1596797882510-0da13101d21c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
     description:
-      "Klinik dokter hewan 24 jam dengan fasilitas UGD dan rawat inap. Melayani grooming dan pet shop.",
+      "Klinik dokter hewan 24 jam dengan fasilitas UGD...",
     details: {
       type: "Klinik Hewan",
       facilities: ["Dokter Jaga", "Grooming", "Pet Shop"],
     },
+    // --- TAGS DITAMBAHKAN ---
+    tags: []
   },
   {
     id: 49,
@@ -2000,15 +1706,7 @@ export const umkmData = [
     priceRange: [8000, 50000],
     paymentMethods: ["Tunai", "QRIS"],
     lastUpdated: "2025-10-21",
-    reviewsList: [
-      {
-        id: "r1",
-        user: "Ibu-ibu",
-        rating: 4,
-        text: "Lengkap, jamu bubuk apa aja ada. Gampang buat stok di rumah. Lokasinya di dalam pasar.",
-        date: "2025-10-20",
-      },
-    ],
+    reviewsList: [/* ... */],
     owner: {
       name: "Toko Herbal",
       joined: "2024-05-20",
@@ -2026,11 +1724,13 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1620921282046-e179e0a16c88?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
     description:
-      "Menjual berbagai macam jamu dan rempah dalam bentuk bubuk instan. Praktis untuk oleh-oleh.",
+      "Menjual berbagai macam jamu dan rempah dalam bentuk bubuk instan. ...",
     details: {
       type: "Toko Herbal",
       facilities: ["Bisa Kirim", "Lengkap"],
     },
+    // --- TAGS DITAMBAHKAN ---
+    tags: ["locally_sourced_materials", "natural_dyes", "preserves_cultural_heritage", "small_batch"]
   },
   {
     id: 50,
@@ -2041,15 +1741,7 @@ export const umkmData = [
     priceRange: [150000, 500000],
     paymentMethods: ["Transfer Bank", "QRIS"],
     lastUpdated: "2025-10-28",
-    reviewsList: [
-      {
-        id: "r1",
-        user: "Owner Online Shop",
-        rating: 5,
-        text: "Pesan logo untuk UMKM saya, hasilnya cepat dan bagus. Komunikasinya gampang, revisi juga cepat.",
-        date: "2025-10-27",
-      },
-    ],
+    reviewsList: [/* ... */],
     owner: {
       name: "Mas Grafis",
       joined: "2024-08-15",
@@ -2067,10 +1759,12 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1611162617213-7d724e0f2042?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
     description:
-      "Freelancer jasa desain logo, brosur, dan kebutuhan branding UMKM. Menerima konsultasi online.",
+      "Freelancer jasa desain logo, brosur, dan kebutuhan branding UMKM. ...",
     details: {
       type: "Jasa Desain",
       facilities: ["Konsultasi Online", "Revisi 3x"],
     },
+    // --- TAGS DITAMBAHKAN ---
+    tags: ["social_enterprise", "personalizable", "custom_orders", "made_to_order"]
   },
 ];
