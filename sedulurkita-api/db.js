@@ -1,13 +1,12 @@
-// db.js
-import pg from 'pg';
+import pkg from 'pg';
+const { Pool } = pkg;
 
-// Connect to your local database
-const pool = new pg.Pool({
+const pool = new Pool({
   user: 'postgres',
   host: 'localhost',
-  database: 'sedulurkita_db', // The database you created
-  password: 'rahasia',
-  port: 5432,
+  database: 'sedulurkita_db',
+  password: '021004', // ganti sesuai
+  port: 5432
 });
 
 export default pool;
