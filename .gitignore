@@ -1,0 +1,55 @@
+# .gitignore (Letakkan di folder root)
+
+# =================================
+# 1. RAHASIA & DEPENDENSI (PALING PENTING)
+# =================================
+
+# Abaikan SEMUA folder node_modules di manapun
+**/node_modules/
+
+# JANGAN PERNAH upload file rahasia backend!
+backend/.env
+
+# Abaikan file .env di frontend (jika ada)
+frontend/.env
+frontend/.env.*
+
+# Ini dari file lama Anda (file .local biasanya berisi env rahasia)
+*.local
+
+# =================================
+# 2. BUILD OUTPUTS & DEPLOY
+# =================================
+
+# Abaikan build output dari Vercel/Netlify
+.vercel/
+.netlify/
+
+# Abaikan build output spesifik dari folder frontend
+frontend/dist/
+frontend/dist-ssr/
+frontend/build/
+
+# =================================
+# 3. LOGS (Dari file lama Anda, ini sudah bagus)
+# =================================
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# =================================
+# 4. EDITOR & OS (Dari file lama Anda, ini sudah bagus)
+# =================================
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
