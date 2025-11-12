@@ -1,3 +1,22 @@
+// === VIDEO PLACEHOLDER BARU (YouTube Embed) ===
+const videoMakanan = "https://www.youtube.com/embed/F-Bq02-x_fE";
+const videoKerajinan = "https://www.youtube.com/embed/8-jF-TqT4-E";
+const videoJasa = "https://www.youtube.com/embed/1Xp_imnLY4U";
+
+// === PRODUK PLACEHOLDER BARU ===
+const foodProducts = [
+  { id: "p1", name: "Menu Andalan", price: 35000, description: "Paket paling populer dan direkomendasikan.", image_url: "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?ixlib=rb-4.0.3&auto=format&fit=crop&w=870&q=80" },
+  { id: "p2", name: "Menu Pelengkap", price: 15000, description: "Tambahan yang sempurna untuk hidangan utama.", image_url: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&auto=format&fit=crop&w=870&q=80" }
+];
+const serviceProducts = [
+  { id: "p1", name: "Layanan Standar", price: 75000, description: "Solusi cepat dan efisien untuk kebutuhan Anda.", image_url: "https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=870&q=80" },
+  { id: "p2", name: "Layanan Premium", price: 250000, description: "Perawatan lengkap dan mendalam.", image_url: "https://images.unsplash.com/photo-1587573089734-09cb69c0f11a?ixlib=rb-4.0.3&auto=format&fit=crop&w=870&q=80" }
+];
+const shopProducts = [
+  { id: "p1", name: "Produk Terlaris", price: 120000, description: "Item yang paling dicari oleh pelanggan.", image_url: "https://images.unsplash.com/photo-1578491793108-d1e3e05f560a?ixlib=rb-4.0.3&auto=format&fit=crop&w=870&q=80" },
+  { id: "p2", name: "Souvenir Khas", price: 45000, description: "Cinderamata unik untuk oleh-oleh.", image_url: "https://images.unsplash.com/photo-1620799140414-b291c3d9b736?ixlib=rb-4.0.3&auto=format&fit=crop&w=870&q=80" }
+];
+
 export const umkmData = [
   {
     id: 1,
@@ -9,26 +28,10 @@ export const umkmData = [
     paymentMethods: ["Tunai", "QRIS", "GoPay", "OVO"],
     lastUpdated: "2025-10-30",
     reviewsList: [
-      {
-        id: "r1",
-        user: "Budi Santoso",
-        rating: 5,
-        text: "Gudegnya paling legendaris! ...",
-        date: "2025-10-28",
-      },
-      {
-        id: "r2",
-        user: "Anita Wijaya",
-        rating: 4,
-        text: "Tempatnya klasik dan otentik. ...",
-        date: "2025-10-25",
-      },
+      { id: "r1", user: "Budi Santoso", rating: 5, text: "Gudegnya paling legendaris! ...", date: "2025-10-28" },
+      { id: "r2", user: "Anita Wijaya", rating: 4, text: "Tempatnya klasik dan otentik. ...", date: "2025-10-25" },
     ],
-    owner: {
-      name: "Keluarga Yu Djum",
-      joined: "2024-01-15",
-      verified: true,
-    },
+    owner: { name: "Keluarga Yu Djum", joined: "2024-01-15", verified: true },
     rating: 99,
     reviews: 303,
     location: "Jl. Wijilan No. 167, Kraton",
@@ -42,14 +45,11 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
       "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
-    description:
-      "Pusat gudeg kering legendaris di Yogyakarta...",
-    details: {
-      type: "Restoran",
-      facilities: ["Parkir", "Toilet", "Area Makan Luas", "Mushola"],
-    },
-    // --- TAGS DITAMBAHKAN ---
-    tags: ["family_owned", "preserves_cultural_heritage", "locally_sourced_materials"]
+    description: "Pusat gudeg kering legendaris di Yogyakarta...",
+    details: { type: "Restoran", facilities: ["Parkir", "Toilet", "Area Makan Luas", "Mushola"] },
+    tags: ["family_owned", "preserves_cultural_heritage", "locally_sourced_materials"],
+    video_url: videoMakanan,
+    products: foodProducts,
   },
   {
     id: 2,
@@ -61,11 +61,7 @@ export const umkmData = [
     paymentMethods: ["Tunai", "QRIS"],
     lastUpdated: "2025-11-01",
     reviewsList: [/* ... */],
-    owner: {
-      name: "Lik Man",
-      joined: "2024-02-10",
-      verified: true,
-    },
+    owner: { name: "Lik Man", joined: "2024-02-10", verified: true },
     rating: 95,
     reviews: 450,
     location: "Utara Stasiun Tugu",
@@ -77,14 +73,11 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1606843043322-c1f31f90b63c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
       "https://images.unsplash.com/photo-1511920183353-52326045634b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
-    description:
-      "Pelopor Kopi Joss (kopi dengan arang) di Yogyakarta. ...",
-    details: {
-      type: "Angkringan",
-      facilities: ["Tempat Duduk Lesehan", "Toilet Umum Terdekat"],
-    },
-    // --- TAGS DITAMBAHKAN ---
-    tags: ["preserves_cultural_heritage", "small_batch"]
+    description: "Pelopor Kopi Joss (kopi dengan arang) di Yogyakarta. ...",
+    details: { type: "Angkringan", facilities: ["Tempat Duduk Lesehan", "Toilet Umum Terdekat"] },
+    tags: ["preserves_cultural_heritage", "small_batch"],
+    video_url: videoMakanan,
+    products: foodProducts,
   },
   {
     id: 3,
@@ -96,11 +89,7 @@ export const umkmData = [
     paymentMethods: ["Tunai", "QRIS", "Debit", "Kartu Kredit"],
     lastUpdated: "2025-10-15",
     reviewsList: [/* ... */],
-    owner: {
-      name: "Mirota Group",
-      joined: "2024-01-20",
-      verified: true,
-    },
+    owner: { name: "Mirota Group", joined: "2024-01-20", verified: true },
     rating: 97,
     reviews: 1200,
     location: "Jl. Malioboro No.9",
@@ -112,14 +101,11 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1578491793108-d1e3e05f560a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
       "https://images.unsplash.com/photo-1620799140414-b291c3d9b736?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
-    description:
-      "Toko souvenir dan batik terlengkap di Malioboro. ...",
-    details: {
-      type: "Toko Oleh-oleh",
-      facilities: ["AC", "Toilet", "Lift", "Rest Area"],
-    },
-    // --- TAGS DITAMBAHKAN ---
-    tags: ["locally_sourced_materials", "preserves_cultural_heritage", "empowers_women", "family_owned"]
+    description: "Toko souvenir dan batik terlengkap di Malioboro. ...",
+    details: { type: "Toko Oleh-oleh", facilities: ["AC", "Toilet", "Lift", "Rest Area"] },
+    tags: ["locally_sourced_materials", "preserves_cultural_heritage", "empowers_women", "family_owned"],
+    video_url: videoKerajinan,
+    products: shopProducts,
   },
   {
     id: 4,
@@ -131,11 +117,7 @@ export const umkmData = [
     paymentMethods: ["Tunai", "QRIS (Sebagian Tenant)"],
     lastUpdated: "2025-10-01",
     reviewsList: [/* ... */],
-    owner: {
-      name: "Pemerintah Kota Yogyakarta",
-      joined: "2024-01-01",
-      verified: true,
-    },
+    owner: { name: "Pemerintah Kota Yogyakarta", joined: "2024-01-01", verified: true },
     rating: 96,
     reviews: 850,
     location: "Jl. Malioboro",
@@ -147,14 +129,11 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1543088243-e35f83b23c0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
       "https://images.unsplash.com/photo-1599586120428-c6f34a26e033?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
-    description:
-      "Pasar tradisional terbesar dan tertua di Yogyakarta. ...",
-    details: {
-      type: "Pasar Tradisional",
-      facilities: ["Toilet Umum", "Area Parkir Luas", "ATM Center"],
-    },
-    // --- TAGS DITAMBAHKAN ---
-    tags: ["locally_sourced_materials", "preserves_cultural_heritage", "community_empowerment"]
+    description: "Pasar tradisional terbesar dan tertua di Yogyakarta. ...",
+    details: { type: "Pasar Tradisional", facilities: ["Toilet Umum", "Area Parkir Luas", "ATM Center"] },
+    tags: ["locally_sourced_materials", "preserves_cultural_heritage", "community_empowerment"],
+    video_url: videoKerajinan,
+    products: shopProducts,
   },
   {
     id: 5,
@@ -166,11 +145,7 @@ export const umkmData = [
     paymentMethods: ["Tunai", "Transfer Bank"],
     lastUpdated: "2025-10-28",
     reviewsList: [/* ... */],
-    owner: {
-      name: "Pak Mandiri",
-      joined: "2024-03-05",
-      verified: false,
-    },
+    owner: { name: "Pak Mandiri", joined: "2024-03-05", verified: false },
     rating: 98,
     reviews: 150,
     location: "Dekat Stasiun Lempuyangan",
@@ -182,14 +157,11 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
       "https://images.unsplash.com/photo-1623871638006-e26b133c4ead?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
-    description:
-      "Jasa penyewaan motor harian di Yogyakarta. ...",
-    details: {
-      type: "Rental Motor",
-      facilities: ["Helm", "Jas Hujan", "Layanan Antar Jemput"],
-    },
-    // --- TAGS DITAMBAHKAN ---
-    tags: ["family_owned"]
+    description: "Jasa penyewaan motor harian di Yogyakarta. ...",
+    details: { type: "Rental Motor", facilities: ["Helm", "Jas Hujan", "Layanan Antar Jemput"] },
+    tags: ["family_owned"],
+    video_url: videoJasa,
+    products: serviceProducts,
   },
   {
     id: 6,
@@ -201,11 +173,7 @@ export const umkmData = [
     paymentMethods: ["Tunai", "QRIS", "Debit"],
     lastUpdated: "2025-10-29",
     reviewsList: [/* ... */],
-    owner: {
-      name: "Keluarga Pathok 25",
-      joined: "2024-01-12",
-      verified: true,
-    },
+    owner: { name: "Keluarga Pathok 25", joined: "2024-01-12", verified: true },
     rating: 97,
     reviews: 620,
     location: "Jl. KS Tubun (Pathuk)",
@@ -217,14 +185,14 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
       "https://images.unsplash.com/photo-1563805042-7684c019e1cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
-    description:
-      "Salah satu merek Bakpia Pathok paling terkenal. ...",
-    details: {
-      type: "Toko Oleh-oleh",
-      facilities: ["Area Produksi Terbuka", "Parkir Bus", "Toilet"],
-    },
-    // --- TAGS DITAMBAHKAN ---
-    tags: ["family_owned", "locally_sourced_materials", "small_batch", "preserves_cultural_heritage"]
+    description: "Salah satu merek Bakpia Pathok paling terkenal. ...",
+    details: { type: "Toko Oleh-oleh", facilities: ["Area Produksi Terbuka", "Parkir Bus", "Toilet"] },
+    tags: ["family_owned", "locally_sourced_materials", "small_batch", "preserves_cultural_heritage"],
+    video_url: videoMakanan,
+    products: [
+      { id: "p1", name: "Bakpia Kering (Isi 15)", price: 35000, description: "Varian rasa kacang hijau, keju, cokelat.", image_url: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80" },
+      { id: "p2", name: "Bakpia Basah (Isi 20)", price: 45000, description: "Tahan 5 hari, rasa original kacang hijau.", image_url: "https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80" }
+    ],
   },
   {
     id: 7,
@@ -236,11 +204,7 @@ export const umkmData = [
     paymentMethods: ["Tunai"],
     lastUpdated: "2025-10-20",
     reviewsList: [/* ... */],
-    owner: {
-      name: "Paguyuban Becak Wisata",
-      joined: "2024-05-15",
-      verified: false,
-    },
+    owner: { name: "Paguyuban Becak Wisata", joined: "2024-05-15", verified: false },
     rating: 94,
     reviews: 80,
     location: "Alun-Alun Utara",
@@ -252,14 +216,11 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1555860163-30588aaa6b6b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
       "https://images.unsplash.com/photo-1594480545281-c7f76b05264b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
-    description:
-      "Keliling area Kraton, Tamansari, dan Wijilan menggunakan becak tradisional. ...",
-    details: {
-      type: "Jasa Tur",
-      facilities: ["Pemandu Lokal", "Spot Foto"],
-    },
-    // --- TAGS DITAMBAHKAN ---
-    tags: ["preserves_cultural_heritage", "community_empowerment", "custom_orders", "locally_sourced_materials"]
+    description: "Keliling area Kraton, Tamansari, dan Wijilan menggunakan becak tradisional. ...",
+    details: { type: "Jasa Tur", facilities: ["Pemandu Lokal", "Spot Foto"] },
+    tags: ["preserves_cultural_heritage", "community_empowerment", "custom_orders", "locally_sourced_materials"],
+    video_url: videoJasa,
+    products: serviceProducts,
   },
   {
     id: 8,
@@ -271,11 +232,7 @@ export const umkmData = [
     paymentMethods: ["Tunai", "QRIS"],
     lastUpdated: "2025-11-01",
     reviewsList: [/* ... */],
-    owner: {
-      name: "Samijaya",
-      joined: "2024-02-18",
-      verified: true,
-    },
+    owner: { name: "Samijaya", joined: "2024-02-18", verified: true },
     rating: 98,
     reviews: 710,
     location: "Jl. Malioboro (Depan Hotel Mutiara)",
@@ -287,14 +244,11 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1631102914562-b53c617c5b5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
       "https://images.unsplash.com/photo-1618190920038-7698d6c75b06?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
-    description:
-      "Lumpia legendaris di Malioboro. ...",
-    details: {
-      type: "Kaki Lima",
-      facilities: ["Hanya Takeaway"],
-    },
-    // --- TAGS DITAMBAHKAN ---
-    tags: ["small_batch", "family_owned"]
+    description: "Lumpia legendaris di Malioboro. ...",
+    details: { type: "Kaki Lima", facilities: ["Hanya Takeaway"] },
+    tags: ["small_batch", "family_owned"],
+    video_url: videoMakanan,
+    products: foodProducts,
   },
   {
     id: 9,
@@ -306,11 +260,7 @@ export const umkmData = [
     paymentMethods: ["Tunai", "QRIS", "Debit", "Kartu Kredit"],
     lastUpdated: "2025-10-25",
     reviewsList: [/* ... */],
-    owner: {
-      name: "ViaVia Group",
-      joined: "2024-03-11",
-      verified: true,
-    },
+    owner: { name: "ViaVia Group", joined: "2024-03-11", verified: true },
     rating: 96,
     reviews: 230,
     location: "Prawirotaman",
@@ -322,14 +272,11 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1563050158-a0c3021a8a29?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
       "https://images.unsplash.com/photo-1509735837536-83d38b552d0e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
-    description:
-      "Bakery yang menjual roti-roti artisan, kue, dan produk organik. ...",
-    details: {
-      type: "Bakery",
-      facilities: ["Kafe", "Toko Organik", "Wifi"],
-    },
-    // --- TAGS DITAMBAHKAN ---
-    tags: ["social_enterprise", "eco_friendly", "small_batch", "locally_sourced_materials", "empowers_women", "natural_dyes"]
+    description: "Bakery yang menjual roti-roti artisan, kue, dan produk organik. ...",
+    details: { type: "Bakery", facilities: ["Kafe", "Toko Organik", "Wifi"] },
+    tags: ["social_enterprise", "eco_friendly", "small_batch", "locally_sourced_materials", "empowers_women", "natural_dyes"],
+    video_url: videoMakanan,
+    products: foodProducts,
   },
   {
     id: 10,
@@ -341,11 +288,7 @@ export const umkmData = [
     paymentMethods: ["Tunai", "QRIS", "Debit"],
     lastUpdated: "2025-10-30",
     reviewsList: [/* ... */],
-    owner: {
-      name: "Tempo Gelato",
-      joined: "2024-01-30",
-      verified: true,
-    },
+    owner: { name: "Tempo Gelato", joined: "2024-01-30", verified: true },
     rating: 98,
     reviews: 1500,
     location: "Prawirotaman",
@@ -357,14 +300,11 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1567197343946-f63ee142353a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
       "https://images.unsplash.com/photo-1627999138243-91285731f82f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
-    description:
-      "Kedai gelato paling populer di Jogja ...",
-    details: {
-      type: "Kedai Gelato",
-      facilities: ["AC", "Toilet", "Area Duduk Indoor & Outdoor"],
-    },
-    // --- TAGS DITAMBAHKAN ---
-    tags: ["family_owned", "small_batch"]
+    description: "Kedai gelato paling populer di Jogja ...",
+    details: { type: "Kedai Gelato", facilities: ["AC", "Toilet", "Area Duduk Indoor & Outdoor"] },
+    tags: ["family_owned", "small_batch"],
+    video_url: videoMakanan,
+    products: foodProducts,
   },
   {
     id: 11,
@@ -376,11 +316,7 @@ export const umkmData = [
     paymentMethods: ["Tunai", "QRIS", "Debit", "Kartu Kredit"],
     lastUpdated: "2025-10-22",
     reviewsList: [/* ... */],
-    owner: {
-      name: "Toga Mas",
-      joined: "2024-02-14",
-      verified: true,
-    },
+    owner: { name: "Toga Mas", joined: "2024-02-14", verified: true },
     rating: 95,
     reviews: 310,
     location: "Kotabaru",
@@ -392,14 +328,11 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1531988042231-E42a2b124027?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
       "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
-    description:
-      "Toko buku besar dengan koleksi lengkap dan harga diskon. ...",
-    details: {
-      type: "Toko Buku",
-      facilities: ["AC", "Area Baca", "Toilet"],
-    },
-    // --- TAGS DITAMBAHKAN ---
-    tags: []
+    description: "Toko buku besar dengan koleksi lengkap dan harga diskon. ...",
+    details: { type: "Toko Buku", facilities: ["AC", "Area Baca", "Toilet"] },
+    tags: [],
+    video_url: videoJasa,
+    products: shopProducts,
   },
   {
     id: 12,
@@ -411,11 +344,7 @@ export const umkmData = [
     paymentMethods: ["Tunai", "QRIS"],
     lastUpdated: "2025-11-01",
     reviewsList: [/* ... */],
-    owner: {
-      name: "Pak Budi",
-      joined: "2024-06-01",
-      verified: false,
-    },
+    owner: { name: "Pak Budi", joined: "2024-06-01", verified: false },
     rating: 93,
     reviews: 65,
     location: "Suryodiningratan",
@@ -427,14 +356,11 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1593078330545-322b7f7b1f57?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
       "https://images.unsplash.com/photo-1610557892470-55d7e80c0b7a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
-    description:
-      "Jasa laundry kiloan cepat 1 hari jadi. ...",
-    details: {
-      type: "Laundry",
-      facilities: ["Setrika Uap", "Layanan Antar Jemput"],
-    },
-    // --- TAGS DITAMBAHKAN ---
-    tags: []
+    description: "Jasa laundry kiloan cepat 1 hari jadi. ...",
+    details: { type: "Laundry", facilities: ["Setrika Uap", "Layanan Antar Jemput"] },
+    tags: [],
+    video_url: videoJasa,
+    products: serviceProducts,
   },
   {
     id: 13,
@@ -446,11 +372,7 @@ export const umkmData = [
     paymentMethods: ["Tunai", "QRIS"],
     lastUpdated: "2025-10-27",
     reviewsList: [/* ... */],
-    owner: {
-      name: "Pak Pele",
-      joined: "2024-02-22",
-      verified: true,
-    },
+    owner: { name: "Pak Pele", joined: "2024-02-22", verified: true },
     rating: 96,
     reviews: 280,
     location: "Alun-Alun Utara",
@@ -462,14 +384,11 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1626700051175-68151f005a88?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
       "https://images.unsplash.com/photo-1625938135216-9b1611c38d37?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
-    description:
-      "Bakmi Jawa legendaris di dekat Kraton. ...",
-    details: {
-      type: "Warung Kaki Lima",
-      facilities: ["Lesehan", "Area Makan Terbuka"],
-    },
-    // --- TAGS DITAMBAHKAN ---
-    tags: ["preserves_cultural_heritage", "small_batch", "family_owned"]
+    description: "Bakmi Jawa legendaris di dekat Kraton. ...",
+    details: { type: "Warung Kaki Lima", facilities: ["Lesehan", "Area Makan Terbuka"] },
+    tags: ["preserves_cultural_heritage", "small_batch", "family_owned"],
+    video_url: videoMakanan,
+    products: foodProducts,
   },
   {
     id: 14,
@@ -481,11 +400,7 @@ export const umkmData = [
     paymentMethods: ["Tunai", "QRIS", "Debit", "Kartu Kredit"],
     lastUpdated: "2025-10-18",
     reviewsList: [/* ... */],
-    owner: {
-      name: "PT. Aseli Dagadu Djokdja",
-      joined: "2024-01-10",
-      verified: true,
-    },
+    owner: { name: "PT. Aseli Dagadu Djokdja", joined: "2024-01-10", verified: true },
     rating: 95,
     reviews: 410,
     location: "Alun-Alun Utara",
@@ -497,14 +412,11 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1523381294911-8d3cead13475?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
       "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
-    description:
-      "Merek kaos ikonik Yogyakarta dengan desain yang cerdas...",
-    details: {
-      type: "Toko Pakaian",
-      facilities: ["AC", "Kamar Pas", "Desain Toko Unik"],
-    },
-    // --- TAGS DITAMBAHKAN ---
-    tags: ["preserves_cultural_heritage", "locally_sourced_materials"]
+    description: "Merek kaos ikonik Yogyakarta dengan desain yang cerdas...",
+    details: { type: "Toko Pakaian", facilities: ["AC", "Kamar Pas", "Desain Toko Unik"] },
+    tags: ["preserves_cultural_heritage", "locally_sourced_materials"],
+    video_url: videoKerajinan,
+    products: shopProducts,
   },
   {
     id: 15,
@@ -516,11 +428,7 @@ export const umkmData = [
     paymentMethods: ["Tunai"],
     lastUpdated: "2025-10-24",
     reviewsList: [/* ... */],
-    owner: {
-      name: "Mbah Suwarni",
-      joined: "2024-04-10",
-      verified: false,
-    },
+    owner: { name: "Mbah Suwarni", joined: "2024-04-10", verified: false },
     rating: 94,
     reviews: 190,
     location: "Jl. Godean (Dekat Pasar Telo)",
@@ -532,14 +440,11 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
       "https://images.unsplash.com/photo-1603052210283-a989f661fb3a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
-    description:
-      "Sate 'kere' (terbuat dari gajih/lemak sapi)...",
-    details: {
-      type: "Warung Tenda",
-      facilities: ["Lesehan"],
-    },
-    // --- TAGS DITAMBAHKAN ---
-    tags: ["female_founded", "small_batch", "preserves_cultural_heritage", "family_owned"]
+    description: "Sate 'kere' (terbuat dari gajih/lemak sapi)...",
+    details: { type: "Warung Tenda", facilities: ["Lesehan"] },
+    tags: ["female_founded", "small_batch", "preserves_cultural_heritage", "family_owned"],
+    video_url: videoMakanan,
+    products: foodProducts,
   },
   {
     id: 16,
@@ -551,11 +456,7 @@ export const umkmData = [
     paymentMethods: ["Tunai", "QRIS", "Debit", "Kartu Kredit"],
     lastUpdated: "2025-10-26",
     reviewsList: [/* ... */],
-    owner: {
-      name: "Cokelat Monggo",
-      joined: "2024-02-17",
-      verified: true,
-    },
+    owner: { name: "Cokelat Monggo", joined: "2024-02-17", verified: true },
     rating: 97,
     reviews: 300,
     location: "Tugu",
@@ -567,14 +468,14 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1511381939415-e3401f17b925?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
       "https://images.unsplash.com/photo-1605287413136-253c55bd1cb3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
-    description:
-      "Cokelat premium asli Jogja dengan berbagai varian rasa unik...",
-    details: {
-      type: "Toko Cokelat",
-      facilities: ["AC", "Tester Produk", "Kafe Kecil"],
-    },
-    // --- TAGS DITAMBAHKAN ---
-    tags: ["locally_sourced_materials", "small_batch", "eco_friendly", "social_enterprise", "preserves_cultural_heritage"]
+    description: "Cokelat premium asli Jogja dengan berbagai varian rasa unik...",
+    details: { type: "Toko Cokelat", facilities: ["AC", "Tester Produk", "Kafe Kecil"] },
+    tags: ["locally_sourced_materials", "small_batch", "eco_friendly", "social_enterprise", "preserves_cultural_heritage"],
+    video_url: videoMakanan,
+    products: [
+      { id: "p1", name: "Cokelat Batang 80g", price: 45000, description: "Varian rasa Dark, Milk, White, dan Rendang.", image_url: "https://images.unsplash.com/photo-1511381939415-e3401f17b925?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80" },
+      { id: "p2", name: "Praline (Isi 9)", price: 90000, description: "Cokelat premium dengan isian lembut.", image_url: "https://images.unsplash.com/photo-1605287413136-253c55bd1cb3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80" }
+    ],
   },
   {
     id: 17,
@@ -586,11 +487,7 @@ export const umkmData = [
     paymentMethods: ["Tunai", "QRIS", "Transfer Bank"],
     lastUpdated: "2025-10-23",
     reviewsList: [/* ... */],
-    owner: {
-      name: "Java Foto",
-      joined: "2024-03-20",
-      verified: true,
-    },
+    owner: { name: "Java Foto", joined: "2024-03-20", verified: true },
     rating: 95,
     reviews: 110,
     location: "Kotabaru",
@@ -602,14 +499,11 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
       "https://images.unsplash.com/photo-1600096194534-960fada6207f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
-    description:
-      "Jasa foto studio profesional dan foto wisuda. ...",
-    details: {
-      type: "Studio Foto",
-      facilities: ["Studio AC", "Properti Foto", "Ruang Ganti"],
-    },
-    // --- TAGS DITAMBAHKAN ---
-    tags: ["family_owned"]
+    description: "Jasa foto studio profesional dan foto wisuda. ...",
+    details: { type: "Studio Foto", facilities: ["Studio AC", "Properti Foto", "Ruang Ganti"] },
+    tags: ["family_owned"],
+    video_url: videoJasa,
+    products: serviceProducts,
   },
   {
     id: 18,
@@ -621,11 +515,7 @@ export const umkmData = [
     paymentMethods: ["Tunai", "QRIS"],
     lastUpdated: "2025-10-28",
     reviewsList: [/* ... */],
-    owner: {
-      name: "Keluarga Bu Wiryo",
-      joined: "2024-02-01",
-      verified: true,
-    },
+    owner: { name: "Keluarga Bu Wiryo", joined: "2024-02-01", verified: true },
     rating: 96,
     reviews: 400,
     location: "Kotabaru",
@@ -637,14 +527,11 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1562635446-56063659250a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
       "https://images.unsplash.com/photo-1628102322441-21c9b6f8c37c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
-    description:
-      "Nasi pecel legendaris yang sudah ada sejak puluhan tahun lalu. ...",
-    details: {
-      type: "Warung Makan",
-      facilities: ["Area Makan Luas", "Parkir"],
-    },
-    // --- TAGS DITAMBAHKAN ---
-    tags: ["family_owned", "preserves_cultural_heritage", "female_founded"]
+    description: "Nasi pecel legendaris yang sudah ada sejak puluhan tahun lalu. ...",
+    details: { type: "Warung Makan", facilities: ["Area Makan Luas", "Parkir"] },
+    tags: ["family_owned", "preserves_cultural_heritage", "female_founded"],
+    video_url: videoMakanan,
+    products: foodProducts,
   },
   {
     id: 19,
@@ -656,11 +543,7 @@ export const umkmData = [
     paymentMethods: ["Tunai", "QRIS", "Debit", "Kartu Kredit"],
     lastUpdated: "2025-10-15",
     reviewsList: [/* ... */],
-    owner: {
-      name: "Progo Group",
-      joined: "2024-01-25",
-      verified: true,
-    },
+    owner: { name: "Progo Group", joined: "2024-01-25", verified: true },
     rating: 93,
     reviews: 350,
     location: "Pusat Kota",
@@ -672,14 +555,11 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1580992734408-b47c0c2c2f6d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
       "https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
-    description:
-      "Supermarket grosir yang menjual segala kebutuhan rumah tangga...",
-    details: {
-      type: "Grosir",
-      facilities: ["Parkir Luas", "Food Court", "Toilet"],
-    },
-    // --- TAGS DITAMBAHKAN ---
-    tags: ["family_owned"]
+    description: "Supermarket grosir yang menjual segala kebutuhan rumah tangga...",
+    details: { type: "Grosir", facilities: ["Parkir Luas", "Food Court", "Toilet"] },
+    tags: ["family_owned"],
+    video_url: videoJasa,
+    products: shopProducts,
   },
   {
     id: 20,
@@ -691,11 +571,7 @@ export const umkmData = [
     paymentMethods: ["Tunai"],
     lastUpdated: "2025-11-01",
     reviewsList: [/* ... */],
-    owner: {
-      name: "Mbah Waginem",
-      joined: "2024-07-01",
-      verified: false,
-    },
+    owner: { name: "Mbah Waginem", joined: "2024-07-01", verified: false },
     rating: 98,
     reviews: 75,
     location: "Pasar Kranggan",
@@ -707,14 +583,11 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1620921282046-e179e0a16c88?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
       "https://images.unsplash.com/photo-1552392372-d591060b3780?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
-    description:
-      "Penjual jamu gendong tradisional dengan ramuan otentik...",
-    details: {
-      type: "Kaki Lima",
-      facilities: ["Minum di tempat", "Bawa Pulang"],
-    },
-    // --- TAGS DITAMBAHKAN ---
-    tags: ["fully_handmade", "natural_dyes", "female_founded", "preserves_cultural_heritage", "locally_sourced_materials", "empowers_women", "small_batch"]
+    description: "Penjual jamu gendong tradisional dengan ramuan otentik...",
+    details: { type: "Kaki Lima", facilities: ["Minum di tempat", "Bawa Pulang"] },
+    tags: ["fully_handmade", "natural_dyes", "female_founded", "preserves_cultural_heritage", "locally_sourced_materials", "empowers_women", "small_batch"],
+    video_url: videoKerajinan,
+    products: shopProducts,
   },
   {
     id: 21,
@@ -726,11 +599,7 @@ export const umkmData = [
     paymentMethods: ["Tunai", "QRIS"],
     lastUpdated: "2025-10-29",
     reviewsList: [/* ... */],
-    owner: {
-      name: "Keluarga Kadipiro",
-      joined: "2024-02-05",
-      verified: true,
-    },
+    owner: { name: "Keluarga Kadipiro", joined: "2024-02-05", verified: true },
     rating: 97,
     reviews: 550,
     location: "Jl. Wates",
@@ -742,14 +611,11 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1587324438345-e8720c0c66fe?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
       "https://images.unsplash.com/photo-1604251759491-3046f3378174?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
-    description:
-      "Soto ayam kampung legendaris dengan kuah bening...",
-    details: {
-      type: "Restoran",
-      facilities: ["Parkir Luas", "Toilet", "Tempat Duduk Banyak"],
-    },
-    // --- TAGS DITAMBAHKAN ---
-    tags: ["family_owned", "preserves_cultural_heritage"]
+    description: "Soto ayam kampung legendaris dengan kuah bening...",
+    details: { type: "Restoran", facilities: ["Parkir Luas", "Toilet", "Tempat Duduk Banyak"] },
+    tags: ["family_owned", "preserves_cultural_heritage"],
+    video_url: videoMakanan,
+    products: foodProducts,
   },
   {
     id: 22,
@@ -761,11 +627,7 @@ export const umkmData = [
     paymentMethods: ["Tunai", "QRIS", "Debit", "Kartu Kredit"],
     lastUpdated: "2025-10-21",
     reviewsList: [/* ... */],
-    owner: {
-      name: "Ansor Silver",
-      joined: "2024-03-15",
-      verified: true,
-    },
+    owner: { name: "Ansor Silver", joined: "2024-03-15", verified: true },
     rating: 96,
     reviews: 180,
     location: "Kotagede",
@@ -776,15 +638,17 @@ export const umkmData = [
     images: [
       "https://images.unsplash.com/photo-1611195325838-68811f267a57?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
       "https://images.unsplash.com/photo-1611956414163-0c464b19c23f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
+      "https://images.unsplash.com/photo-1606802236881-b7de9c6a0b99?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80"
     ],
-    description:
-      "Pusat kerajinan perak di Kotagede. ...",
-    details: {
-      type: "Toko Kerajinan",
-      facilities: ["Workshop", "Showroom AC", "Parkir"],
-    },
-    // --- TAGS DITAMBAHKAN ---
-    tags: ["hand_carved", "fully_handmade", "family_owned", "preserves_cultural_heritage", "small_batch", "made_to_order", "custom_orders"]
+    description: "Pusat kerajinan perak di Kotagede. ...",
+    details: { type: "Toko Kerajinan", facilities: ["Workshop", "Showroom AC", "Parkir"] },
+    tags: ["hand_carved", "fully_handmade", "family_owned", "preserves_cultural_heritage", "small_batch", "made_to_order", "custom_orders"],
+    video_url: videoKerajinan,
+    products: [
+      { id: "p1", name: "Cincin Perak Filigri", price: 350000, description: "Cincin perak murni dengan ukiran filigri.", image_url: "https://images.unsplash.com/photo-1611195325838-68811f267a57?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80" },
+      { id: "p2", name: "Kalung Perak", price: 700000, description: "Kalung dengan liontin perak bakar.", image_url: "https://images.unsplash.com/photo-1611956414163-0c464b19c23f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80" },
+      { id: "p3", name: "Anting Perak", price: 250000, description: "Anting-anting model subang.", image_url: "https://images.unsplash.com/photo-1606802236881-b7de9c6a0b99?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80" }
+    ],
   },
   {
     id: 23,
@@ -796,11 +660,7 @@ export const umkmData = [
     paymentMethods: ["Tunai", "QRIS", "Debit"],
     lastUpdated: "2025-10-27",
     reviewsList: [/* ... */],
-    owner: {
-      name: "Pak Sehat",
-      joined: "2024-05-10",
-      verified: false,
-    },
+    owner: { name: "Pak Sehat", joined: "2024-05-10", verified: false },
     rating: 94,
     reviews: 90,
     location: "Jl. Kaliurang (Bawah)",
@@ -812,14 +672,11 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1515377905703-c4788e51af15?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
       "https://images.unsplash.com/photo-1617936132034-c3b8813d6404?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
-    description:
-      "Jasa pijat refleksi dan pijat tradisional untuk kebugaran. ...",
-    details: {
-      type: "Jasa Kebugaran",
-      facilities: ["Ruangan AC", "Terapis Profesional", "Minuman Jahe"],
-    },
-    // --- TAGS DITAMBAHKAN ---
-    tags: ["family_owned"]
+    description: "Jasa pijat refleksi dan pijat tradisional untuk kebugaran. ...",
+    details: { type: "Jasa Kebugaran", facilities: ["Ruangan AC", "Terapis Profesional", "Minuman Jahe"] },
+    tags: ["family_owned"],
+    video_url: videoJasa,
+    products: serviceProducts,
   },
   {
     id: 24,
@@ -831,11 +688,7 @@ export const umkmData = [
     paymentMethods: ["Tunai", "QRIS"],
     lastUpdated: "2025-10-29",
     reviewsList: [/* ... */],
-    owner: {
-      name: "Bu Narti",
-      joined: "2024-03-01",
-      verified: true,
-    },
+    owner: { name: "Bu Narti", joined: "2024-03-01", verified: true },
     rating: 95,
     reviews: 600,
     location: "Jl. KH. Ahmad Dahlan",
@@ -847,14 +700,11 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1572695211072-a43b2323e05a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
       "https://images.unsplash.com/photo-1604251759491-3046f3378174?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
-    description:
-      "Pelopor oseng-oseng super pedas (mercon) di Yogyakarta. ...",
-    details: {
-      type: "Warung Tenda",
-      facilities: ["Lesehan", "Minuman Dingin"],
-    },
-    // --- TAGS DITAMBAHKAN ---
-    tags: ["female_founded", "preserves_cultural_heritage", "small_batch", "family_owned"]
+    description: "Pelopor oseng-oseng super pedas (mercon) di Yogyakarta. ...",
+    details: { type: "Warung Tenda", facilities: ["Lesehan", "Minuman Dingin"] },
+    tags: ["female_founded", "preserves_cultural_heritage", "small_batch", "family_owned"],
+    video_url: videoMakanan,
+    products: foodProducts,
   },
   {
     id: 25,
@@ -866,11 +716,7 @@ export const umkmData = [
     paymentMethods: ["Tunai", "QRIS", "Debit"],
     lastUpdated: "2025-10-25",
     reviewsList: [/* ... */],
-    owner: {
-      name: "Jejamuran",
-      joined: "2024-02-28",
-      verified: true,
-    },
+    owner: { name: "Jejamuran", joined: "2024-02-28", verified: true },
     rating: 97,
     reviews: 700,
     location: "Jl. Magelang (Agak Utara)",
@@ -882,14 +728,11 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1576686001018-30640f0c0211?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
       "https://images.unsplash.com/photo-1600185810766-9d3e7e311c9e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
-    description:
-      "Restoran unik dengan semua menu terbuat dari jamur. ...",
-    details: {
-      type: "Restoran",
-      facilities: ["Parkir Luas", "Toko Oleh-oleh Jamur", "Mushola"],
-    },
-    // --- TAGS DITAMBAHKAN ---
-    tags: ["locally_sourced_materials", "small_batch", "family_owned"]
+    description: "Restoran unik dengan semua menu terbuat dari jamur. ...",
+    details: { type: "Restoran", facilities: ["Parkir Luas", "Toko Oleh-oleh Jamur", "Mushola"] },
+    tags: ["locally_sourced_materials", "small_batch", "family_owned"],
+    video_url: videoMakanan,
+    products: foodProducts,
   },
   {
     id: 26,
@@ -901,11 +744,7 @@ export const umkmData = [
     paymentMethods: ["Tunai", "Transfer Bank"],
     lastUpdated: "2025-10-19",
     reviewsList: [/* ... */],
-    owner: {
-      name: "Pak Rotan",
-      joined: "2024-06-11",
-      verified: false,
-    },
+    owner: { name: "Pak Rotan", joined: "2024-06-11", verified: false },
     rating: 94,
     reviews: 50,
     location: "Jl. Prawirotaman",
@@ -916,15 +755,21 @@ export const umkmData = [
     images: [
       "https://images.unsplash.com/photo-1594026112273-091a079f6b3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
       "https://images.unsplash.com/photo-1618220790829-c88f71a0636f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
+      "https://images.unsplash.com/photo-1567900000780-1634f1954f92?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+      "https://images.unsplash.com/photo-1569048788106-f608a0b06431?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+      "https://images.unsplash.com/photo-1618335431302-09d6688b1f55?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+      "https://images.unsplash.com/photo-1542157798-9369c0c326c9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
     ],
-    description:
-      "Pusat kerajinan mebel dan dekorasi rumah berbahan dasar rotan. ...",
-    details: {
-      type: "Toko Mebel",
-      facilities: ["Workshop", "Showroom"],
-    },
-    // --- TAGS DITAMBAHKAN ---
-    tags: ["fully_handmade", "locally_sourced_materials", "hand_woven", "custom_orders", "family_owned"]
+    description: "Pusat kerajinan mebel dan dekorasi rumah berbahan dasar rotan. ...",
+    details: { type: "Toko Mebel", facilities: ["Workshop", "Showroom"] },
+    tags: ["fully_handmade", "locally_sourced_materials", "hand_woven", "custom_orders", "family_owned"],
+    video_url: videoKerajinan,
+    products: [
+      { id: "p1", name: "Tas Rotan Dayak", price: 450000, description: "Tas jinjing klasik tenunan tangan.", image_url: "https://images.unsplash.com/photo-1567900000780-1634f1954f92?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" },
+      { id: "p2", name: "Keranjang Tenun \"Setia\"", price: 320000, description: "Sempurna untuk penyimpanan di rumah.", image_url: "https://images.unsplash.com/photo-1569048788106-f608a0b06431?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" },
+      { id: "p3", name: "Tatakan Rotan (Set 4)", price: 280000, description: "Estetika makan yang alami.", image_url: "https://images.unsplash.com/photo-1618335431302-09d6688b1f55?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" },
+      { id: "p4", name: "Hiasan Dinding \"Matahari\"", price: 510000, description: "Cermin dinding buatan tangan.", image_url: "https://images.unsplash.com/photo-1542157798-9369c0c326c9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" }
+    ],
   },
   {
     id: 27,
@@ -936,11 +781,7 @@ export const umkmData = [
     paymentMethods: ["Tunai", "QRIS"],
     lastUpdated: "2025-10-30",
     reviewsList: [/* ... */],
-    owner: {
-      name: "Mas Clean",
-      joined: "2024-04-12",
-      verified: false,
-    },
+    owner: { name: "Mas Clean", joined: "2024-04-12", verified: false },
     rating: 96,
     reviews: 120,
     location: "Kotabaru",
@@ -952,14 +793,11 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1551107696-a3b472d0b586?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
       "https://images.unsplash.com/photo-1608231387042-66d18ab3437a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
-    description:
-      "Jasa cuci sepatu (sneakers, kanvas, kulit) profesional. ...",
-    details: {
-      type: "Jasa Cuci",
-      facilities: ["Cuci Cepat", "Repaint", "Unyellowing"],
-    },
-    // --- TAGS DITAMBAHKAN ---
-    tags: []
+    description: "Jasa cuci sepatu (sneakers, kanvas, kulit) profesional. ...",
+    details: { type: "Jasa Cuci", facilities: ["Cuci Cepat", "Repaint", "Unyellowing"] },
+    tags: [],
+    video_url: videoJasa,
+    products: serviceProducts,
   },
   {
     id: 28,
@@ -971,11 +809,7 @@ export const umkmData = [
     paymentMethods: ["Tunai", "QRIS", "Debit"],
     lastUpdated: "2025-10-26",
     reviewsList: [/* ... */],
-    owner: {
-      name: "Raminten Group",
-      joined: "2024-02-19",
-      verified: true,
-    },
+    owner: { name: "Raminten Group", joined: "2024-02-19", verified: true },
     rating: 95,
     reviews: 250,
     location: "Kotabaru",
@@ -987,14 +821,11 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1582298538104-fe2e74c2d561?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
       "https://images.unsplash.com/photo-1599586120428-c6f34a26e033?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
-    description:
-      "Toko oleh-oleh yang menjual pernak-pernik unik...",
-    details: {
-      type: "Toko Oleh-oleh",
-      facilities: ["AC", "Parkir"],
-    },
-    // --- TAGS DITAMBAHKAN ---
-    tags: ["family_owned", "preserves_cultural_heritage", "female_founded"]
+    description: "Toko oleh-oleh yang menjual pernak-pernik unik...",
+    details: { type: "Toko Oleh-oleh", facilities: ["AC", "Parkir"] },
+    tags: ["family_owned", "preserves_cultural_heritage", "female_founded"],
+    video_url: videoKerajinan,
+    products: shopProducts,
   },
   {
     id: 29,
@@ -1006,11 +837,7 @@ export const umkmData = [
     paymentMethods: ["Tunai"],
     lastUpdated: "2025-10-27",
     reviewsList: [/* ... */],
-    owner: {
-      name: "Mbah Payem",
-      joined: "2024-03-12",
-      verified: false,
-    },
+    owner: { name: "Mbah Payem", joined: "2024-03-12", verified: false },
     rating: 97,
     reviews: 200,
     location: "Jl. Kauman",
@@ -1022,14 +849,11 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1588785292021-d7f02d515a40?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
       "https://images.unsplash.com/photo-1630440533342-6031d7e296a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
-    description:
-      "Wedang Ronde legendaris yang menjadi langganan Sultan. ...",
-    details: {
-      type: "Kaki Lima",
-      facilities: ["Lesehan"],
-    },
-    // --- TAGS DITAMBAHKAN ---
-    tags: ["female_founded", "preserves_cultural_heritage", "small_batch", "family_owned"]
+    description: "Wedang Ronde legendaris yang menjadi langganan Sultan. ...",
+    details: { type: "Kaki Lima", facilities: ["Lesehan"] },
+    tags: ["female_founded", "preserves_cultural_heritage", "small_batch", "family_owned"],
+    video_url: videoMakanan,
+    products: foodProducts,
   },
   {
     id: 30,
@@ -1041,11 +865,7 @@ export const umkmData = [
     paymentMethods: ["Tunai", "QRIS"],
     lastUpdated: "2025-10-20",
     reviewsList: [/* ... */],
-    owner: {
-      name: "Komunitas Pelukis",
-      joined: "2024-07-07",
-      verified: false,
-    },
+    owner: { name: "Komunitas Pelukis", joined: "2024-07-07", verified: false },
     rating: 93,
     reviews: 60,
     location: "Jl. Malioboro",
@@ -1057,14 +877,11 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
       "https://images.unsplash.com/photo-1482160549825-59ac1b23cb6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
-    description:
-      "Para seniman jalanan yang menawarkan jasa lukis sketsa wajah cepat...",
-    details: {
-      type: "Jasa Seni",
-      facilities: ["Lukis di Tempat", "Bisa Pesan"],
-    },
-    // --- TAGS DITAMBAHKAN ---
-    tags: ["fully_handmade", "made_to_order", "personalizable", "custom_orders", "community_empowerment"]
+    description: "Para seniman jalanan yang menawarkan jasa lukis sketsa wajah cepat...",
+    details: { type: "Jasa Seni", facilities: ["Lukis di Tempat", "Bisa Pesan"] },
+    tags: ["fully_handmade", "made_to_order", "personalizable", "custom_orders", "community_empowerment"],
+    video_url: videoKerajinan,
+    products: serviceProducts,
   },
   {
     id: 31,
@@ -1076,11 +893,7 @@ export const umkmData = [
     paymentMethods: ["Tunai", "QRIS", "Debit"],
     lastUpdated: "2025-10-22",
     reviewsList: [/* ... */],
-    owner: {
-      name: "Pak Kulit",
-      joined: "2024-04-18",
-      verified: false,
-    },
+    owner: { name: "Pak Kulit", joined: "2024-04-18", verified: false },
     rating: 95,
     reviews: 110,
     location: "Jl. Malioboro",
@@ -1092,14 +905,14 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1605812863642-19e98b0a96b4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
       "https://images.unsplash.com/photo-1524580323223-a589077271b6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
-    description:
-      "Toko yang menjual berbagai produk kerajinan kulit asli...",
-    details: {
-      type: "Toko Kerajinan",
-      facilities: ["Bisa Custom", "Showroom"],
-    },
-    // --- TAGS DITAMBAHKAN ---
-    tags: ["fully_handmade", "small_batch", "locally_sourced_materials", "personalizable", "custom_orders"]
+    description: "Toko yang menjual berbagai produk kerajinan kulit asli...",
+    details: { type: "Toko Kerajinan", facilities: ["Bisa Custom", "Showroom"] },
+    tags: ["fully_handmade", "small_batch", "locally_sourced_materials", "personalizable", "custom_orders"],
+    video_url: videoKerajinan,
+    products: [
+      { id: "p1", name: "Dompet Kulit Pria", price: 150000, description: "Dompet kulit sapi asli jahitan tangan.", image_url: "https://images.unsplash.com/photo-1605812863642-19e98b0a96b4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80" },
+      { id: "p2", name: "Ikat Pinggang Kulit", price: 250000, description: "Ikat pinggang kulit sapi dengan kepala kuningan.", image_url: "https://images.unsplash.com/photo-1524580323223-a589077271b6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80" }
+    ],
   },
   {
     id: 32,
@@ -1111,11 +924,7 @@ export const umkmData = [
     paymentMethods: ["Tunai", "QRIS"],
     lastUpdated: "2025-10-28",
     reviewsList: [/* ... */],
-    owner: {
-      name: "Pak Nardi",
-      joined: "2024-03-25",
-      verified: false,
-    },
+    owner: { name: "Pak Nardi", joined: "2024-03-25", verified: false },
     rating: 96,
     reviews: 210,
     location: "Pakualaman",
@@ -1127,14 +936,11 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1615478503195-039c4c70b8f0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
       "https://images.unsplash.com/photo-1579954115545-a95591f28bfc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
-    description:
-      "Kombinasi unik rujak buah segar dengan es krim puter...",
-    details: {
-      type: "Kaki Lima",
-      facilities: ["Area Duduk Terbatas"],
-    },
-    // --- TAGS DITAMBAHKAN ---
-    tags: ["small_batch", "family_owned"]
+    description: "Kombinasi unik rujak buah segar dengan es krim puter...",
+    details: { type: "Kaki Lima", facilities: ["Area Duduk Terbatas"] },
+    tags: ["small_batch", "family_owned"],
+    video_url: videoMakanan,
+    products: foodProducts,
   },
   {
     id: 33,
@@ -1146,11 +952,7 @@ export const umkmData = [
     paymentMethods: ["Tunai", "Debit", "Transfer Bank"],
     lastUpdated: "2025-10-23",
     reviewsList: [/* ... */],
-    owner: {
-      name: "Keluarga Kranggan",
-      joined: "2024-02-11",
-      verified: true,
-    },
+    owner: { name: "Keluarga Kranggan", joined: "2024-02-11", verified: true },
     rating: 94,
     reviews: 85,
     location: "Pasar Kranggan",
@@ -1162,14 +964,11 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1606802236881-b7de9c6a0b99?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
       "https://images.unsplash.com/photo-1611860363533-8ade5f4d88a4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
-    description:
-      "Toko perhiasan emas dengan model lengkap dan harga bersaing. ...",
-    details: {
-      type: "Toko Perhiasan",
-      facilities: ["Terima Jual Beli", "Sertifikat"],
-    },
-    // --- TAGS DITAMBAHKAN ---
-    tags: ["family_owned"]
+    description: "Toko perhiasan emas dengan model lengkap dan harga bersaing. ...",
+    details: { type: "Toko Perhiasan", facilities: ["Terima Jual Beli", "Sertifikat"] },
+    tags: ["family_owned"],
+    video_url: videoKerajinan,
+    products: shopProducts,
   },
   {
     id: 34,
@@ -1181,11 +980,7 @@ export const umkmData = [
     paymentMethods: ["Tunai", "QRIS", "Transfer Bank"],
     lastUpdated: "2025-10-29",
     reviewsList: [/* ... */],
-    owner: {
-      name: "Mas Tekno",
-      joined: "2024-05-01",
-      verified: false,
-    },
+    owner: { name: "Mas Tekno", joined: "2024-05-01", verified: false },
     rating: 95,
     reviews: 130,
     location: "Jl. Godean (Dekat Kota)",
@@ -1197,14 +992,11 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1587573089734-09cb69c0f11a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
       "https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
-    description:
-      "Jasa perbaikan laptop, instal ulang, dan upgrade hardware. ...",
-    details: {
-      type: "Servis Elektronik",
-      facilities: ["Gratis Cek Kerusakan", "Garansi Servis"],
-    },
-    // --- TAGS DITAMBAHKAN ---
-    tags: []
+    description: "Jasa perbaikan laptop, instal ulang, dan upgrade hardware. ...",
+    details: { type: "Servis Elektronik", facilities: ["Gratis Cek Kerusakan", "Garansi Servis"] },
+    tags: [],
+    video_url: videoJasa,
+    products: serviceProducts,
   },
   {
     id: 35,
@@ -1216,11 +1008,7 @@ export const umkmData = [
     paymentMethods: ["Tunai"],
     lastUpdated: "2025-10-26",
     reviewsList: [/* ... */],
-    owner: {
-      name: "Keluarga Gudeg Pawon",
-      joined: "2024-03-10",
-      verified: true,
-    },
+    owner: { name: "Keluarga Gudeg Pawon", joined: "2024-03-10", verified: true },
     rating: 98,
     reviews: 650,
     location: "Dekat UTY Glagahsari",
@@ -1232,14 +1020,11 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
       "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&auto=format&fit=crop&w=1981&q=80",
     ],
-    description:
-      "Pengalaman unik makan gudeg otentik langsung dari 'pawon' (dapur). ...",
-    details: {
-      type: "Warung Makan",
-      facilities: ["Suasana Tradisional", "Antri"],
-    },
-    // --- TAGS DITAMBAHKAN ---
-    tags: ["family_owned", "preserves_cultural_heritage", "small_batch", "locally_sourced_materials"]
+    description: "Pengalaman unik makan gudeg otentik langsung dari 'pawon' (dapur). ...",
+    details: { type: "Warung Makan", facilities: ["Suasana Tradisional", "Antri"] },
+    tags: ["family_owned", "preserves_cultural_heritage", "small_batch", "locally_sourced_materials"],
+    video_url: videoMakanan,
+    products: foodProducts,
   },
   {
     id: 36,
@@ -1251,11 +1036,7 @@ export const umkmData = [
     paymentMethods: ["Tunai", "Debit"],
     lastUpdated: "2025-10-17",
     reviewsList: [/* ... */],
-    owner: {
-      name: "Toko Kain",
-      joined: "2024-04-20",
-      verified: false,
-    },
+    owner: { name: "Toko Kain", joined: "2024-04-20", verified: false },
     rating: 93,
     reviews: 70,
     location: "Jl. Bantul (Bawah)",
@@ -1267,14 +1048,11 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
       "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
-    description:
-      "Menjual berbagai macam kain sisa garmen secara kiloan. ...",
-    details: {
-      type: "Toko Kain",
-      facilities: ["Banyak Pilihan", "Parkir"],
-    },
-    // --- TAGS DITAMBAHKAN ---
-    tags: []
+    description: "Menjual berbagai macam kain sisa garmen secara kiloan. ...",
+    details: { type: "Toko Kain", facilities: ["Banyak Pilihan", "Parkir"] },
+    tags: [],
+    video_url: videoKerajinan,
+    products: shopProducts,
   },
   {
     id: 37,
@@ -1286,11 +1064,7 @@ export const umkmData = [
     paymentMethods: ["Tunai", "QRIS"],
     lastUpdated: "2025-10-24",
     reviewsList: [/* ... */],
-    owner: {
-      name: "Benang Emas",
-      joined: "2024-03-18",
-      verified: false,
-    },
+    owner: { name: "Benang Emas", joined: "2024-03-18", verified: false },
     rating: 94,
     reviews: 45,
     location: "Dekat Pasar Beringharjo",
@@ -1302,14 +1076,11 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1517694466633-f7d7c6f0e4b1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
       "https://images.unsplash.com/photo-1599723002633-87f583095034?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
-    description:
-      "Toko kecil yang menjual segala kebutuhan menjahit. ...",
-    details: {
-      type: "Toko Alat Jahit",
-      facilities: ["Lengkap"],
-    },
-    // --- TAGS DITAMBAHKAN ---
-    tags: ["family_owned"]
+    description: "Toko kecil yang menjual segala kebutuhan menjahit. ...",
+    details: { type: "Toko Alat Jahit", facilities: ["Lengkap"] },
+    tags: ["family_owned"],
+    video_url: videoKerajinan,
+    products: shopProducts,
   },
   {
     id: 38,
@@ -1321,11 +1092,7 @@ export const umkmData = [
     paymentMethods: ["Tunai", "QRIS", "Debit"],
     lastUpdated: "2025-10-29",
     reviewsList: [/* ... */],
-    owner: {
-      name: "Raminten Group",
-      joined: "2024-02-19",
-      verified: true,
-    },
+    owner: { name: "Raminten Group", joined: "2024-02-19", verified: true },
     rating: 96,
     reviews: 1100,
     location: "Kotabaru",
@@ -1337,14 +1104,11 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1549488344-1f9b8d243a93?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
       "https://images.unsplash.com/photo-1514933651103-005eec06c04b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
-    description:
-      "Restoran dengan konsep Jawa yang sangat kental. ...",
-    details: {
-      type: "Restoran",
-      facilities: ["Suasana Unik", "Toilet", "Spot Foto", "Buka 24 Jam (TBC)"],
-    },
-    // --- TAGS DITAMBAHKAN ---
-    tags: ["family_owned", "preserves_cultural_heritage", "female_founded"]
+    description: "Restoran dengan konsep Jawa yang sangat kental. ...",
+    details: { type: "Restoran", facilities: ["Suasana Unik", "Toilet", "Spot Foto", "Buka 24 Jam (TBC)"] },
+    tags: ["family_owned", "preserves_cultural_heritage", "female_founded"],
+    video_url: videoMakanan,
+    products: foodProducts,
   },
   {
     id: 39,
@@ -1356,11 +1120,7 @@ export const umkmData = [
     paymentMethods: ["Tunai", "Transfer Bank"],
     lastUpdated: "2025-10-21",
     reviewsList: [/* ... */],
-    owner: {
-      name: "Pak Rapi",
-      joined: "2024-04-14",
-      verified: false,
-    },
+    owner: { name: "Pak Rapi", joined: "2024-04-14", verified: false },
     rating: 97,
     reviews: 80,
     location: "Jl. C. Simanjuntak",
@@ -1372,14 +1132,11 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1593030103057-01a40b99176f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
       "https://images.unsplash.com/photo-1497032628192-86f99079de7c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
-    description:
-      "Jasa jahit (tailor) khusus jas pria. ...",
-    details: {
-      type: "Tailor",
-      facilities: ["Pengukuran di Tempat", "Pilihan Kain"],
-    },
-    // --- TAGS DITAMBAHKAN ---
-    tags: ["made_to_order", "custom_orders", "fully_handmade", "family_owned"]
+    description: "Jasa jahit (tailor) khusus jas pria. ...",
+    details: { type: "Tailor", facilities: ["Pengukuran di Tempat", "Pilihan Kain"] },
+    tags: ["made_to_order", "custom_orders", "fully_handmade", "family_owned"],
+    video_url: videoKerajinan,
+    products: serviceProducts,
   },
   {
     id: 40,
@@ -1391,11 +1148,7 @@ export const umkmData = [
     paymentMethods: ["Tunai", "QRIS"],
     lastUpdated: "2025-10-28",
     reviewsList: [/* ... */],
-    owner: {
-      name: "Bu Tini",
-      joined: "2024-02-25",
-      verified: true,
-    },
+    owner: { name: "Bu Tini", joined: "2024-02-25", verified: true },
     rating: 95,
     reviews: 320,
     location: "Dekat Tugu",
@@ -1407,14 +1160,11 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1626645737525-375da14d5138?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
       "https://images.unsplash.com/photo-1562967914-01efa7e87832?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
-    description:
-      "Ayam goreng kampung empuk dengan kremesan gurih. ...",
-    details: {
-      type: "Restoran",
-      facilities: ["Parkir", "Toilet", "Lalapan Ambil Sendiri"],
-    },
-    // --- TAGS DITAMBAHKAN ---
-    tags: ["female_founded", "family_owned", "preserves_cultural_heritage"]
+    description: "Ayam goreng kampung empuk dengan kremesan gurih. ...",
+    details: { type: "Restoran", facilities: ["Parkir", "Toilet", "Lalapan Ambil Sendiri"] },
+    tags: ["female_founded", "family_owned", "preserves_cultural_heritage"],
+    video_url: videoMakanan,
+    products: foodProducts,
   },
   {
     id: 41,
@@ -1426,11 +1176,7 @@ export const umkmData = [
     paymentMethods: ["Tunai", "Transfer Bank"],
     lastUpdated: "2025-10-20",
     reviewsList: [/* ... */],
-    owner: {
-      name: "Pak Dalang",
-      joined: "2024-04-22",
-      verified: false,
-    },
+    owner: { name: "Pak Dalang", joined: "2024-04-22", verified: false },
     rating: 96,
     reviews: 60,
     location: "Kraton",
@@ -1442,14 +1188,14 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1624622089339-a8c6f2f0c7e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
       "https://images.unsplash.com/photo-1624622089304-45330368310e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
-    description:
-      "Menjual wayang kulit asli berbagai ukuran...",
-    details: {
-      type: "Toko Kerajinan",
-      facilities: ["Workshop", "Edukasi Singkat"],
-    },
-    // --- TAGS DITAMBAHKAN ---
-    tags: ["fully_handmade", "hand_carved", "preserves_cultural_heritage", "family_owned", "made_to_order", "custom_orders", "personalizable"]
+    description: "Menjual wayang kulit asli berbagai ukuran...",
+    details: { type: "Toko Kerajinan", facilities: ["Workshop", "Edukasi Singkat"] },
+    tags: ["fully_handmade", "hand_carved", "preserves_cultural_heritage", "family_owned", "made_to_order", "custom_orders", "personalizable"],
+    video_url: videoKerajinan,
+    products: [
+      { id: "p1", name: "Wayang Kulit Arjuna", price: 750000, description: "Ukuran standar pedalangan, kulit kerbau asli.", image_url: "https://images.unsplash.com/photo-1624622089339-a8c6f2f0c7e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80" },
+      { id: "p2", name: "Gantungan Kunci Wayang", price: 30000, description: "Souvenir Punakawan (Semar, Gareng, Petruk, Bagong).", image_url: "https://images.unsplash.com/photo-1624622089304-45330368310e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80" }
+    ],
   },
   {
     id: 42,
@@ -1461,11 +1207,7 @@ export const umkmData = [
     paymentMethods: ["Tunai", "QRIS"],
     lastUpdated: "2025-10-29",
     reviewsList: [/* ... */],
-    owner: {
-      name: "Keluarga PK",
-      joined: "2024-03-02",
-      verified: false,
-    },
+    owner: { name: "Keluarga PK", joined: "2024-03-02", verified: false },
     rating: 95,
     reviews: 280,
     location: "Pakualaman",
@@ -1477,14 +1219,11 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1600091323386-e4a6b10a20f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
       "https://images.unsplash.com/photo-1504439031068-01d00c3c6f84?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
-    description:
-      "Es buah legendaris dengan isian komplit...",
-    details: {
-      type: "Kaki Lima",
-      facilities: ["Banyak Pilihan Topping", "Area Duduk"],
-    },
-    // --- TAGS DITAMBAHKAN ---
-    tags: ["family_owned", "small_batch"]
+    description: "Es buah legendaris dengan isian komplit...",
+    details: { type: "Kaki Lima", facilities: ["Banyak Pilihan Topping", "Area Duduk"] },
+    tags: ["family_owned", "small_batch"],
+    video_url: videoMakanan,
+    products: foodProducts,
   },
   {
     id: 43,
@@ -1496,11 +1235,7 @@ export const umkmData = [
     paymentMethods: ["Tunai", "QRIS (Sebagian Tenant)"],
     lastUpdated: "2025-10-18",
     reviewsList: [/* ... */],
-    owner: {
-      name: "Paguyuban Kasongan",
-      joined: "2024-02-01",
-      verified: true,
-    },
+    owner: { name: "Paguyuban Kasongan", joined: "2024-02-01", verified: true },
     rating: 97,
     reviews: 400,
     location: "Kasongan (Agak ke Selatan)",
@@ -1512,14 +1247,14 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1549033391-8c1c463e5b33?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
       "https://images.unsplash.com/photo-1578904764805-7f5378130835?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
-    description:
-      "Desa wisata yang menjadi pusat kerajinan gerabah dan keramik...",
-    details: {
-      type: "Pasar Kerajinan",
-      facilities: ["Banyak Showroom", "Workshop", "Parkir Luas"],
-    },
-    // --- TAGS DITAMBAHKAN ---
-    tags: ["community_empowerment", "fully_handmade", "locally_sourced_materials", "rural_community", "preserves_cultural_heritage", "custom_orders"]
+    description: "Desa wisata yang menjadi pusat kerajinan gerabah dan keramik...",
+    details: { type: "Pasar Kerajinan", facilities: ["Banyak Showroom", "Workshop", "Parkir Luas"] },
+    tags: ["community_empowerment", "fully_handmade", "locally_sourced_materials", "rural_community", "preserves_cultural_heritage", "custom_orders"],
+    video_url: videoKerajinan,
+    products: [
+      { id: "p1", name: "Pot Gerabah Besar", price: 150000, description: "Pot terakota untuk tanaman besar.", image_url: "https://images.unsplash.com/photo-1549033391-8c1c463e5b33?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80" },
+      { id: "p2", name: "Set Cangkir Keramik", price: 80000, description: "Set cangkir dan teko keramik.", image_url: "https://images.unsplash.com/photo-1578904764805-7f5378130835?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80" }
+    ],
   },
   {
     id: 44,
@@ -1531,11 +1266,7 @@ export const umkmData = [
     paymentMethods: ["Tunai", "QRIS"],
     lastUpdated: "2025-10-25",
     reviewsList: [/* ... */],
-    owner: {
-      name: "Pak Man",
-      joined: "2024-05-16",
-      verified: false,
-    },
+    owner: { name: "Pak Man", joined: "2024-05-16", verified: false },
     rating: 94,
     reviews: 115,
     location: "Jl. Bantul",
@@ -1547,14 +1278,11 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1581223681816-a09e1ac7c86a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
       "https://images.unsplash.com/photo-1621644752281-0f7238a063c1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
-    description:
-      "Bengkel umum non-resmi yang jujur dan terpercaya. ...",
-    details: {
-      type: "Bengkel",
-      facilities: ["Ganti Oli", "Servis Ringan", "Tambal Ban"],
-    },
-    // --- TAGS DITAMBAHKAN ---
-    tags: ["family_owned"]
+    description: "Bengkel umum non-resmi yang jujur dan terpercaya. ...",
+    details: { type: "Bengkel", facilities: ["Ganti Oli", "Servis Ringan", "Tambal Ban"] },
+    tags: ["family_owned"],
+    video_url: videoJasa,
+    products: serviceProducts,
   },
   {
     id: 45,
@@ -1566,11 +1294,7 @@ export const umkmData = [
     paymentMethods: ["Tunai"],
     lastUpdated: "2025-11-01",
     reviewsList: [/* ... */],
-    owner: {
-      name: "Bu Sri",
-      joined: "2024-01-11",
-      verified: false,
-    },
+    owner: { name: "Bu Sri", joined: "2024-01-11", verified: false },
     rating: 93,
     reviews: 50,
     location: "Ngampilan",
@@ -1582,14 +1306,11 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1590300136236-01f301402a7b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
       "https://images.unsplash.com/photo-1588977221655-6638549e623c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
-    description:
-      "Warung kelontong yang menjual kebutuhan sehari-hari...",
-    details: {
-      type: "Warung",
-      facilities: ["Lengkap", "Harga Eceran"],
-    },
-    // --- TAGS DITAMBAHKAN ---
-    tags: ["female_founded", "family_owned"]
+    description: "Warung kelontong yang menjual kebutuhan sehari-hari...",
+    details: { type: "Warung", facilities: ["Lengkap", "Harga Eceran"] },
+    tags: ["female_founded", "family_owned"],
+    video_url: videoJasa,
+    products: shopProducts,
   },
   {
     id: 46,
@@ -1601,11 +1322,7 @@ export const umkmData = [
     paymentMethods: ["Tunai"],
     lastUpdated: "2025-10-24",
     reviewsList: [/* ... */],
-    owner: {
-      name: "Pak Kumis",
-      joined: "2024-08-01",
-      verified: false,
-    },
+    owner: { name: "Pak Kumis", joined: "2024-08-01", verified: false },
     rating: 92,
     reviews: 180,
     location: "Jl. Malioboro",
@@ -1617,14 +1334,11 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1604251759491-3046f3378174?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
       "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
-    description:
-      "Salah satu dari banyak warung lesehan di Malioboro...",
-    details: {
-      type: "Lesehan",
-      facilities: ["Makan di Tempat", "Live Music (Musisi Jalanan)"],
-    },
-    // --- TAGS DITAMBAHKAN ---
-    tags: []
+    description: "Salah satu dari banyak warung lesehan di Malioboro...",
+    details: { type: "Lesehan", facilities: ["Makan di Tempat", "Live Music (Musisi Jalanan)"] },
+    tags: [],
+    video_url: videoMakanan,
+    products: foodProducts,
   },
   {
     id: 47,
@@ -1636,11 +1350,7 @@ export const umkmData = [
     paymentMethods: ["Tunai", "QRIS", "Debit", "Kartu Kredit"],
     lastUpdated: "2025-10-25",
     reviewsList: [/* ... */],
-    owner: {
-      name: "Gramedia",
-      joined: "2024-01-15",
-      verified: true,
-    },
+    owner: { name: "Gramedia", joined: "2024-01-15", verified: true },
     rating: 96,
     reviews: 500,
     location: "Jl. Jend. Sudirman",
@@ -1652,14 +1362,11 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
       "https://images.unsplash.com/photo-1533669061430-65c2e0d7b835?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
-    description:
-      "Toko buku Gramedia terbesar di Yogyakarta. ...",
-    details: {
-      type: "Toko Buku",
-      facilities: ["AC", "Kafe", "Alat Tulis", "Parkir"],
-    },
-    // --- TAGS DITAMBAHKAN ---
-    tags: []
+    description: "Toko buku Gramedia terbesar di Yogyakarta. ...",
+    details: { type: "Toko Buku", facilities: ["AC", "Kafe", "Alat Tulis", "Parkir"] },
+    tags: [],
+    video_url: videoJasa,
+    products: shopProducts,
   },
   {
     id: 48,
@@ -1671,11 +1378,7 @@ export const umkmData = [
     paymentMethods: ["Tunai", "QRIS", "Debit"],
     lastUpdated: "2025-10-30",
     reviewsList: [/* ... */],
-    owner: {
-      name: "Drh. Hewan",
-      joined: "2024-03-30",
-      verified: true,
-    },
+    owner: { name: "Drh. Hewan", joined: "2024-03-30", verified: true },
     rating: 97,
     reviews: 160,
     location: "Jl. Kaliurang (Bawah)",
@@ -1687,14 +1390,11 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
       "https://images.unsplash.com/photo-1596797882510-0da13101d21c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
-    description:
-      "Klinik dokter hewan 24 jam dengan fasilitas UGD...",
-    details: {
-      type: "Klinik Hewan",
-      facilities: ["Dokter Jaga", "Grooming", "Pet Shop"],
-    },
-    // --- TAGS DITAMBAHKAN ---
-    tags: []
+    description: "Klinik dokter hewan 24 jam dengan fasilitas UGD...",
+    details: { type: "Klinik Hewan", facilities: ["Dokter Jaga", "Grooming", "Pet Shop"] },
+    tags: [],
+    video_url: videoJasa,
+    products: serviceProducts,
   },
   {
     id: 49,
@@ -1706,11 +1406,7 @@ export const umkmData = [
     paymentMethods: ["Tunai", "QRIS"],
     lastUpdated: "2025-10-21",
     reviewsList: [/* ... */],
-    owner: {
-      name: "Toko Herbal",
-      joined: "2024-05-20",
-      verified: false,
-    },
+    owner: { name: "Toko Herbal", joined: "2024-05-20", verified: false },
     rating: 94,
     reviews: 70,
     location: "Pasar Beringharjo",
@@ -1720,16 +1416,13 @@ export const umkmData = [
     longitude: 110.366,
     images: [
       "https://images.unsplash.com/photo-1556706990-0f31750c48d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
-      "https://images.unsplash.com/photo-1620921282046-e179e0a16c88?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
+      "httpsg.com/photo-1620921282046-e179e0a16c88?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
-    description:
-      "Menjual berbagai macam jamu dan rempah dalam bentuk bubuk instan. ...",
-    details: {
-      type: "Toko Herbal",
-      facilities: ["Bisa Kirim", "Lengkap"],
-    },
-    // --- TAGS DITAMBAHKAN ---
-    tags: ["locally_sourced_materials", "natural_dyes", "preserves_cultural_heritage", "small_batch"]
+    description: "Menjual berbagai macam jamu dan rempah dalam bentuk bubuk instan. ...",
+    details: { type: "Toko Herbal", facilities: ["Bisa Kirim", "Lengkap"] },
+    tags: ["locally_sourced_materials", "natural_dyes", "preserves_cultural_heritage", "small_batch"],
+    video_url: videoKerajinan,
+    products: shopProducts,
   },
   {
     id: 50,
@@ -1741,11 +1434,7 @@ export const umkmData = [
     paymentMethods: ["Transfer Bank", "QRIS"],
     lastUpdated: "2025-10-28",
     reviewsList: [/* ... */],
-    owner: {
-      name: "Mas Grafis",
-      joined: "2024-08-15",
-      verified: false,
-    },
+    owner: { name: "Mas Grafis", joined: "2024-08-15", verified: false },
     rating: 95,
     reviews: 40,
     location: "Kotabaru",
@@ -1757,13 +1446,10 @@ export const umkmData = [
       "https://images.unsplash.com/photo-1609921141834-7d169ae659e9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
       "https://images.unsplash.com/photo-1611162617213-7d724e0f2042?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
     ],
-    description:
-      "Freelancer jasa desain logo, brosur, dan kebutuhan branding UMKM. ...",
-    details: {
-      type: "Jasa Desain",
-      facilities: ["Konsultasi Online", "Revisi 3x"],
-    },
-    // --- TAGS DITAMBAHKAN ---
-    tags: ["social_enterprise", "personalizable", "custom_orders", "made_to_order"]
+    description: "Freelancer jasa desain logo, brosur, dan kebutuhan branding UMKM. ...",
+    details: { type: "Jasa Desain", facilities: ["Konsultasi Online", "Revisi 3x"] },
+    tags: ["social_enterprise", "personalizable", "custom_orders", "made_to_order"],
+    video_url: videoJasa,
+    products: serviceProducts,
   },
 ];
