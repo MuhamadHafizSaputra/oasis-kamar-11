@@ -1,4 +1,3 @@
-import React from 'react';
 import { Utensils, ShoppingBag, Hammer, Search } from "lucide-react";
 
 const SearchSection = () => {
