@@ -210,9 +210,41 @@ export default function ListPage() {
           />
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-            {filteredUmkm.map((item) => (
-              <UmkmCard key={item.id} umkm={item} />
-            ))}
+            {filteredUmkm.length > 0 ? (
+              // Jika ada data, tampilkan seperti biasa
+              filteredUmkm.map((item) => (
+                <UmkmCard key={item.id} umkm={item} />
+              ))
+            ) : (
+              // JIKA KOSONG, tampilkan pesan ini
+              <div className="md:col-span-2 text-center py-16 px-6"> {/* Hapus bg-gray-50 rounded-lg border border-gray-200 */}
+                <svg 
+                  className="mx-auto h-12 w-12 text-gray-400" 
+                  fill="none" 
+                  viewBox="0 0 24 24" 
+                  strokeWidth="1.5" 
+                  stroke="currentColor"
+                >
+                  <path 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round" 
+                    d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" 
+                  />
+                  <path 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round" 
+                    d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" 
+                  />
+                </svg>
+                
+                <h3 className="mt-3 text-xl font-semibold text-gray-900">
+                  Mulai Menjelajah Peta
+                </h3>
+                <p className="mt-1 text-md text-gray-600">
+                  Geser atau perbesar peta di sebelah kanan untuk melihat UMKM di area yang Anda inginkan.
+                </p>
+              </div>
+            )}
           </div>
         </div>
 
