@@ -1,5 +1,3 @@
-import React from 'react';
-
 interface Card2Props {
   title: string;
   description?: string;

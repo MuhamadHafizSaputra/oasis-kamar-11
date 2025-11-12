@@ -25,7 +25,7 @@ export async function searchApiUmkm(query, lat, lon) {
 
   try {
     // Panggil endpoint /api/umkm/search
-    const response = await axios.get('http://localhost:3001/api/umkm/search', { params });
+    const response = await axios.get('https://sedulurkita-api.vercel.app/api/umkm/search', { params });
     
     const umkmList = response.data; // Ini adalah array
 
@@ -100,7 +100,7 @@ export async function getUmkmInBounds(bounds) {
   const maxLat = bounds.getNorth();
 
   try {
-    const response = await axios.get('http://localhost:3001/api/umkm', {
+    const response = await axios.get('https://sedulurkita-api.vercel.app/api/umkm', {
       params: { minLng, minLat, maxLng, maxLat }
     });
     

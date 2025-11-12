@@ -1,4 +1,5 @@
 // server.js
+import 'dotenv/config'; // BARIS INI PALING ATAS
 import express from 'express';
 import cors from 'cors';
 import db from './db.js';
@@ -80,32 +81,41 @@ app.get('/api/umkm/search', async (req, res) => {
 
 // 3. Endpoint untuk ProfilePage.jsx (HARUS SETELAH 'search')
 app.get('/api/umkm/:id', async (req, res) => {
-  const { id } = req.params;
-  
-  if (isNaN(id)) {
-      return res.status(400).json({ error: 'ID must be a number' });
-  }
+  const { id } = req.params;
+  
+  if (isNaN(id)) {
+      return res.status(400).json({ error: 'ID must be a number' });
+  }
 
-  try {
-    const umkmQuery = 'SELECT * FROM umkm WHERE id = $1';
-    const reviewsQuery = 'SELECT * FROM reviews WHERE umkm_id = $1';
-    
-    const umkmResult = await db.query(umkmQuery, [id]);
-    const reviewsResult = await db.query(reviewsQuery, [id]);
+  try {
+    // === PERSIAPKAN SEMUA QUERY ===
+    const umkmQuery = 'SELECT * FROM umkm WHERE id = $1';
+    const reviewsQuery = 'SELECT * FROM reviews WHERE umkm_id = $1';
+    // === TAMBAHKAN QUERY PRODUK ===
+    const productsQuery = 'SELECT * FROM products WHERE umkm_id = $1';
+    
+    // === JALANKAN SEMUA QUERY SECARA BERSAMAAN ===
+    const [umkmResult, reviewsResult, productsResult] = await Promise.all([
+      db.query(umkmQuery, [id]),
+      db.query(reviewsQuery, [id]),
+      db.query(productsQuery, [id]) // <-- Menjalankan query produk
+    ]);
 
-    if (umkmResult.rows.length === 0) {
-      return res.status(404).json({ error: 'UMKM not found' });
-    }
-    
-    const umkm = umkmResult.rows[0];
-    umkm.reviewsList = reviewsResult.rows;
+    if (umkmResult.rows.length === 0) {
+      return res.status(404).json({ error: 'UMKM not found' });
+    }
+    
+    // === GABUNGKAN SEMUA HASIL ===
+    const umkm = umkmResult.rows[0];
+    umkm.reviewsList = reviewsResult.rows;
+    umkm.products = productsResult.rows; // <-- Menambahkan array produk
 
-    res.json(umkm);
-    
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Internal server error' });
-  }
+    res.json(umkm); // <-- Mengirim data yang sudah lengkap
+    
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
 });
 
 // 4. Endpoint untuk ListPage.jsx (DynamicDataLoader)
