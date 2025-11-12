@@ -54,7 +54,7 @@ export default function ProfilePage() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/api/umkm/${id}`)
+      .get(`https://sedulurkita-api.vercel.app/api/umkm/${id}`)
       .then((response) => {
         const data = response.data;
         const parsedUmkm = {

@@ -16,7 +16,7 @@ function FeaturedUmkm() {
   useEffect(() => {
     
     // Alamat API backend yang sudah kita uji tadi
-    const apiUrl = 'http://localhost:3001/api/umkm/featured';
+    const apiUrl = 'https://sedulurkita-api.vercel.app/api/umkm/featured';
 
     console.log('Mencoba mengambil data dari:', apiUrl);
 

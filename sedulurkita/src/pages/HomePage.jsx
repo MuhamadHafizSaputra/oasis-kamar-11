@@ -10,7 +10,7 @@ export default function HomePage() {
 
   // 5. Tambahkan useEffect untuk fetch data saat komponen dimuat
   useEffect(() => {
-    axios.get('http://localhost:3001/api/umkm/featured')
+    axios.get('https://sedulurkita-api.vercel.app/api/umkm/featured')
       .then(response => {
         // 6. Data dari API perlu di-transform (fix snake_case & JSON)
         const transformedData = response.data.map(umkm => ({
