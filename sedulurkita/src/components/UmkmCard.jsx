@@ -45,7 +45,7 @@ export default function UmkmCard({ umkm }) {
                 style: "currency",
                 currency: "IDR",
                 minimumFractionDigits: 0,
-              }).format(umkm.price_from || umkm.priceFrom)} 
+              }).format(umkm.price_from || umkm.priceFrom || 0)} 
               {/* (Menambahkan fallback price_from) */}
             </span>
           </p>
