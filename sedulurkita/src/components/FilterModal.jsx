@@ -134,7 +134,7 @@ export default function FilterModal({
           </button>
           <button
             onClick={onClose}
-            className="px-6 py-2 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700"
+            className="px-6 py-2 bg-[#DA9A3D] text-white font-semibold rounded-lg hover:bg-indigo-700"
           >
             Terapkan
           </button>
