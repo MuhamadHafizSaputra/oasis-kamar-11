@@ -40,9 +40,9 @@ export default function Navbar() {
             {/* --- 3. Logika Tampilan Login/Logout --- */}
             {isAuthenticated ? (
               <>
-                <span className="text-gray-700">
+                <Link to="/account" className="text-gray-700 hover:text-[#DA9A3D] font-medium">
                   Hi, {user?.name || 'Pengguna'}!
-                </span>
+                </Link>
                 <button
                   onClick={handleLogout}
                   className="px-4 py-2 bg-gray-200 text-gray-800 rounded-full hover:bg-gray-300"

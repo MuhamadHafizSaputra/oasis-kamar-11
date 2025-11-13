@@ -6,8 +6,9 @@ import ListPage from "./pages/ListPage.jsx";
 import ProfilePage from "./pages/ProfilePage.jsx";
 import AboutPage from "./pages/AboutPage.jsx";
 import Navbar from "./components/Navbar.jsx";
-import LoginPage from "./pages/LoginPage.jsx"; // <-- 1. Impor
-import RegisterPage from "./pages/RegisterPage.jsx"; // <-- 2. Impor
+import LoginPage from "./pages/LoginPage.jsx"; 
+import RegisterPage from "./pages/RegisterPage.jsx"; 
+import AccountProfilePage from "./pages/AccountProfilePage.jsx";
 
 function App() {
   return (
@@ -18,10 +19,9 @@ function App() {
         <Route path="/list" element={<ListPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/umkm/:id" element={<ProfilePage />} />
-        
-        {/* --- 3. Tambahkan Rute Baru --- */}
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/account" element={<AccountProfilePage />} />
       </Routes>
     </Router>
   );

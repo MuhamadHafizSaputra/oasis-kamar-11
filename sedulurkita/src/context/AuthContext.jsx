@@ -71,12 +71,33 @@ export const AuthProvider = ({ children }) => {
     delete axios.defaults.headers.common['Authorization'];
   };
 
+  // 7. Fungsi untuk UPDATE PROFILE (Nama & Foto)
+  const updateProfile = async (formData) => {
+    try {
+      // Kita asumsikan backend menerima FormData untuk upload file
+      // Endpoint ini harus sesuai dengan backend Anda (misal: /api/auth/update)
+      const response = await axios.put(`${API_URL}/update`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data', // Penting untuk upload file
+        },
+      });
+
+      const updatedUser = response.data.user;
+      setUser(updatedUser); // Update state user di aplikasi
+      return { success: true, message: 'Profil berhasil diperbarui!' };
+    } catch (error) {
+      console.error("Update error:", error);
+      throw error;
+    }
+  };
+
   const value = {
     user,
     token,
     login,
     register,
     logout,
+    updateProfile,
     loading, // Tambahkan loading
     isAuthenticated: !!token,
   };

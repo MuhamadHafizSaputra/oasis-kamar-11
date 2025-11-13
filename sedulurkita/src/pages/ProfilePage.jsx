@@ -4,6 +4,9 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 
 import { Map, Marker, NavigationControl } from "@vis.gl/react-maplibre";
+import LazyImage from "../components/LazyImage"; 
+import VideoFacade from "../components/VideoFacade"; 
+import { getOptimizedImageUrl } from "../lib/imageUtils"; 
 
 // Import the custom hooks
 import { useCountUp } from "../hooks/useCountUp.js";
@@ -153,9 +156,10 @@ export default function ProfilePage() {
       <section className="relative h-[60vh] min-h-[400px] bg-black overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src={umkm.images[0] || "https://images.unsplash.com/photo-1599057161716-6c7c1f88e7b8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"}
+            src={getOptimizedImageUrl(umkm.images[0], 1200)} 
             alt={`${umkm.name} hero image`}
-            className="w-full h-full object-cover animate-fadeInScale" /* <-- ADD THIS CLASS */
+            className="w-full h-full object-cover animate-fadeInScale"
+            fetchPriority="high" // Hint browser untuk memprioritaskan ini
           />
         </div>
         <div className="absolute inset-0 bg-black opacity-60"></div>
@@ -182,14 +186,14 @@ export default function ProfilePage() {
       <section id="maker" className="py-20 bg-white">
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row items-center gap-12">
-            {/* === PERBAIKAN: Mengembalikan md:w-1/2 === */}
-            <div className="md:w-1/2" ref={addScrollAnimateRef}> 
-            {/* === AKHIR PERBAIKAN === */}
-              <img
-                src={umkm.images[1] || "https://images.unsplash.com/photo-1628187807098-f2f2c6e4e581?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"}
-                alt={`Pemilik ${umkm.name}`}
-                className="rounded-lg shadow-xl object-cover h-full w-full"
-              />
+            <div className="md:w-1/2 h-[400px]" ref={addScrollAnimateRef}> 
+               {/* Ganti <img> biasa dengan LazyImage */}
+               <LazyImage 
+                 src={umkm.images[1]} 
+                 alt={`Pemilik ${umkm.name}`}
+                 className="rounded-lg shadow-xl h-full w-full"
+                 width={600} // Request lebar 600px
+               />
             </div>
             <div className="md:w-1/2" ref={addScrollAnimateRef}>
               <h2 className="text-sm font-semibold uppercase text-[#9c724b] tracking-widest">
@@ -225,19 +229,13 @@ export default function ProfilePage() {
 
           {/* === BAGIAN VIDEO === */}
           {umkm.video_url && (
-            <div className="mb-16" ref={addScrollAnimateRef}>
-              <div className="w-full max-w-4xl mx-auto aspect-video rounded-lg shadow-xl overflow-hidden animate-pulseBorder border-2 border-transparent hover:border-[#9c724b] transition-colors duration-300">
-                <iframe
-                  src={`${umkm.video_url}?autoplay=1&mute=1&controls=0&rel=0`}
-                  className="w-full h-full"
-                  frameBorder="0"
-                  allow="autoplay; fullscreen; picture-in-picture"
-                  allowFullScreen
-                  title="Video Proses UMKM"
-                ></iframe>
+              <div className="mb-16" ref={addScrollAnimateRef}>
+                <div className="w-full max-w-4xl mx-auto aspect-video rounded-lg shadow-xl overflow-hidden border-2 border-transparent hover:border-[#9c724b] transition-colors duration-300">
+                  {/* Ganti iframe dengan VideoFacade */}
+                  <VideoFacade videoUrl={umkm.video_url} />
+                </div>
               </div>
-            </div>
-          )}
+            )}
 
           {/* Process Steps */}
           <h4 className="text-2xl font-serif font-bold text-center mb-8 text-[#473524]" ref={addScrollAnimateRef}>
