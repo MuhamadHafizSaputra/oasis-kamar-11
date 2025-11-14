@@ -7,14 +7,9 @@ import { Link } from "react-router-dom";
 
 export default function UmkmCard({ umkm }) {
   
-  // --- PERBAIKAN DI SINI ---
-  // Cek apakah 'calculated_distance' (angka) ada.
-  // Jika ada, format menjadi "1.23 km".
-  // Jika tidak, gunakan 'distance' (teks "10 min")
   const distanceText = umkm.calculated_distance
     ? `${umkm.calculated_distance.toFixed(2)} km`
     : umkm.distance;
-  // --- AKHIR PERBAIKAN ---
 
   return (
     <Link to={`/umkm/${umkm.id}`} className="block">
@@ -45,7 +40,7 @@ export default function UmkmCard({ umkm }) {
                 style: "currency",
                 currency: "IDR",
                 minimumFractionDigits: 0,
-              }).format(umkm.price_from || umkm.priceFrom || 0)} 
+              }).format(umkm.price_from || umkm.priceFrom || umkm.price_min || 0)} 
               {/* (Menambahkan fallback price_from) */}
             </span>
           </p>

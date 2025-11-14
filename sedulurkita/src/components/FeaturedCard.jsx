@@ -4,15 +4,8 @@ import { Link } from "react-router-dom"; // Impor Link untuk tombol
 
 // Definisikan tema warna agar mirip gambar
 const themes = {
-  purple: {
+  brown: {
     bg: "bg-[#6B4E31]",
-    title: "text-white",
-    description: "text-white",
-    buttonBg: "bg-white",
-    buttonText: "text-black",
-  },
-  orange: {
-    bg: "bg-[#6B4E31]", // Anda bisa ganti ini ke warna brand Anda, misal 'bg-[#FFCA8E]'
     title: "text-white",
     description: "text-white",
     buttonBg: "bg-white",
@@ -26,9 +19,9 @@ export default function FeaturedCard({
   description,
   imageUrl,
   buttonText,
-  colorTheme = "purple",
+  colorTheme = "brown",
 }) {
-  const theme = themes[colorTheme] || themes.purple;
+  const theme = themes[colorTheme] || themes.brown;
 
   return (
     // --- MODIFIKASI TOTAL STRUKTUR KARTU ---

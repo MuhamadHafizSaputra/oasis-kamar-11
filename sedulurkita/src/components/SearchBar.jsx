@@ -73,10 +73,10 @@ export default function SearchBar() {
           <div key={category.name} className="relative group">
             {/* Tombol Kategori Utama: Sekarang memanggil handleCategoryClick */}
             <button 
-              className="flex flex-col items-center w-20 text-center text-gray-700 hover:text-indigo-600"
+              className="flex flex-col items-center w-20 text-center text-gray-700 hover:text-[#3C2A18]"
               onClick={() => handleCategoryClick(category.name)}
             >
-              <div className="p-3 bg-gray-100 rounded-full group-hover:bg-indigo-100">
+              <div className="p-3 bg-gray-100 rounded-full group-hover:bg-[#C7A686] transition-colors"> 
                 <category.icon className="w-6 h-6" />
               </div>
               <span className="mt-1 text-sm font-medium">{category.name}</span>
@@ -110,7 +110,7 @@ export default function SearchBar() {
           <input
             type="text"
             placeholder="Mau cari apa di Jogja?"
-            className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-[#6B4E31]"
             // DIUBAH: Hubungkan ke state
             value={query}
             onChange={(e) => setQuery(e.target.value)}
@@ -129,7 +129,7 @@ export default function SearchBar() {
                 className="flex items-center px-4 py-3 hover:bg-gray-100 cursor-pointer"
                 onMouseDown={handleNearMeClick}
               >
-                <MapPinIcon className="w-6 h-6 mr-3 text-indigo-600" />
+                <MapPinIcon className="w-6 h-6 mr-3 text-[#6B4E31]" />
                 <div>
                   <p className="font-semibold">UMKM Terdekat</p>
                   <p className="text-sm text-gray-500">
