@@ -1,7 +1,5 @@
 // src/pages/HomePage.jsx
-// --- SEMUA ANIMASI SCROLL SEKARANG MENGGUNAKAN KELAS CSS 'animate-scroll-fade-up' ---
-
-import React, { useState, useEffect } from 'react'; 
+import React, { useState, useEffect, useRef } from 'react'; 
 import { Link } from 'react-router-dom';
 import { 
   ArrowRight, 
@@ -15,33 +13,74 @@ import {
   Youtube 
 } from 'lucide-react';
 
-// Hook animasi scroll (useScrollAnimate) sudah tidak diperlukan dan dihapus
 import SearchBar from '../components/SearchBar.jsx';
 
 export default function HomePage() {
-  // Kita tidak lagi memanggil useScrollAnimate()
-  
   const [heroImage, setHeroImage] = useState(null); 
   const [heroImageAlt, setHeroImageAlt] = useState("Memuat gambar..."); 
 
+  // --- LOGIKA DRAG TO SCROLL (SMOOTH + INERTIA) ---
+  const scrollRef = useRef(null);
+  const [isDown, setIsDown] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
+  const [velX, setVelX] = useState(0); 
+  const momentumID = useRef(null);
+
+  const handleMouseDown = (e) => {
+    setIsDown(true);
+    setStartX(e.pageX - scrollRef.current.offsetLeft);
+    setScrollLeft(scrollRef.current.scrollLeft);
+    cancelAnimationFrame(momentumID.current);
+  };
+
+  const handleMouseLeave = () => {
+    setIsDown(false);
+  };
+
+  const handleMouseUp = () => {
+    setIsDown(false);
+    beginMomentumTracking();
+  };
+
+  const handleMouseMove = (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - scrollRef.current.offsetLeft;
+    const walk = (x - startX) * 1.5; 
+    const prevScrollLeft = scrollRef.current.scrollLeft;
+    scrollRef.current.scrollLeft = scrollLeft - walk;
+    setVelX(scrollRef.current.scrollLeft - prevScrollLeft);
+  };
+
+  const beginMomentumTracking = () => {
+    cancelAnimationFrame(momentumID.current);
+    const scrollContainer = scrollRef.current;
+    const friction = 0.95; 
+    let currentVelX = velX;
+
+    const momentumLoop = () => {
+      if (Math.abs(currentVelX) > 0.5) { 
+        scrollContainer.scrollLeft += currentVelX;
+        currentVelX *= friction; 
+        momentumID.current = requestAnimationFrame(momentumLoop);
+      }
+    };
+    momentumLoop();
+  };
+  // --- LOGIKA SELESAI ---
+
   useEffect(() => {
-    // (Logika fetch gambar hero tidak berubah)
     fetch('https://sedulurkita-api.vercel.app/api/umkm/featured')
       .then(response => {
-        if (!response.ok) {
-          throw new Error('Respon jaringan tidak OK');
-        }
+        if (!response.ok) throw new Error('Respon jaringan tidak OK');
         return response.json();
       })
       .then(data => {
         if (data && data.length > 0) {
           const umkmUnggulan = data[0];
           let images = umkmUnggulan.images;
-
-          if (typeof images === 'string') {
-            images = JSON.parse(images || "[]");
-          }
-
+          if (typeof images === 'string') images = JSON.parse(images || "[]");
           if (Array.isArray(images) && images.length > 0) {
             setHeroImage(images[0]); 
             setHeroImageAlt(umkmUnggulan.name);
@@ -54,7 +93,6 @@ export default function HomePage() {
         console.error("Error fetching featured image:", error);
         setHeroImageAlt("Gagal memuat gambar dari server.");
       });
-
   }, []); 
 
   return (
@@ -62,44 +100,25 @@ export default function HomePage() {
       <main>
         {/* Hero Section */}
         <section className="relative bg-white pt-16 pb-24 md:pt-24 md:pb-32 overflow-hidden">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10 relative">
+           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10 relative">
             <div className="max-w-3xl text-center md:text-left">
-              
-              <h1 
-                className="text-5xl md:text-7xl font-bold tracking-tighter text-gray-900 font-serif animate-scroll-fade-up" // <-- DITAMBAHKAN
-              >
+              <h1 className="text-5xl md:text-7xl font-bold tracking-tighter text-gray-900 font-serif animate-scroll-fade-up">
                 Beyond the Product.
                 <br />
                 <span className="text-[#DA9A3D]">Discover the Story.</span>
               </h1>
-              
-              <p 
-                className="mt-6 text-lg md:text-xl text-gray-700 max-w-2xl animate-scroll-fade-up" // <-- DITAMBAHKAN
-                style={{ animationDelay: '0.1s' }} // Delay kecil agar muncul setelah judul
-              >
+              <p className="mt-6 text-lg md:text-xl text-gray-700 max-w-2xl animate-scroll-fade-up" style={{ animationDelay: '0.1s' }}>
                 Direktori ini menghubungkan Anda dengan jantung Yogyakarta: para pembuat, pengrajin, dan wirausahawan yang menuangkan gairah mereka ke dalam setiap kreasi.
               </p>
-              
-              <div 
-                className="mt-0 w-full max-w-xl animate-scroll-fade-up" // <-- DITAMBAHKAN
-                style={{ animationDelay: '0.2s' }} // Delay lagi
-              >
+              <div className="mt-0 w-full max-w-xl animate-scroll-fade-up" style={{ animationDelay: '0.2s' }}>
                 <SearchBar />
               </div>
             </div>
           </div>
-          
           <div className="absolute top-0 right-0 h-full w-full lg:w-1/2">
-            
             {heroImage && (
-              <img  
-                src={heroImage}
-                alt={heroImageAlt}
-                className="w-full h-full object-cover opacity-30 md:opacity-100"
-                style={{ clipPath: 'polygon(0 0, 100% 0, 100% 100%, 25% 100%)' }}
-              />
+              <img src={heroImage} alt={heroImageAlt} className="w-full h-full object-cover opacity-30 md:opacity-100" style={{ clipPath: 'polygon(0 0, 100% 0, 100% 100%, 25% 100%)' }} />
             )}
-            
             <div className="absolute inset-0 bg-gradient-to-t from-white via-white/80 to-transparent md:bg-gradient-to-r md:from-white md:via-white/60 md:to-transparent"></div>
           </div>
         </section>
@@ -108,119 +127,144 @@ export default function HomePage() {
         <section className="py-16 md:py-24 bg-gray-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center mb-8">
-              <h2 
-                className="text-3xl md:text-4xl font-bold text-gray-900 font-serif animate-scroll-fade-up" // <-- DITAMBAHKAN
-              >
-                Live dari Workshop
-              </h2>
+              <div className="flex items-center gap-3 animate-scroll-fade-up">
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 font-serif">
+                  Live dari Workshop
+                </h2>
+                {/* Indikator Live */}
+                <span className="relative flex h-5 w-5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-5 w-5 bg-red-600"></span>
+                </span>
+              </div>
+              
               <Link to="/list" className="flex items-center text-[#DA9A3D] font-medium hover:underline">
                 <span>Lihat Semua</span>
                 <ArrowRight className="w-4 h-4 ml-1" />
               </Link>
             </div>
             
-            <div className="flex space-x-6 pb-6 overflow-x-auto no-scrollbar">
+            <div 
+              ref={scrollRef}
+              className={`flex space-x-6 pb-8 overflow-x-auto no-scrollbar touch-pan-x transition-all duration-75
+                ${isDown ? 'cursor-grabbing snap-none' : 'cursor-grab snap-x snap-mandatory scroll-smooth'}
+              `}
+              onMouseDown={handleMouseDown}
+              onMouseLeave={handleMouseLeave}
+              onMouseUp={handleMouseUp}
+              onMouseMove={handleMouseMove}
+            >
               
-              <div 
-                className="flex-shrink-0 w-80 bg-white rounded-lg shadow-xl overflow-hidden transform transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl animate-scroll-fade-up" // <-- DITAMBAHKAN
-              >
+              {/* Kartu 1 */}
+              <div className="snap-center flex-shrink-0 w-80 bg-white rounded-lg shadow-xl overflow-hidden transform transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl animate-scroll-fade-up">
                 <div className="relative">
-                  <img src="https://images.unsplash.com/photo-1525934220630-b967b60b8b0a?auto=format&fit=crop&w=400&q=80" alt="Live Batik Making" className="w-full h-48 object-cover" />
+                  <img src="https://images.unsplash.com/photo-1525934220630-b967b60b8b0a?auto=format&fit=crop&w=400&q=80" alt="Live Batik Making" className="w-full h-48 object-cover pointer-events-none" />
                   <span className="absolute top-3 left-3 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider animate-pulse">
                     LIVE
                   </span>
                 </div>
-                <div className="p-5">
+                <div className="p-5 select-none"> 
                   <h3 className="font-bold text-lg text-gray-900 truncate">Ibu Dian sedang membatik</h3>
                   <p className="text-sm text-gray-600 mt-1">Batik Tulis Asli</p>
                   <div className="flex items-center text-sm text-gray-500 mt-3">
                     <MapPin className="w-4 h-4 mr-1.5 text-gray-400" />
                     Laweyan, Surakarta
                   </div>
-                  <button className="mt-4 w-full bg-indigo-100 text-indigo-700 font-medium py-2 rounded-lg hover:bg-indigo-200 transition-colors">
+                  {/* UPDATE LINK KE /live/3 */}
+                  <Link 
+                    to="/live/3" 
+                    className="mt-4 block w-full text-center bg-indigo-100 text-indigo-700 font-medium py-2 rounded-lg hover:bg-indigo-200 transition-colors pointer-events-auto"
+                  >
                     Tonton Live
-                  </button>
+                  </Link>
                 </div>
               </div>
 
-              <div 
-                className="flex-shrink-0 w-80 bg-white rounded-lg shadow-xl overflow-hidden transform transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl animate-scroll-fade-up" // <-- DITAMBAHKAN
-                style={{ animationDelay: '0.1s' }}
-              >
+              {/* Kartu 2 */}
+              <div className="snap-center flex-shrink-0 w-80 bg-white rounded-lg shadow-xl overflow-hidden transform transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl animate-scroll-fade-up" style={{ animationDelay: '0.1s' }}>
                 <div className="relative">
-                  <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=400&q=80" alt="Live Cooking Gudeg" className="w-full h-48 object-cover" />
+                  <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=400&q=80" alt="Live Cooking Gudeg" className="w-full h-48 object-cover pointer-events-none" />
                   <span className="absolute top-3 left-3 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider animate-pulse">
                     LIVE
                   </span>
                 </div>
-                <div className="p-5">
+                <div className="p-5 select-none">
                   <h3 className="font-bold text-lg text-gray-900 truncate">Pak Budi memasak Gudeg</h3>
                   <p className="text-sm text-gray-600 mt-1">Warung Sido Mampir</p>
                   <div className="flex items-center text-sm text-gray-500 mt-3">
                     <MapPin className="w-4 h-4 mr-1.5 text-gray-400" />
                     Yogyakarta
                   </div>
-                  <button className="mt-4 w-full bg-pink-100 text-pink-700 font-medium py-2 rounded-lg hover:bg-pink-200 transition-colors">
+                  {/* UPDATE LINK KE /live/1 */}
+                  <Link 
+                    to="/live/1" 
+                    className="mt-4 block w-full text-center bg-pink-100 text-pink-700 font-medium py-2 rounded-lg hover:bg-pink-200 transition-colors pointer-events-auto"
+                  >
                     Tonton Live
-                  </button>
+                  </Link>
                 </div>
               </div>
 
-              <div 
-                className="flex-shrink-0 w-80 bg-white rounded-lg shadow-xl overflow-hidden transform transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl animate-scroll-fade-up" // <-- DITAMBAHKAN
-                style={{ animationDelay: '0.2s' }}
-              >
+              {/* Kartu 3 */}
+              <div className="snap-center flex-shrink-0 w-80 bg-white rounded-lg shadow-xl overflow-hidden transform transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl animate-scroll-fade-up" style={{ animationDelay: '0.2s' }}>
                 <div className="relative">
-                  <img src="https://images.unsplash.com/photo-1605812863642-19e98b0a96b4?auto=format&fit=crop&w=400&q=80" alt="Live Leather Crafting" className="w-full h-48 object-cover" />
+                  <img src="https://images.unsplash.com/photo-1605812863642-19e98b0a96b4?auto=format&fit=crop&w=400&q=80" alt="Live Leather Crafting" className="w-full h-48 object-cover pointer-events-none" />
                   <span className="absolute top-3 left-3 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider animate-pulse">
                     LIVE
                   </span>
                 </div>
-                <div className="p-5">
+                <div className="p-5 select-none">
                   <h3 className="font-bold text-lg text-gray-900 truncate">Rina membuat dompet kulit</h3>
                   <p className="text-sm text-gray-600 mt-1">Jaya Kulit Mandiri</p>
                   <div className="flex items-center text-sm text-gray-500 mt-3">
                     <MapPin className="w-4 h-4 mr-1.5 text-gray-400" />
                     Sleman, Yogyakarta
                   </div>
-                  <button className="mt-4 w-full bg-green-100 text-green-700 font-medium py-2 rounded-lg hover:bg-green-200 transition-colors">
+                  {/* UPDATE LINK KE /live/31 */}
+                  <Link 
+                    to="/live/31" 
+                    className="mt-4 block w-full text-center bg-green-100 text-green-700 font-medium py-2 rounded-lg hover:bg-green-200 transition-colors pointer-events-auto"
+                  >
                     Tonton Live
-                  </button>
+                  </Link>
                 </div>
               </div>
 
-              <div 
-                className="flex-shrink-0 w-80 bg-white rounded-lg shadow-xl overflow-hidden transform transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl animate-scroll-fade-up" // <-- DITAMBAHKAN
-                style={{ animationDelay: '0.3s' }}
-              >
+              {/* Kartu 4 (Event) */}
+              <div className="snap-center flex-shrink-0 w-80 bg-white rounded-lg shadow-xl overflow-hidden transform transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl animate-scroll-fade-up" style={{ animationDelay: '0.3s' }}>
                 <div className="relative">
-                  <img src="https://images.unsplash.com/photo-1543088243-e35f83b23c0c?auto=format&fit=crop&w=400&q=80" alt="Market Day" className="w-full h-48 object-cover" />
+                  <img src="https://images.unsplash.com/photo-1543088243-e35f83b23c0c?auto=format&fit=crop&w=400&q=80" alt="Market Day" className="w-full h-48 object-cover pointer-events-none" />
                   <span className="absolute top-3 left-3 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
                     EVENT
                   </span>
                 </div>
-                <div className="p-5">
+                <div className="p-5 select-none">
                   <h3 className="font-bold text-lg text-gray-900 truncate">Pasar Mingguan Beringharjo</h3>
                   <p className="text-sm text-gray-600 mt-1">Pasar Tradisional</p>
                   <div className="flex items-center text-sm text-gray-500 mt-3">
                     <MapPin className="w-4 h-4 mr-1.5 text-gray-400" />
                     Malioboro, Yogyakarta
                   </div>
-                  <button className="mt-4 w-full bg-amber-100 text-amber-700 font-medium py-2 rounded-lg hover:bg-amber-200 transition-colors">
+                  {/* UPDATE LINK KE /live/4 */}
+                  <Link 
+                    to="/live/4" 
+                    className="mt-4 block w-full text-center bg-amber-100 text-amber-700 font-medium py-2 rounded-lg hover:bg-amber-200 transition-colors pointer-events-auto"
+                  >
                     Lihat Detail
-                  </button>
+                  </Link>
                 </div>
               </div>
+
             </div>
           </div>
         </section>
         
-        {/* Makers Section */}
+        {/* ... SISA KODE SECTION LAIN DAN FOOTER TETAP SAMA SEPERTI SEBELUMNYA ... */}
         <section id="makers" className="py-16 md:py-32 bg-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 items-center">
               <div 
-                className="rounded-lg overflow-hidden shadow-2xl animate-scroll-fade-up" // <-- DITAMBAHKAN
+                className="rounded-lg overflow-hidden shadow-2xl animate-scroll-fade-up" 
               >
                 <img  
                   src="https://images.unsplash.com/photo-1541696432-86034d618063?auto=format&fit=crop&w=800&q=80"
@@ -228,7 +272,7 @@ export default function HomePage() {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <div className="lg:-ml-8 animate-scroll-fade-up" // <-- DITAMBAHKAN
+              <div className="lg:-ml-8 animate-scroll-fade-up" 
                    style={{ animationDelay: '0.1s' }}> 
                 <h2 className="text-4xl md:text-5xl font-bold text-gray-900 font-serif leading-tight">
                   Penjaga Soga Cokelat
@@ -250,11 +294,10 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Explore Section */}
-        <section id="explore" className="py-16 md:py-24 bg-gray-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+         <section id="explore" className="py-16 md:py-24 bg-gray-50">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 
-              className="text-3xl md:text-4xl font-bold text-center text-gray-900 font-serif mb-12 animate-scroll-fade-up" // <-- DITAMBAHKAN
+              className="text-3xl md:text-4xl font-bold text-center text-gray-900 font-serif mb-12 animate-scroll-fade-up" 
             >
               Jelajahi Berdasarkan Cerita
             </h2>
@@ -262,7 +305,7 @@ export default function HomePage() {
               
               <Link 
                 to="/list?q=Kerajinan" 
-                className="relative h-96 rounded-lg overflow-hidden shadow-xl group animate-scroll-fade-up" // <-- DITAMBAHKAN
+                className="relative h-96 rounded-lg overflow-hidden shadow-xl group animate-scroll-fade-up" 
               >
                 <img src="https://images.unsplash.com/photo-1578491793108-d1e3e05f560a?auto=format&fit=crop&w=500&q=80" alt="Handicrafts" className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-110" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
@@ -274,7 +317,7 @@ export default function HomePage() {
               
               <Link 
                 to="/list?q=Makanan" 
-                className="relative h-96 rounded-lg overflow-hidden shadow-xl group animate-scroll-fade-up" // <-- DITAMBAHKAN
+                className="relative h-96 rounded-lg overflow-hidden shadow-xl group animate-scroll-fade-up" 
                 style={{ animationDelay: '0.1s' }}
               >
                 <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?auto=format&fit=crop&w=500&q=80" alt="Food" className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-110" />
@@ -287,7 +330,7 @@ export default function HomePage() {
               
               <Link 
                 to="/list?q=Jasa" 
-                className="relative h-96 rounded-lg overflow-hidden shadow-xl group animate-scroll-fade-up" // <-- DITAMBAHKAN
+                className="relative h-96 rounded-lg overflow-hidden shadow-xl group animate-scroll-fade-up" 
                 style={{ animationDelay: '0.2s' }}
               >
                 <img src="https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?auto=format&fit=crop&w=500&q=80" alt="Services" className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-110" />
@@ -300,7 +343,7 @@ export default function HomePage() {
               
               <Link 
                 to="/list?q=Belanja" 
-                className="relative h-96 rounded-lg overflow-hidden shadow-xl group animate-scroll-fade-up" // <-- DITAMBAHKAN
+                className="relative h-96 rounded-lg overflow-hidden shadow-xl group animate-scroll-fade-up" 
                 style={{ animationDelay: '0.3s' }}
               >
                 <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=500&q=80" alt="Groceries" className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-110" />
@@ -312,20 +355,19 @@ export default function HomePage() {
               </Link>
             </div>
           </div>
-        </section>
+         </section>
 
-        {/* Mission Section */}
-        <section id="about" className="py-16 md:py-32 bg-white">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+         <section id="about" className="py-16 md:py-32 bg-white">
+              <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 
-              className="text-4xl md:text-5xl font-bold text-[#DA9A3D] font-serif animate-scroll-fade-up" // <-- DITAMBAHKAN
+              className="text-4xl md:text-5xl font-bold text-[#DA9A3D] font-serif animate-scroll-fade-up" 
             >
               Lebih dari Direktori.
               <br />
               Ini adalah Gerakan.
             </h2>
             <p 
-              className="mt-6 text-xl text-gray-700 leading-relaxed animate-scroll-fade-up" // <-- DITAMBAHKAN
+              className="mt-6 text-xl text-gray-700 leading-relaxed animate-scroll-fade-up" 
               style={{ animationDelay: '0.1s' }}
             >
               Kami percaya bahwa setiap UMKM memiliki cerita yang layak untuk diceritakan. Kami di sini untuk menghubungkan Anda dengan orang-orang, semangat, dan kebanggaan di balik setiap produk. Saat Anda berbelanja dari direktori kami, Anda tidak only membeli barang—Anda mendukung mimpi dan melestarikan budaya.
@@ -333,7 +375,7 @@ export default function HomePage() {
             
             <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-8">
               <div 
-                className="flex flex-col items-center animate-scroll-fade-up" // <-- DITAMBAHKAN
+                className="flex flex-col items-center animate-scroll-fade-up" 
               >
                 <div className="w-16 h-16 bg-yellow-100 text-yellow-700 rounded-full flex items-center justify-center">
                   <ShieldCheck className="w-8 h-8" />
@@ -342,7 +384,7 @@ export default function HomePage() {
                 <p className="text-gray-600 mt-1">Setiap profil diperiksa oleh tim kami.</p>
               </div>
               <div 
-                className="flex flex-col items-center animate-scroll-fade-up" // <-- DITAMBAHKAN
+                className="flex flex-col items-center animate-scroll-fade-up" 
                 style={{ animationDelay: '0.1s' }}
               >
                 <div className="w-16 h-16 bg-yellow-100 text-yellow-700 rounded-full flex items-center justify-center">
@@ -352,7 +394,7 @@ export default function HomePage() {
                 <p className="text-gray-600 mt-1">Ngobrol dan bertransaksi secara langsung.</p>
               </div>
               <div 
-                className="flex flex-col items-center animate-scroll-fade-up" // <-- DITAMBAHKAN
+                className="flex flex-col items-center animate-scroll-fade-up" 
                 style={{ animationDelay: '0.2s' }}
               >
                 <div className="w-16 h-16 bg-yellow-100 text-yellow-700 rounded-full flex items-center justify-center">
@@ -363,11 +405,9 @@ export default function HomePage() {
               </div>
             </div>
           </div>
-        </section>
+         </section>
       </main>
-
-      {/* Footer (Tidak berubah) */}
-      <footer className="bg-gray-900 text-gray-400">
+       <footer className="bg-gray-900 text-gray-400">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8">
             <div className="col-span-2 lg:col-span-2">
