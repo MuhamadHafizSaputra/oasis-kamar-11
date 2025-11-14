@@ -1,11 +1,11 @@
+// src/context/AuthContext.jsx
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 
-// 1. Tentukan URL dasar API Anda
-// KESALAHAN 1 DIPERBAIKI:
-// Port 5173/5731 adalah port FRONTEND Anda.
-// API_URL harus menunjuk ke port BACKEND Anda (yaitu 3001 dari server.js Anda)
-const API_URL = 'http://localhost:3001/api/auth';
+// --- PERBAIKAN URL API ---
+// Gunakan URL backend yang sama dengan yang ada di HomePage/ProfilePage
+// Jangan gunakan localhost kecuali Anda menjalankan server backend sendiri di port 3001
+const API_URL = 'https://sedulurkita-api.vercel.app/api/auth';
 
 const AuthContext = createContext();
 
@@ -16,22 +16,19 @@ export function useAuth() {
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(() => localStorage.getItem('token') || null);
-  const [loading, setLoading] = useState(true); // State untuk loading awal
+  const [loading, setLoading] = useState(true);
 
-  // 2. Cek local storage saat aplikasi dimuat
   useEffect(() => {
     if (token) {
+      // Set header global agar setiap request membawa token
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       
-      // 3. Verifikasi token ke backend untuk mendapatkan data user
-      // KESALAHAN 2 DIPERBAIKI:
-      // Ganti URL hardcode Vercel dengan API_URL lokal
-      axios.get(`${API_URL}/me`) // Menggunakan /me dari routes/auth.js
+      axios.get(`${API_URL}/me`)
         .then(response => {
           setUser(response.data.user);
         })
-        .catch(() => {
-          // Token tidak valid/expire
+        .catch((error) => {
+          console.error("Gagal verifikasi token:", error);
           localStorage.removeItem('token');
           setToken(null);
           delete axios.defaults.headers.common['Authorization'];
@@ -44,26 +41,32 @@ export const AuthProvider = ({ children }) => {
     }
   }, [token]);
 
-  // 4. Fungsi untuk LOGIN
   const login = async (email, password) => {
-    const response = await axios.post(`${API_URL}/login`, { email, password });
-    const { token, user } = response.data;
-    
-    setToken(token);
-    setUser(user);
-    localStorage.setItem('token', token);
-    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    return response.data;
+    try {
+      const response = await axios.post(`${API_URL}/login`, { email, password });
+      const { token, user } = response.data;
+      
+      setToken(token);
+      setUser(user);
+      localStorage.setItem('token', token);
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      return response.data;
+    } catch (error) {
+      // Lempar error agar bisa ditangkap di LoginPage
+      throw error;
+    }
   };
 
-  // 5. Fungsi untuk REGISTER
   const register = async (name, email, password) => {
-    // URL ini sekarang sudah benar menunjuk ke http://localhost:3001/api/auth/register
-    const response = await axios.post(`${API_URL}/register`, { name, email, password });
-    return response.data;
+    try {
+      const response = await axios.post(`${API_URL}/register`, { name, email, password });
+      return response.data;
+    } catch (error) {
+      // Lempar error agar bisa ditangkap di RegisterPage
+      throw error;
+    }
   };
 
-  // 6. Fungsi untuk LOGOUT
   const logout = () => {
     setUser(null);
     setToken(null);
@@ -71,19 +74,16 @@ export const AuthProvider = ({ children }) => {
     delete axios.defaults.headers.common['Authorization'];
   };
 
-  // 7. Fungsi untuk UPDATE PROFILE (Nama & Foto)
   const updateProfile = async (formData) => {
     try {
-      // Kita asumsikan backend menerima FormData untuk upload file
-      // Endpoint ini harus sesuai dengan backend Anda (misal: /api/auth/update)
       const response = await axios.put(`${API_URL}/update`, formData, {
         headers: {
-          'Content-Type': 'multipart/form-data', // Penting untuk upload file
+          'Content-Type': 'multipart/form-data',
         },
       });
 
       const updatedUser = response.data.user;
-      setUser(updatedUser); // Update state user di aplikasi
+      setUser(updatedUser);
       return { success: true, message: 'Profil berhasil diperbarui!' };
     } catch (error) {
       console.error("Update error:", error);
@@ -98,11 +98,10 @@ export const AuthProvider = ({ children }) => {
     register,
     logout,
     updateProfile,
-    loading, // Tambahkan loading
+    loading,
     isAuthenticated: !!token,
   };
 
-  // Jangan render app sebelum selesai verifikasi token
   return (
     <AuthContext.Provider value={value}>
       {!loading && children}

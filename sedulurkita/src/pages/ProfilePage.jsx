@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 
 import { Map, Marker, NavigationControl } from "@vis.gl/react-maplibre";
+import { StarIcon } from "@heroicons/react/24/solid"; 
 import LazyImage from "../components/LazyImage"; 
 import VideoFacade from "../components/VideoFacade"; 
 import { getOptimizedImageUrl } from "../lib/imageUtils"; 
@@ -88,7 +89,7 @@ export default function ProfilePage() {
         setUmkm(parsedUmkm);
         setLoading(false);
       })
-      .catch((err) => { // Menambahkan penanganan error
+      .catch((err) => { 
         console.error("Error fetching UMKM data:", err);
         setError("Error fetching data.");
         setLoading(false);
@@ -96,19 +97,15 @@ export default function ProfilePage() {
   }, [id]);
 
   // --- Initialize count-up hook *after* data is loaded ---
-  // We need to wrap this in a component or call it conditionally
   const reviewsRef = useCountUp(umkm ? umkm.reviews : 0, "+");
   const tagsRef = useCountUp(umkm ? umkm.tags.length : 0, "+");
-  // Example for a static number, replace if data becomes available
   const artisansRef = useCountUp(umkm ? (umkm.reviews > 20 ? Math.floor(umkm.reviews / 5) : 5) : 0, "+");
 
 
-  // 1. Tampilkan status Loading
   if (loading) {
     return <div className="text-center p-10">Loading...</div>;
   }
 
-  // 2. Tampilkan status Error
   if (error || !umkm) {
     return (
       <div className="container mx-auto max-w-6xl px-4 py-10 text-center">
@@ -120,22 +117,18 @@ export default function ProfilePage() {
     );
   }
   
-  // Truncate description for hero
   const heroDescription = umkm.description.length > 150
     ? umkm.description.substring(0, 150) + "..."
     : umkm.description;
 
-  // Filter tags for "Commitment" list (process, impact)
   const commitmentTags = umkm.tags.filter(tag => 
     tag.startsWith("fully_") || tag.startsWith("hand_") || tag.startsWith("locally_") || tag.startsWith("natural_") || tag.startsWith("small_") || tag.startsWith("eco_") || tag.startsWith("preserves_")
   );
 
-  // Filter tags for "Badges" (creator, impact)
   const badgeTags = umkm.tags.filter(tag =>
     tag.startsWith("female_") || tag.startsWith("artisan_") || tag.startsWith("family_") || tag.startsWith("social_") || tag.startsWith("rural_") || tag.startsWith("empowers_") || tag.startsWith("fair_") || tag.startsWith("community_")
   );
 
-  // Logika Judul Dinamis
   let makerTitle = "Meet The Maker";
   if (umkm.category === "Makanan") {
     makerTitle = "Meet The Chef";
@@ -150,6 +143,10 @@ export default function ProfilePage() {
     collectionTitle = "Menu Unggulan Kami";
   }
 
+  // --- LOGIKA RATING 0-10 ---
+  const rawRating = umkm.rating || 0;
+  const displayRating = (rawRating / 10).toString().replace('.', ',');
+
   return (
     <main>
       {/* Hero Section */}
@@ -159,40 +156,53 @@ export default function ProfilePage() {
             src={getOptimizedImageUrl(umkm.images[0], 1200)} 
             alt={`${umkm.name} hero image`}
             className="w-full h-full object-cover animate-fadeInScale"
-            fetchPriority="high" // Hint browser untuk memprioritaskan ini
+            fetchPriority="high"
           />
         </div>
         <div className="absolute inset-0 bg-black opacity-60"></div>
         <div className="container mx-auto px-6 relative z-10 h-full flex flex-col justify-center items-center text-center text-white">
-          <h1 className="text-5xl md:text-6xl font-bold font-serif mb-4 animate-fadeInSlideUp"> {/* <-- ADD THIS CLASS */}
+          <h1 className="text-5xl md:text-6xl font-bold font-serif mb-4 animate-fadeInSlideUp">
             {umkm.name}
           </h1>
+          
+          {/* --- TAMPILAN RATING DI HERO --- */}
+          <div 
+            className="flex items-center gap-2 mb-4 animate-fadeInSlideUp bg-white/10 backdrop-blur-sm px-4 py-1.5 rounded-full border border-white/20"
+            style={{ animationDelay: "0.05s" }}
+          >
+            <StarIcon className="w-6 h-6 text-yellow-400" />
+            <span className="text-2xl font-bold text-white">{displayRating}</span>
+            <span className="text-white/80 text-sm font-medium">/ 10</span>
+            <span className="text-white/60 text-sm ml-1">• {umkm.reviews} ulasan</span>
+          </div>
+          {/* --- AKHIR TAMPILAN RATING --- */}
+
           <p
-            className="text-xl md:text-2xl font-light max-w-2xl animate-fadeInSlideUp" /* <-- ADD THIS CLASS */
+            className="text-xl md:text-2xl font-light max-w-2xl animate-fadeInSlideUp"
             style={{ animationDelay: "0.1s" }}
           >
             {umkm.subcategory || heroDescription}
           </p>
           <a
             href="#maker"
-            className="mt-8 px-8 py-3 bg-[#9c724b] text-white rounded-full text-lg font-semibold hover:bg-[#8c6644] transition-all duration-300 transform hover:scale-105 animate-fadeInSlideUp" /* <-- ADD THIS CLASS */
+            className="mt-8 px-8 py-3 bg-[#9c724b] text-white rounded-full text-lg font-semibold hover:bg-[#8c6644] transition-all duration-300 transform hover:scale-105 animate-fadeInSlideUp"
             style={{ animationDelay: "0.2s" }}
           >
             Pelajari Cerita Kami
           </a>
         </div>
       </section>
+
       {/* Meet the Maker Section */}
       <section id="maker" className="py-20 bg-white">
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row items-center gap-12">
             <div className="md:w-1/2 h-[400px]" ref={addScrollAnimateRef}> 
-               {/* Ganti <img> biasa dengan LazyImage */}
                <LazyImage 
                  src={umkm.images[1]} 
                  alt={`Pemilik ${umkm.name}`}
                  className="rounded-lg shadow-xl h-full w-full"
-                 width={600} // Request lebar 600px
+                 width={600} 
                />
             </div>
             <div className="md:w-1/2" ref={addScrollAnimateRef}>
@@ -227,17 +237,14 @@ export default function ProfilePage() {
             </p>
           </div>
 
-          {/* === BAGIAN VIDEO === */}
           {umkm.video_url && (
               <div className="mb-16" ref={addScrollAnimateRef}>
                 <div className="w-full max-w-4xl mx-auto aspect-video rounded-lg shadow-xl overflow-hidden border-2 border-transparent hover:border-[#9c724b] transition-colors duration-300">
-                  {/* Ganti iframe dengan VideoFacade */}
                   <VideoFacade videoUrl={umkm.video_url} />
                 </div>
               </div>
             )}
 
-          {/* Process Steps */}
           <h4 className="text-2xl font-serif font-bold text-center mb-8 text-[#473524]" ref={addScrollAnimateRef}>
             Dari Bahan Menjadi Harta Karun
           </h4>
@@ -274,7 +281,6 @@ export default function ProfilePage() {
             </div>
           </div>
 
-          {/* Commitment List */}
           {commitmentTags.length > 0 && (
             <div className="max-w-2xl mx-auto mt-16 bg-white p-8 rounded-lg shadow-lg" ref={addScrollAnimateRef}>
               <h4 className="text-2xl font-serif font-bold mb-6 text-[#473524]">
@@ -324,7 +330,6 @@ export default function ProfilePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center max-w-5xl mx-auto">
-            {/* Stat 1: Reviews */}
             <div ref={addScrollAnimateRef}>
               <svg
                 className="w-16 h-16 text-[#9c724b] mx-auto mb-4"
@@ -349,7 +354,7 @@ export default function ProfilePage() {
               <div className="w-24 h-2 bg-[#d8caba] rounded mx-auto mt-3 overflow-hidden">
                 <div
                   className="h-full bg-[#9c724b]"
-                  style={{ width: `${Math.min(umkm.reviews / 5, 100)}%` }} // Example logic for progress bar
+                  style={{ width: `${Math.min(umkm.reviews / 5, 100)}%` }}
                 ></div>
               </div>
               <p className="text-[#715237] mt-2">
@@ -357,7 +362,6 @@ export default function ProfilePage() {
               </p>
             </div>
             
-            {/* Stat 2: Tags */}
             <div ref={addScrollAnimateRef}>
               <svg 
                 className="w-16 h-16 text-[#9c724b] mx-auto mb-4" 
@@ -384,7 +388,6 @@ export default function ProfilePage() {
               </p>
             </div>
 
-            {/* Stat 3: Artisans (Example) */}
             <div ref={addScrollAnimateRef}>
               <svg
                 className="w-16 h-16 text-[#9c724b] mx-auto mb-4"
@@ -397,7 +400,7 @@ export default function ProfilePage() {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth="2"
-                  d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
+                  d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 18 0z"
                 ></path>
               </svg>
               <h4 ref={artisansRef} className="text-5xl font-bold text-[#715237]">
@@ -418,7 +421,6 @@ export default function ProfilePage() {
             </div>
           </div>
 
-          {/* Badges of Trust */}
           {badgeTags.length > 0 && (
             <div className="mt-20 text-center" ref={addScrollAnimateRef}>
               <h4 className="text-xl font-serif font-bold mb-6 text-[#473524]">
@@ -483,7 +485,7 @@ export default function ProfilePage() {
       )}
 
       {/* Visit Us Section - DYNAMIC MAP */}
-      <section id="visit-us" className="py-20 bg-[#f8f5f2]">
+      <section id="visit-us" className="py-20 bg-white">
         <div className="container mx-auto px-6">
           <div className="text-center max-w-3xl mx-auto mb-8" ref={addScrollAnimateRef}>
             <h2 className="text-sm font-semibold uppercase text-[#9c724b] tracking-widest">

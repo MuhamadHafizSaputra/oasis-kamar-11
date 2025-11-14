@@ -2,11 +2,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import { useAuth } from "../context/AuthContext.jsx"; // <-- 1. Impor useAuth
+import { useAuth } from "../context/AuthContext.jsx"; 
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const { isAuthenticated, logout, user } = useAuth(); // <-- 2. Panggil hook
+  const { isAuthenticated, logout, user } = useAuth(); 
   const closeMenu = () => setIsOpen(false);
 
   const handleLogout = () => {
@@ -18,9 +18,19 @@ export default function Navbar() {
     <nav className="bg-white border-b border-gray-200 sticky top-0 z-50">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-20">
-          <Link to="/" className="text-2xl font-bold text-[#DA9A3D]" onClick={closeMenu}>
-            SedulurKita
+          
+          {/* --- BAGIAN LOGO DIPERBARUI --- */}
+          <Link to="/" className="flex items-center gap-2 group" onClick={closeMenu}>
+            <img 
+              src="/images/LogoSedulurKita.png" 
+              alt="Logo SedulurKita" 
+              className="h-10 w-auto object-contain" 
+            />
+            <span className="text-2xl font-bold text-[#DA9A3D] group-hover:text-[#B87A2B] transition-colors">
+              SedulurKita
+            </span>
           </Link>
+          {/* --- AKHIR BAGIAN LOGO --- */}
 
           {/* Tautan Navigasi Desktop */}
           <div className="hidden md:flex items-center space-x-4">
@@ -37,7 +47,7 @@ export default function Navbar() {
               Tentang Kami
             </Link>
 
-            {/* --- 3. Logika Tampilan Login/Logout --- */}
+            {/* Logika Tampilan Login/Logout */}
             {isAuthenticated ? (
               <>
                 <Link to="/account" className="text-gray-700 hover:text-[#DA9A3D] font-medium">
@@ -58,7 +68,6 @@ export default function Navbar() {
                 Login
               </Link>
             )}
-            {/* --- Akhir Logika --- */}
             
           </div>
 
@@ -98,7 +107,6 @@ export default function Navbar() {
             Tentang Kami
           </Link>
           
-          {/* --- 4. Logika Mobile --- */}
           {isAuthenticated ? (
             <button
               onClick={handleLogout}
@@ -115,7 +123,6 @@ export default function Navbar() {
               Login
             </Link>
           )}
-          {/* --- Akhir Logika Mobile --- */}
           
         </div>
       </div>
