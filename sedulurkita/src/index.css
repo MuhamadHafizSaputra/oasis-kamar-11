@@ -1,8 +1,14 @@
 /* src/index.css */
+
+/* 1. Impor Font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Playfair+Display:wght@700;800&display=swap');
+
+/* 2. Arahan @tailwind */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* 3. Aturan @layer base */
 @layer base {
   html {
     font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -11,9 +17,54 @@
   body {
     @apply bg-brand-beige min-h-screen;
   }
+
+  h1, h2, h3, h4, .font-serif {
+    font-family: 'Playfair Display', serif;
+  }
 }
 
-/* (Style popup maplibre-mu yang sudah ada) */
+/* 4. Aturan @layer components (Helper) */
+@layer components {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* --- PERUBAHAN UTAMA DI SINI --- */
+
+/* 5. Definisikan Keyframe Animasi Kita */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 6. Buat Kelas Animasi CSS Murni */
+/* Ini adalah pengganti hook useScrollAnimate.js */
+.animate-scroll-fade-up {
+  /* Atur animasi agar tidak langsung berjalan */
+  animation: fade-in-up 0.7s ease-out forwards;
+  animation-play-state: paused; /* Mulai dalam keadaan 'pause' */
+  
+  /* Tautkan animasi ke timeline scroll */
+  /* Ini adalah API browser modern pengganti IntersectionObserver JS */
+  animation-timeline: view();
+  
+  /* Tentukan di mana animasi harus dimulai dan berakhir */
+  /* Mulai saat elemen 10% terlihat, berakhir saat 40% terlihat */
+  animation-range: entry 10% cover 40%;
+}
+
+/* 7. Sisa gaya dari file index.css asli Anda */
 .map-container {
   width: 100%;
   height: 100%;
@@ -28,17 +79,11 @@
   font-size: 20px;
   padding: 0 5px;
 }
-
-/* --- TAMBAHKAN KODE DI BAWAH INI --- */
-
-/* PERBAIKAN: Sembunyikan Tombol Geolocate Bawaan
-  Tombol ini ditambahkan oleh maplibre-gl secara langsung, 
-  jadi kita sembunyikan via CSS global menggunakan class aslinya.
-*/
 .maplibregl-ctrl-geolocate {
   display: none !important;
 }
 
+/* Keyframes untuk Halaman Profil (Biarkan saja) */
 @keyframes fadeInScale {
     from { opacity: 0; transform: scale(1.05); }
     to { opacity: 1; transform: scale(1); }
@@ -47,8 +92,6 @@
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
 }
-
-/* Utility classes to apply them */
 .animate-fadeInScale {
     animation: fadeInScale 1s ease-out forwards;
 }

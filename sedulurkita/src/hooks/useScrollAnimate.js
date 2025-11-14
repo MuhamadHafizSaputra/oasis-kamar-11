@@ -1,48 +1,56 @@
 // src/hooks/useScrollAnimate.js
-import { useEffect, useRef } from 'react';
+import { useRef, useCallback, useEffect } from 'react';
 
-// Hook ini akan menambahkan kelas 'is-visible' saat elemen masuk ke viewport
 export function useScrollAnimate() {
-  const elementsRef = useRef([]);
-
+  
+  // 1. Ref untuk menyimpan SATU observer
+  const observer = useRef(null);
+  
+  // 2. useEffect ini akan mengelola SIKLUS HIDUP observer
   useEffect(() => {
-    const observer = new IntersectionObserver(
+    
+    // 3. Buat observer-nya TEPAT SATU KALI saat hook digunakan (mount)
+    observer.current = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
+          // Saat elemen masuk ke layar
           if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            observer.unobserve(entry.target);
+            entry.target.classList.add('is-visible'); // Tambahkan kelas
+            
+            // Setelah animasi selesai, berhenti mengamati
+            if (observer.current) {
+              observer.current.unobserve(entry.target);
+            }
           }
         });
       },
       {
-        threshold: 0.1,
-        rootMargin: "0px 0px -50px 0px", // Mulai animasi sedikit sebelum elemen penuh terlihat
+        threshold: 0.1, // Muncul saat 10% elemen terlihat
+        rootMargin: "0px 0px -50px 0px", // Mulai 50px sebelum
       }
     );
 
-    const currentElements = elementsRef.current;
-    currentElements.forEach((element) => {
-      if (element) {
-        observer.observe(element);
-      }
-    });
+    // 4. Simpan observer saat ini ke variabel lokal
+    //    Ini penting untuk cleanup yang aman
+    const currentObserver = observer.current;
 
+    // 5. FUNGSI CLEANUP: Dipanggil saat komponen (spt HomePage) di-unmount
     return () => {
-      currentElements.forEach((element) => {
-        if (element) {
-          observer.unobserve(element);
-        }
-      });
+      if (currentObserver) {
+        // Matikan observer sepenuhnya
+        currentObserver.disconnect();
+      }
     };
-  }, []);
+  }, []); // [] = Hanya berjalan sekali saat mount dan cleanup saat unmount
 
-  // Fungsi untuk mendaftarkan elemen ke ref array
-  const addRef = (el) => {
-    if (el && !elementsRef.current.includes(el)) {
-      elementsRef.current.push(el);
+  // 6. Callback ref (addRef) sekarang SANGAT sederhana
+  //    Tugasnya HANYA menambahkan elemen ke observer yang sudah ada
+  const addRef = useCallback((el) => {
+    // Pastikan elemen ada DAN observer sudah dibuat
+    if (el && observer.current) {
+      observer.current.observe(el);
     }
-  };
+  }, []); // [] = Stabil, karena observer.current adalah ref yang mutable
 
-  return addRef; // Kembalikan fungsi 'addRef'
+  return addRef;
 }

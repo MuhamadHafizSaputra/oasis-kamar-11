@@ -12,36 +12,25 @@ import axios from 'axios';
  * @returns {Array | null} Array UMKM yang ditemukan atau null
  */
 export async function searchApiUmkm(query, lat, lon) {
-  console.log(`Mencari dari API untuk: "${query}"`);
-  
-  // --- PERUBAHAN DI SINI: Tambahkan lat/lon ke parameter ---
-  const params = { q: query };
-  if (lat && lon) {
-    params.lat = lat;
-    params.lon = lon;
-    console.log(`Dengan lokasi: ${lat}, ${lon}`);
-  }
-  // --- AKHIR PERUBAHAN ---
+  // ... (kode params) ...
 
   try {
-    // Panggil endpoint /api/umkm/search
-    const response = await axios.get('https://sedulurkita-api.vercel.app/api/umkm/search', { params });
+    // ... (axios.get) ...
     
-    const umkmList = response.data; // Ini adalah array
+    const umkmList = response.data; 
 
-    // Jika array kosong, kembalikan null agar geocoder bisa lanjut
     if (umkmList.length === 0) {
       console.log("UMKM tidak ditemukan via API, akan lanjut mencari lokasi.");
       return null;
     }
 
-    // Transformasi data untuk setiap item dalam array
     return umkmList.map(umkm => ({
       ...umkm,
-      priceFrom: umkm.price_from,
-      // Perbaiki juga parsing JSON untuk images
+      // --- PERBAIKAN DI SINI ---
+      // Gunakan 'price_min' dari API, bukan 'price_from'
+      priceFrom: umkm.price_min,
+      // --- AKHIR PERBAIKAN ---
       images: Array.isArray(umkm.images) ? umkm.images : JSON.parse(umkm.images || '[]'),
-      // Tambahkan 'distance' jika ada (dari backend)
       distance: umkm.distance || null 
     }));
 
@@ -106,13 +95,15 @@ export async function getUmkmInBounds(bounds) {
     
     const transformedData = response.data.map(umkm => ({
       ...umkm,
-      priceFrom: umkm.price_from,
-      // Perbaiki juga parsing JSON di sini
+      // --- PERBAIKAN DI SINI ---
+      // Gunakan 'price_min' dari API, bukan 'price_from'
+      priceFrom: umkm.price_min, 
+      // --- AKHIR PERBAIKAN ---
       images: Array.isArray(umkm.images) ? umkm.images : JSON.parse(umkm.images || '[]'),
     }));
     
     console.log(`Live API: Found ${transformedData.length} UMKM.`);
-    return transformedData; // <-- Return the new, fixed data
+    return transformedData; 
 
   } catch (error) {
     console.error("Error fetching UMKM in bounds:", error);
