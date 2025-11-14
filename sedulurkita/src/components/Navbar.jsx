@@ -20,15 +20,14 @@ export default function Navbar() {
         <div className="flex justify-between items-center h-20">
           
           {/* --- BAGIAN LOGO DIPERBARUI --- */}
-          <Link to="/" className="flex items-center gap-2 group" onClick={closeMenu}>
+          {/* The text span is removed, leaving only the image inside the Link */}
+          <Link to="/" className="flex items-center group" onClick={closeMenu}>
             <img 
               src="/images/LogoSedulurKita.png" 
               alt="Logo SedulurKita" 
               className="h-10 w-auto object-contain" 
             />
-            <span className="text-2xl font-bold text-[#DA9A3D] group-hover:text-[#B87A2B] transition-colors">
-              SedulurKita
-            </span>
+            {/* The <span> tag with "SedulurKita" text has been removed */}
           </Link>
           {/* --- AKHIR BAGIAN LOGO --- */}
 

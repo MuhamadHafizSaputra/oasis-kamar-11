@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useSearchParams } from "react-router-dom";
 import FilterBar from "../components/FilterBar.jsx";
 import UmkmCard from "../components/UmkmCard.jsx";
-import FilterModal from "../components/FilterModal.jsx"; 
+import FilterModal from "../components/FilterModal.jsx"; // <-- Diambil dari kedua branch
 
 import maplibregl from "maplibre-gl";
 import { Map, Marker, Popup, GeolocateControl, useMap } from "@vis.gl/react-maplibre";
@@ -16,7 +16,7 @@ import { geocode, searchApiUmkm } from "../lib/api.js";
 const MAP_PADDING = { top: 100, bottom: 40, left: 40, right: 40 };
 const SPECIFIC_LOCATION_ZOOM = 16.5;
 
-// (Helper-helper tidak berubah)
+// (Helper getCategoryMarker tidak berubah)
 function getCategoryMarker(category) {
   switch (category) {
     case "Makanan": return <span className="text-2xl">🍲</span>;
@@ -26,6 +26,8 @@ function getCategoryMarker(category) {
     default: return <span className="text-2xl">📍</span>;
   }
 }
+
+// (Helper getUserLocation tidak berubah)
 const getUserLocation = () => new Promise((resolve) => {
   if (!navigator.geolocation) {
     console.warn("Geolocation tidak didukung.");
@@ -46,7 +48,8 @@ const getUserLocation = () => new Promise((resolve) => {
   );
 });
 
-// (InitialMapAction tidak berubah, TAPI kita pastikan zoom-nya pakai 13.5)
+// --- FUNGSI INI DIAMBIL DARI KODE ANDA YANG SUDAH DIPERBAIKI ---
+// Ini adalah versi yang benar, yang memanggil API Mapbox dari backend
 function InitialMapAction({ geolocateControlRef, setOriginalUmkm, setIsInSearchMode }) {
   const { default: map } = useMap();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -58,10 +61,9 @@ function InitialMapAction({ geolocateControlRef, setOriginalUmkm, setIsInSearchM
     const location = searchParams.get('loc');
     const runSearch = async (q) => {
       console.log(`Menjalankan pencarian awal untuk teks: ${q}`);
-      // Aturan 1 -> Aturan 3
+      // Aturan 1 -> Aturan 3 (Cari di DB UMKM dulu)
       const foundUmkmList = await searchApiUmkm(q, null, null);
       if (foundUmkmList && foundUmkmList.length > 0) {
-        // ... (logika Aturan 3 tidak berubah)
         console.log(`Ditemukan ${foundUmkmList.length} UMKM:`, foundUmkmList);
         setOriginalUmkm(foundUmkmList); 
         setIsInSearchMode(true); 
@@ -76,18 +78,17 @@ function InitialMapAction({ geolocateControlRef, setOriginalUmkm, setIsInSearchM
           map.fitBounds(bounds, { padding: {top: 150, bottom: 50, left: 50, right: 50}, duration: 1500 });
         }
       } else {
-        // Aturan 1 -> Aturan 2 (Fallback ke Nominatim)
+        // Aturan 1 -> Aturan 2 (Fallback, cari LOKASI via Mapbox)
         console.log("Pencarian UMKM gagal, mencoba Geocode...");
         setIsInSearchMode(false); 
-        const geocodeResult = await geocode(q); // Memanggil Nominatim
+        const geocodeResult = await geocode(q); // Memanggil backend Mapbox
         if (geocodeResult) {
-          if (geocodeResult.boundingbox) {
-            const [minLat, maxLat, minLng, maxLng] = geocodeResult.boundingbox.map(parseFloat);
+          if (geocodeResult.bbox) { // Mapbox pakai 'bbox'
+            const [minLng, minLat, maxLng, maxLat] = geocodeResult.bbox;
             map.fitBounds([[minLng, minLat], [maxLng, maxLat]], { padding: MAP_PADDING, duration: 1500 });
-          } else if (geocodeResult.lon && geocodeResult.lat) {
-            const lon = parseFloat(geocodeResult.lon);
-            const lat = parseFloat(geocodeResult.lat);
-            map.flyTo({ center: [lon, lat], zoom: 13.5, padding: MAP_PADDING, duration: 1500 }); // Zoom 13.5
+          } else if (geocodeResult.center) { // Mapbox pakai 'center'
+            const [lon, lat] = geocodeResult.center;
+            map.flyTo({ center: [lon, lat], zoom: 13.5, padding: MAP_PADDING, duration: 1500 }); 
           }
         }
       }
@@ -99,7 +100,6 @@ function InitialMapAction({ geolocateControlRef, setOriginalUmkm, setIsInSearchM
       runSearch(query);
     } 
     else if (location === 'terdekat' && geolocateControlRef.current) {
-      // ... (logika 'terdekat' tidak berubah)
       console.log("Menjalankan pencarian lokasi terdekat...");
       setIsInSearchMode(false); 
       geolocateControlRef.current.trigger();
@@ -109,6 +109,7 @@ function InitialMapAction({ geolocateControlRef, setOriginalUmkm, setIsInSearchM
   }, [map, searchParams, setSearchParams, hasRun, geolocateControlRef, setOriginalUmkm, setIsInSearchMode]);
   return null;
 }
+// --- AKHIR FUNGSI YANG DIPERBAIKI ---
 
 
 export default function ListPage() {
@@ -121,19 +122,19 @@ export default function ListPage() {
     rating: 0,
   });
   
+  // --- State dari 'Fix-Navbar' ---
   const [activeTags, setActiveTags] = useState(new Set());
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
+  // ---
   
   const [selectedUmkm, setSelectedUmkm] = useState(null);
   const [isInSearchMode, setIsInSearchMode] = useState(false);
+  
+  // --- State dari 'main' (perbaikan search) ---
   const [userLocation, setUserLocation] = useState(null); 
-  
   const geolocateControlRef = useRef(null);
-  
-  // --- PERUBAHAN DI SINI ---
-  // Ambil 'map' di sini
-  const { default: map } = useMap(); 
-  // --- AKHIR PERUBAHAN ---
+  const { default: map } = useMap(); // Diambil dari 'main'
+  // ---
 
   const initialViewState = {
     longitude: 110.3777,
@@ -142,14 +143,18 @@ export default function ListPage() {
   };
 
   
-  // (useEffect filter tidak berubah)
+  // --- useEffect yang sudah digabung ---
   useEffect(() => {
     let itemsToFilter = [...originalUmkm];
+
+    // Filter Kategori (tidak berubah)
     if (activeFilters.category !== 'all') {
       itemsToFilter = itemsToFilter.filter(
         (umkm) => umkm.category === activeFilters.category
       );
     }
+
+    // Filter Harga (tidak berubah)
     if (activeFilters.price !== 'all') {
       itemsToFilter = itemsToFilter.filter((umkm) => {
         const price = umkm.price_from || umkm.priceFrom;
@@ -160,11 +165,15 @@ export default function ListPage() {
         return true;
       });
     }
+
+    // Filter Rating (tidak berubah)
     if (activeFilters.rating > 0) {
       itemsToFilter = itemsToFilter.filter(
         (umkm) => umkm.rating >= activeFilters.rating
       );
     }
+
+    // Filter Tags dari 'Fix-Navbar'
     if (activeTags.size > 0) {
       const selectedTags = Array.from(activeTags);
       itemsToFilter = itemsToFilter.filter((umkm) => {
@@ -174,14 +183,17 @@ export default function ListPage() {
         return selectedTags.every((tag) => umkm.tags.includes(tag));
       });
     }
+
     setFilteredUmkm(itemsToFilter);
-  }, [originalUmkm, activeFilters, activeTags]); 
+
+  }, [originalUmkm, activeFilters, activeTags]); // Dependency 'activeTags' ditambah
+  // --- AKHIR useEffect ---
 
 
   return (
-    <>
+    <> {/* Diambil dari 'Fix-Navbar' */}
       <div className="flex h-[calc(100vh-80px)]">
-        {/* (Kolom Kiri tidak berubah) */}
+        {/* Kolom Kiri (Daftar) */}
         <div className="w-full lg:w-3/5 overflow-y-auto px-6 py-4">
           
           <h2 className="text-2xl font-bold mb-2">
@@ -192,6 +204,7 @@ export default function ListPage() {
                 : "Memuat UMKM di area peta..."}
           </h2>
           
+          {/* Prop 'onAdvancedFilterClick' diambil dari 'Fix-Navbar' */}
           <FilterBar 
             activeFilters={activeFilters}
             setActiveFilters={setActiveFilters}
@@ -204,6 +217,7 @@ export default function ListPage() {
                 <UmkmCard key={item.id} umkm={item} />
               ))
             ) : (
+              // Pesan 'kosong' yang digabung
               !isInSearchMode && (
                 <div className="md:col-span-2 text-center py-16 px-6">
                   <svg 
@@ -245,16 +259,15 @@ export default function ListPage() {
             mapStyle="https://tiles.openfreemap.org/styles/liberty"
             className="map-container"
           >
-            {/* --- PERUBAHAN DI SINI --- */}
-            {/* Oper 'map' sebagai prop */}
+            {/* Prop 'map' dan 'userLocation' dari 'main' */}
             <MapGeocoder 
               map={map} 
               setUmkm={setOriginalUmkm} 
               setIsInSearchMode={setIsInSearchMode}
               userLocation={userLocation} 
             />
-            {/* --- AKHIR PERUBAHAN --- */}
             
+            {/* Prop 'isInSearchMode' dari 'main' */}
             <DynamicDataLoader 
               isInSearchMode={isInSearchMode} 
               onDataLoaded={({ listings, umkm }) => {
@@ -265,6 +278,7 @@ export default function ListPage() {
               }}
             />
             
+            {/* 'onGeolocate' dan 'setUserLocation' dari 'main' */}
             <GeolocateControl 
               ref={geolocateControlRef}
               position="top-right"
@@ -288,7 +302,6 @@ export default function ListPage() {
               }}
             />
 
-            {/* (Tombol Geolocate tidak berubah) */}
             <button
               onClick={() => {
                 if (geolocateControlRef.current) {
@@ -350,7 +363,7 @@ export default function ListPage() {
         </div>
       </div>
 
-      {/* (Modal Filter tidak berubah) */}
+      {/* Modal Filter dari 'Fix-Navbar' */}
       <FilterModal
         isOpen={isFilterModalOpen}
         onClose={() => setIsFilterModalOpen(false)}
