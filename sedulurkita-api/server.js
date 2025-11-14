@@ -3,7 +3,7 @@ import 'dotenv/config'; // BARIS INI PALING ATAS
 import express from 'express';
 import cors from 'cors';
 import db from './db.js';
-import axios from 'axios'; // Pastikan axios diimpor
+// HAPUS 'import axios from 'axios';'
 
 const app = express();
 const port = 3001;
@@ -14,47 +14,7 @@ app.use(express.json());
 
 // --- API ENDPOINTS ---
 
-// --- Endpoint Geocoding (Mapbox) ---
-app.get('/api/geocode', async (req, res) => {
-  const { q } = req.query;
-  const accessToken = process.env.MAPBOX_ACCESS_TOKEN;
-
-  if (!q) {
-    return res.status(400).json({ error: 'Missing query' });
-  }
-  
-  if (!accessToken) {
-    console.warn("MAPBOX_ACCESS_TOKEN tidak diatur. Fitur Geocode non-aktif.");
-    return res.json(null); // Kembalikan null jika token tidak ada
-  }
-
-  // Bounding Box untuk Jogja
-  const JOGJA_BOUNDING_BOX = [110.012, -8.210, 110.840, -7.523];
-  
-  const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(q)}.json`;
-
-  try {
-    const response = await axios.get(url, {
-      params: {
-        access_token: accessToken,
-        limit: 1,
-        bbox: JOGJA_BOUNDING_BOX.join(','),
-        language: 'id',
-        country: 'ID',
-      }
-    });
-
-    if (response.data && response.data.features && response.data.features.length > 0) {
-      res.json(response.data.features[0]);
-    } else {
-      res.json(null);
-    }
-  } catch (err) {
-    console.error("Mapbox Geocoding error:", err.message);
-    res.status(500).json({ error: 'Internal server error' });
-  }
-});
-
+// HAPUS SEMUA ENDPOINT '/api/geocode' (MAPBOX) DARI SINI
 
 // 1. Endpoint untuk HomePage.jsx (Featured)
 // (Tidak berubah)
@@ -84,9 +44,8 @@ app.get('/api/umkm/search', async (req, res) => {
     let query;
     let queryParams = [`%${q}%`]; // $1
     
-    // --- PERUBAHAN DI SINI ---
-    // 'OR description ILIKE $1' telah dihapus dari kedua query
-    // Sesuai permintaanmu, kita hanya mencari di name, category, dan subcategory
+    // --- PERBAIKAN DI SINI ---
+    // Hapus 'OR description ILIKE $1' DAN 'OR location ILIKE $1'
     
     if (lat && lon) {
       console.log(`Calculating distance from: ${lat}, ${lon}`);
@@ -116,7 +75,7 @@ app.get('/api/umkm/search', async (req, res) => {
             OR subcategory ILIKE $1;
       `;
     }
-    // --- AKHIR PERUBAHAN ---
+    // --- AKHIR PERBAIKAN ---
 
     const result = await db.query(query, queryParams);
     res.json(result.rows);
