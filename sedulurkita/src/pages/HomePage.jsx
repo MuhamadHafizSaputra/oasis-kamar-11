@@ -1,5 +1,6 @@
 // src/pages/HomePage.jsx
 // --- SEMUA ANIMASI SCROLL SEKARANG MENGGUNAKAN KELAS CSS 'animate-scroll-fade-up' ---
+// --- KECUALI HERO SECTION YANG MENGGUNAKAN 'animate-fadeInSlideUp' ---
 
 import React, { useState, useEffect } from 'react'; 
 import { Link } from 'react-router-dom';
@@ -65,27 +66,31 @@ export default function HomePage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10 relative">
             <div className="max-w-3xl text-center md:text-left">
               
+              {/* --- PERUBAHAN DI SINI --- */}
               <h1 
-                className="text-5xl md:text-7xl font-bold tracking-tighter text-gray-900 font-serif animate-scroll-fade-up" // <-- DITAMBAHKAN
+                className="text-5xl md:text-7xl font-bold tracking-tighter text-gray-900 font-serif animate-fadeInSlideUp" // <-- DIUBAH
               >
                 Beyond the Product.
                 <br />
                 <span className="text-[#DA9A3D]">Discover the Story.</span>
               </h1>
               
+              {/* --- PERUBAHAN DI SINI --- */}
               <p 
-                className="mt-6 text-lg md:text-xl text-gray-700 max-w-2xl animate-scroll-fade-up" // <-- DITAMBAHKAN
+                className="mt-6 text-lg md:text-xl text-gray-700 max-w-2xl animate-fadeInSlideUp" // <-- DIUBAH
                 style={{ animationDelay: '0.1s' }} // Delay kecil agar muncul setelah judul
               >
                 Direktori ini menghubungkan Anda dengan jantung Yogyakarta: para pembuat, pengrajin, dan wirausahawan yang menuangkan gairah mereka ke dalam setiap kreasi.
               </p>
               
+              {/* --- PERUBAHAN DI SINI --- */}
               <div 
-                className="mt-0 w-full max-w-xl animate-scroll-fade-up" // <-- DITAMBAHKAN
+                className="mt-0 w-full max-w-xl animate-fadeInSlideUp" // <-- DIUBAH
                 style={{ animationDelay: '0.2s' }} // Delay lagi
               >
                 <SearchBar />
               </div>
+              {/* --- AKHIR PERUBAHAN --- */}
             </div>
           </div>
           
@@ -104,12 +109,12 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Live Section */}
+        {/* Live Section (Ini sudah benar menggunakan animate-scroll-fade-up) */}
         <section className="py-16 md:py-24 bg-gray-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center mb-8">
               <h2 
-                className="text-3xl md:text-4xl font-bold text-gray-900 font-serif animate-scroll-fade-up" // <-- DITAMBAHKAN
+                className="text-3xl md:text-4xl font-bold text-gray-900 font-serif animate-scroll-fade-up" // <-- TETAP
               >
                 Live dari Workshop
               </h2>
@@ -122,7 +127,7 @@ export default function HomePage() {
             <div className="flex space-x-6 pb-6 overflow-x-auto no-scrollbar">
               
               <div 
-                className="flex-shrink-0 w-80 bg-white rounded-lg shadow-xl overflow-hidden transform transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl animate-scroll-fade-up" // <-- DITAMBAHKAN
+                className="flex-shrink-0 w-80 bg-white rounded-lg shadow-xl overflow-hidden transform transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl animate-scroll-fade-up" // <-- TETAP
               >
                 <div className="relative">
                   <img src="https://images.unsplash.com/photo-1525934220630-b967b60b8b0a?auto=format&fit=crop&w=400&q=80" alt="Live Batik Making" className="w-full h-48 object-cover" />
@@ -144,7 +149,7 @@ export default function HomePage() {
               </div>
 
               <div 
-                className="flex-shrink-0 w-80 bg-white rounded-lg shadow-xl overflow-hidden transform transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl animate-scroll-fade-up" // <-- DITAMBAHKAN
+                className="flex-shrink-0 w-80 bg-white rounded-lg shadow-xl overflow-hidden transform transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl animate-scroll-fade-up" // <-- TETAP
                 style={{ animationDelay: '0.1s' }}
               >
                 <div className="relative">
@@ -167,7 +172,7 @@ export default function HomePage() {
               </div>
 
               <div 
-                className="flex-shrink-0 w-80 bg-white rounded-lg shadow-xl overflow-hidden transform transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl animate-scroll-fade-up" // <-- DITAMBAHKAN
+                className="flex-shrink-0 w-80 bg-white rounded-lg shadow-xl overflow-hidden transform transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl animate-scroll-fade-up" // <-- TETAP
                 style={{ animationDelay: '0.2s' }}
               >
                 <div className="relative">
@@ -190,7 +195,7 @@ export default function HomePage() {
               </div>
 
               <div 
-                className="flex-shrink-0 w-80 bg-white rounded-lg shadow-xl overflow-hidden transform transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl animate-scroll-fade-up" // <-- DITAMBAHKAN
+                className="flex-shrink-0 w-80 bg-white rounded-lg shadow-xl overflow-hidden transform transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl animate-scroll-fade-up" // <-- TETAP
                 style={{ animationDelay: '0.3s' }}
               >
                 <div className="relative">
@@ -215,12 +220,12 @@ export default function HomePage() {
           </div>
         </section>
         
-        {/* Makers Section */}
+        {/* Makers Section (Ini sudah benar menggunakan animate-scroll-fade-up) */}
         <section id="makers" className="py-16 md:py-32 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 items-center">
               <div 
-                className="rounded-lg overflow-hidden shadow-2xl animate-scroll-fade-up" // <-- DITAMBAHKAN
+                className="rounded-lg overflow-hidden shadow-2xl animate-scroll-fade-up" // <-- TETAP
               >
                 <img  
                   src="https://images.unsplash.com/photo-1541696432-86034d618063?auto=format&fit=crop&w=800&q=80"
@@ -228,7 +233,7 @@ export default function HomePage() {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <div className="lg:-ml-8 animate-scroll-fade-up" // <-- DITAMBAHKAN
+              <div className="lg:-ml-8 animate-scroll-fade-up" // <-- TETAP
                    style={{ animationDelay: '0.1s' }}> 
                 <h2 className="text-4xl md:text-5xl font-bold text-gray-900 font-serif leading-tight">
                   Penjaga Soga Cokelat
@@ -250,11 +255,11 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Explore Section */}
+        {/* Explore Section (Ini sudah benar menggunakan animate-scroll-fade-up) */}
         <section id="explore" className="py-16 md:py-24 bg-gray-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 
-              className="text-3xl md:text-4xl font-bold text-center text-gray-900 font-serif mb-12 animate-scroll-fade-up" // <-- DITAMBAHKAN
+              className="text-3xl md:text-4xl font-bold text-center text-gray-900 font-serif mb-12 animate-scroll-fade-up" // <-- TETAP
             >
               Jelajahi Berdasarkan Cerita
             </h2>
@@ -262,7 +267,7 @@ export default function HomePage() {
               
               <Link 
                 to="/list?q=Kerajinan" 
-                className="relative h-96 rounded-lg overflow-hidden shadow-xl group animate-scroll-fade-up" // <-- DITAMBAHKAN
+                className="relative h-96 rounded-lg overflow-hidden shadow-xl group animate-scroll-fade-up" // <-- TETAP
               >
                 <img src="https://images.unsplash.com/photo-1578491793108-d1e3e05f560a?auto=format&fit=crop&w=500&q=80" alt="Handicrafts" className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-110" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
@@ -274,7 +279,7 @@ export default function HomePage() {
               
               <Link 
                 to="/list?q=Makanan" 
-                className="relative h-96 rounded-lg overflow-hidden shadow-xl group animate-scroll-fade-up" // <-- DITAMBAHKAN
+                className="relative h-96 rounded-lg overflow-hidden shadow-xl group animate-scroll-fade-up" // <-- TETAP
                 style={{ animationDelay: '0.1s' }}
               >
                 <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?auto=format&fit=crop&w=500&q=80" alt="Food" className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-110" />
@@ -287,7 +292,7 @@ export default function HomePage() {
               
               <Link 
                 to="/list?q=Jasa" 
-                className="relative h-96 rounded-lg overflow-hidden shadow-xl group animate-scroll-fade-up" // <-- DITAMBAHKAN
+                className="relative h-96 rounded-lg overflow-hidden shadow-xl group animate-scroll-fade-up" // <-- TETAP
                 style={{ animationDelay: '0.2s' }}
               >
                 <img src="https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?auto=format&fit=crop&w=500&q=80" alt="Services" className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-110" />
@@ -300,7 +305,7 @@ export default function HomePage() {
               
               <Link 
                 to="/list?q=Belanja" 
-                className="relative h-96 rounded-lg overflow-hidden shadow-xl group animate-scroll-fade-up" // <-- DITAMBAHKAN
+                className="relative h-96 rounded-lg overflow-hidden shadow-xl group animate-scroll-fade-up" // <-- TETAP
                 style={{ animationDelay: '0.3s' }}
               >
                 <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=500&q=80" alt="Groceries" className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-110" />
@@ -314,18 +319,18 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Mission Section */}
+        {/* Mission Section (Ini sudah benar menggunakan animate-scroll-fade-up) */}
         <section id="about" className="py-16 md:py-32 bg-white">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 
-              className="text-4xl md:text-5xl font-bold text-[#DA9A3D] font-serif animate-scroll-fade-up" // <-- DITAMBAHKAN
+              className="text-4xl md:text-5xl font-bold text-[#DA9A3D] font-serif animate-scroll-fade-up" // <-- TETAP
             >
               Lebih dari Direktori.
               <br />
               Ini adalah Gerakan.
             </h2>
             <p 
-              className="mt-6 text-xl text-gray-700 leading-relaxed animate-scroll-fade-up" // <-- DITAMBAHKAN
+              className="mt-6 text-xl text-gray-700 leading-relaxed animate-scroll-fade-up" // <-- TETAP
               style={{ animationDelay: '0.1s' }}
             >
               Kami percaya bahwa setiap UMKM memiliki cerita yang layak untuk diceritakan. Kami di sini untuk menghubungkan Anda dengan orang-orang, semangat, dan kebanggaan di balik setiap produk. Saat Anda berbelanja dari direktori kami, Anda tidak only membeli barang—Anda mendukung mimpi dan melestarikan budaya.
@@ -333,7 +338,7 @@ export default function HomePage() {
             
             <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-8">
               <div 
-                className="flex flex-col items-center animate-scroll-fade-up" // <-- DITAMBAHKAN
+                className="flex flex-col items-center animate-scroll-fade-up" // <-- TETAP
               >
                 <div className="w-16 h-16 bg-yellow-100 text-yellow-700 rounded-full flex items-center justify-center">
                   <ShieldCheck className="w-8 h-8" />
@@ -342,7 +347,7 @@ export default function HomePage() {
                 <p className="text-gray-600 mt-1">Setiap profil diperiksa oleh tim kami.</p>
               </div>
               <div 
-                className="flex flex-col items-center animate-scroll-fade-up" // <-- DITAMBAHKAN
+                className="flex flex-col items-center animate-scroll-fade-up" // <-- TETAP
                 style={{ animationDelay: '0.1s' }}
               >
                 <div className="w-16 h-16 bg-yellow-100 text-yellow-700 rounded-full flex items-center justify-center">
@@ -352,7 +357,7 @@ export default function HomePage() {
                 <p className="text-gray-600 mt-1">Ngobrol dan bertransaksi secara langsung.</p>
               </div>
               <div 
-                className="flex flex-col items-center animate-scroll-fade-up" // <-- DITAMBAHKAN
+                className="flex flex-col items-center animate-scroll-fade-up" // <-- TETAP
                 style={{ animationDelay: '0.2s' }}
               >
                 <div className="w-16 h-16 bg-yellow-100 text-yellow-700 rounded-full flex items-center justify-center">

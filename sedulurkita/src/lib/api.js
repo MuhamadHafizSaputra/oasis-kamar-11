@@ -1,21 +1,23 @@
 // src/lib/api.js
 import { JOGJA_BOUNDING_BOX } from "./constants.js";
-// Hapus impor mockData, sudah tidak terpakai di sini
-// import { umkmData } from '../data/mockData.jsx'; 
 import axios from 'axios';
+
+const API_BASE_URL = 'https://sedulurkita-api.vercel.app/api';
 
 /**
  * Mencari UMKM dari API.
- * @param {string} query Teks pencarian
- * @param {number | null} lat Garis lintang pengguna (opsional)
- * @param {number | null} lon Garis bujur pengguna (opsional)
- * @returns {Array | null} Array UMKM yang ditemukan atau null
+ * (Tidak berubah, sudah benar)
  */
 export async function searchApiUmkm(query, lat, lon) {
-  // ... (kode params) ...
+  
+  const params = { q: query };
+  if (lat && lon) {
+    params.lat = lat;
+    params.lon = lon;
+  }
 
   try {
-    // ... (axios.get) ...
+    const response = await axios.get(`${API_BASE_URL}/umkm/search`, { params });
     
     const umkmList = response.data; 
 
@@ -26,25 +28,24 @@ export async function searchApiUmkm(query, lat, lon) {
 
     return umkmList.map(umkm => ({
       ...umkm,
-      // --- PERBAIKAN DI SINI ---
-      // Gunakan 'price_min' dari API, bukan 'price_from'
       priceFrom: umkm.price_min,
-      // --- AKHIR PERBAIKAN ---
       images: Array.isArray(umkm.images) ? umkm.images : JSON.parse(umkm.images || '[]'),
-      distance: umkm.distance || null 
+      distance: umkm.distance || null,
+      calculated_distance: umkm.calculated_distance || null 
     }));
 
   } catch (error) {
+    console.error("Error saat searchApiUmkm:", error.message); 
     console.log("UMKM tidak ditemukan via API, akan lanjut mencari lokasi.");
     return null;
   }
 }
 
+// --- FUNGSI GEOCODE DIPERBARUI ---
 /**
- * Mengambil data geocoding (LOKASI), DIBATASI HANYA DI DALAM JOGJA.
+ * Mengambil data geocoding (LOKASI) dari NOMINATIM (Gratis).
  */
 export async function geocode(query) {
-  // ... (Fungsi ini tidak berubah)
   const url = new URL("https://nominatim.openstreetmap.org/search");
   url.searchParams.set("q", query);
   url.searchParams.set("format", "json");
@@ -53,6 +54,7 @@ export async function geocode(query) {
   url.searchParams.set("bounded", "1");
 
   try {
+    // Kita panggil Nominatim langsung dari frontend
     const response = await fetch(url.toString());
     if (!response.ok) {
       console.error("Geocoding request failed");
@@ -60,7 +62,7 @@ export async function geocode(query) {
     }
     const results = await response.json();
     if (results && results.length > 0) {
-      return results[0]; 
+      return results[0]; // Kembalikan hasil Nominatim
     }
     console.warn(`Lokasi "${query}" tidak ditemukan di area Jogja.`);
     return null;
@@ -69,9 +71,14 @@ export async function geocode(query) {
     return null;
   }
 }
+// --- AKHIR FUNGSI GEOCODE ---
 
-// ... (Fungsi getListingsInBounds tidak berubah) ...
+
+/**
+ * (Fungsi ini tidak berubah)
+ */
 export async function getListingsInBounds(bounds) {
+  // ... (kode tidak berubah)
   console.log("Mock API: Fetching listings...");
   await new Promise(resolve => setTimeout(resolve, 100));
   const visibleListings = []; 
@@ -79,17 +86,20 @@ export async function getListingsInBounds(bounds) {
   return visibleListings;
 }
 
+/**
+ * (Fungsi ini tidak berubah)
+ */
 export async function getUmkmInBounds(bounds) {
+  // ... (kode tidak berubah)
   console.log("Live API: Fetching UMKM from backend...");
   
-  // Get the corners from the map
   const minLng = bounds.getWest();
   const maxLng = bounds.getEast();
   const minLat = bounds.getSouth();
   const maxLat = bounds.getNorth();
 
   try {
-    const response = await axios.get('https://sedulurkita-api.vercel.app/api/umkm', {
+    const response = await axios.get(`${API_BASE_URL}/umkm`, {
       params: { minLng, minLat, maxLng, maxLat }
     });
     
