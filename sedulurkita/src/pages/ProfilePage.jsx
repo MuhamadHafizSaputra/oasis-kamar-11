@@ -97,7 +97,8 @@ export default function ProfilePage() {
   }, [id]);
 
   // --- Initialize count-up hook *after* data is loaded ---
-  const reviewsRef = useCountUp(umkm ? umkm.reviews : 0, "+");
+  // (Mengaktifkan kembali reviewsRef)
+  const reviewsRef = useCountUp(umkm ? umkm.reviews : 0, "+"); 
   const tagsRef = useCountUp(umkm ? umkm.tags.length : 0, "+");
   const artisansRef = useCountUp(umkm ? (umkm.reviews > 20 ? Math.floor(umkm.reviews / 5) : 5) : 0, "+");
 
@@ -151,6 +152,7 @@ export default function ProfilePage() {
     <main>
       {/* Hero Section */}
       <section className="relative h-[60vh] min-h-[400px] bg-black overflow-hidden">
+        {/* ... (Tidak ada perubahan di sini) ... */}
         <div className="absolute inset-0">
           <img
             src={getOptimizedImageUrl(umkm.images[0], 1200)} 
@@ -165,18 +167,6 @@ export default function ProfilePage() {
             {umkm.name}
           </h1>
           
-          {/* --- TAMPILAN RATING DI HERO --- */}
-          <div 
-            className="flex items-center gap-2 mb-4 animate-fadeInSlideUp bg-white/10 backdrop-blur-sm px-4 py-1.5 rounded-full border border-white/20"
-            style={{ animationDelay: "0.05s" }}
-          >
-            <StarIcon className="w-6 h-6 text-yellow-400" />
-            <span className="text-2xl font-bold text-white">{displayRating}</span>
-            <span className="text-white/80 text-sm font-medium">/ 10</span>
-            <span className="text-white/60 text-sm ml-1">• {umkm.reviews} ulasan</span>
-          </div>
-          {/* --- AKHIR TAMPILAN RATING --- */}
-
           <p
             className="text-xl md:text-2xl font-light max-w-2xl animate-fadeInSlideUp"
             style={{ animationDelay: "0.1s" }}
@@ -195,6 +185,7 @@ export default function ProfilePage() {
 
       {/* Meet the Maker Section */}
       <section id="maker" className="py-20 bg-white">
+        {/* ... (Tidak ada perubahan di sini) ... */}
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row items-center gap-12">
             <div className="md:w-1/2 h-[400px]" ref={addScrollAnimateRef}> 
@@ -224,6 +215,7 @@ export default function ProfilePage() {
 
       {/* Behind the Product Section */}
       <section className="py-20 bg-[#f8f5f2]">
+        {/* ... (Tidak ada perubahan di sini) ... */}
         <div className="container mx-auto px-6">
           <div className="text-center max-w-3xl mx-auto mb-16" ref={addScrollAnimateRef}>
             <h2 className="text-sm font-semibold uppercase text-[#9c724b] tracking-widest">
@@ -330,6 +322,8 @@ export default function ProfilePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center max-w-5xl mx-auto">
+            
+            {/* --- BLOK 1: TOTAL ULASAN (DIKEMBALIKAN) --- */}
             <div ref={addScrollAnimateRef}>
               <svg
                 className="w-16 h-16 text-[#9c724b] mx-auto mb-4"
@@ -354,15 +348,18 @@ export default function ProfilePage() {
               <div className="w-24 h-2 bg-[#d8caba] rounded mx-auto mt-3 overflow-hidden">
                 <div
                   className="h-full bg-[#9c724b]"
-                  style={{ width: `${Math.min(umkm.reviews / 5, 100)}%` }}
+                  style={{ width: `${Math.min(umkm.reviews / 5, 100)}%` }} 
                 ></div>
               </div>
               <p className="text-[#715237] mt-2">
                 Menunjukkan kepuasan dan kepercayaan pelanggan.
               </p>
             </div>
+            {/* --- AKHIR BLOK 1 --- */}
             
+            {/* Stat 2: Tags */}
             <div ref={addScrollAnimateRef}>
+              {/* ... (Tidak ada perubahan di sini) ... */}
               <svg 
                 className="w-16 h-16 text-[#9c724b] mx-auto mb-4" 
                 fill="none" 
@@ -388,7 +385,9 @@ export default function ProfilePage() {
               </p>
             </div>
 
+            {/* Stat 3: Artisans (Example) */}
             <div ref={addScrollAnimateRef}>
+              {/* ... (Tidak ada perubahan di sini) ... */}
               <svg
                 className="w-16 h-16 text-[#9c724b] mx-auto mb-4"
                 fill="none"
@@ -423,6 +422,7 @@ export default function ProfilePage() {
 
           {badgeTags.length > 0 && (
             <div className="mt-20 text-center" ref={addScrollAnimateRef}>
+              {/* ... (Tidak ada perubahan di sini) ... */}
               <h4 className="text-xl font-serif font-bold mb-6 text-[#473524]">
                 Tanda Kepercayaan Kami
               </h4>
@@ -444,6 +444,7 @@ export default function ProfilePage() {
       {/* "Our Collection" Section */}
       {umkm.products && umkm.products.length > 0 && (
         <section id="collection" className="py-20 bg-white">
+          {/* ... (Tidak ada perubahan di sini) ... */}
           <div className="container mx-auto px-6">
             <div className="text-center max-w-3xl mx-auto mb-16" ref={addScrollAnimateRef}>
               <h2 className="text-sm font-semibold uppercase text-[#9c724b] tracking-widest">
@@ -484,8 +485,93 @@ export default function ProfilePage() {
         </section>
       )}
 
+      {/* Reviews Section */}
+      <section id="reviews" className="py-20 bg-[#f8f5f2]">
+        <div className="container mx-auto px-6">
+           <div className="text-center max-w-3xl mx-auto mb-16" ref={addScrollAnimateRef}>
+            <h2 className="text-sm font-semibold uppercase text-[#9c724b] tracking-widest">
+              Kata Mereka
+            </h2>
+            <h3 className="text-4xl font-bold font-serif text-[#473524] mt-2">
+              Ulasan Pelanggan
+            </h3>
+            <p className="text-lg text-[#59412c] mt-4 leading-relaxed">
+              Apa kata mereka yang sudah merasakan produk dan layanan kami.
+            </p>
+          </div>
+
+          {umkm.reviewsList && umkm.reviewsList.length > 0 ? (
+            <>
+              {/* --- RINGKASAN RATING DIPINDAH KE SINI --- */}
+              <div className="bg-white p-8 rounded-xl shadow-md border border-[#ece6df] max-w-5xl mx-auto mb-12" ref={addScrollAnimateRef}>
+                <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-12">
+                  {/* Skor Angka */}
+                  <div className="text-center">
+                    <h4 className="text-6xl font-bold text-[#715237]">
+                      {displayRating}
+                    </h4>
+                    <p className="text-xl font-semibold text-[#59412c] mt-1">
+                      / 10
+                    </p>
+                  </div>
+                  {/* Bintang dan Progress Bar */}
+                  <div className="flex-1 w-full md:w-auto">
+                    <div className="flex items-center justify-center md:justify-start text-yellow-400">
+                      {/* Bintang berdasarkan rating 0-100 (dikonversi ke 0-5) */}
+                      {[...Array(5)].map((_, i) => (
+                        <StarIcon key={i} className={`h-8 w-8 ${i < Math.round(rawRating / 20) ? "text-yellow-400" : "text-gray-300"}`} />
+                      ))}
+                    </div>
+                    <div className="w-full h-2 bg-[#d8caba] rounded mt-3 overflow-hidden">
+                      <div
+                        className="h-full bg-[#9c724b]"
+                        style={{ width: `${umkm.rating}%` }} // Menggunakan rating 0-100%
+                      ></div>
+                    </div>
+                    <p className="text-[#715237] mt-2 text-center md:text-left">
+                      Berdasarkan {umkm.reviews} ulasan pelanggan.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              {/* --- AKHIR RINGKASAN RATING --- */}
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                {umkm.reviewsList.map((review) => (
+                  <div key={review.id} className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 border border-[#ece6df]" ref={addScrollAnimateRef}>
+                    {/* ... (isi kartu review tidak berubah) ... */}
+                    <div className="flex items-center gap-4 mb-6">
+                      <div className="h-12 w-12 rounded-full bg-[#d8caba] flex items-center justify-center text-[#59412c] font-bold text-xl">
+                          {review.user.charAt(0)}
+                      </div>
+                      <div>
+                          <p className="font-bold text-[#473524] text-lg">{review.user}</p>
+                          <div className="flex text-yellow-500 mt-1">
+                            {[...Array(5)].map((_, i) => (
+                              <StarIcon key={i} className={`h-5 w-5 ${i < review.rating ? "text-yellow-400" : "text-gray-200"}`} />
+                            ))}
+                          </div>
+                      </div>
+                      <span className="ml-auto text-sm text-[#9c724b] font-medium bg-[#f8f5f2] px-3 py-1 rounded-full">
+                        {review.date}
+                      </span>
+                    </div>
+                    <p className="text-[#59412c] italic text-lg leading-relaxed">"{review.text}"</p>
+                  </div>
+                ))}
+              </div>
+            </>
+          ) : (
+             <div className="text-center py-12 bg-white rounded-xl shadow-sm max-w-2xl mx-auto">
+                <p className="text-gray-500 italic">Belum ada ulasan untuk UMKM ini.</p>
+             </div>
+          )}
+        </div>
+      </section>
+
       {/* Visit Us Section - DYNAMIC MAP */}
       <section id="visit-us" className="py-20 bg-white">
+        {/* ... (Tidak ada perubahan di sini) ... */}
         <div className="container mx-auto px-6">
           <div className="text-center max-w-3xl mx-auto mb-8" ref={addScrollAnimateRef}>
             <h2 className="text-sm font-semibold uppercase text-[#9c724b] tracking-widest">
