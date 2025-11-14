@@ -6,7 +6,7 @@ import { geocode, searchApiUmkm } from '../lib/api.js';
 
 const MAP_PADDING = { top: 100, bottom: 40, left: 40, right: 40 };
 const SPECIFIC_LOCATION_ZOOM = 16.5; // Zoom untuk 1 UMKM spesifik
-const LOCATION_AREA_ZOOM = 5; // Zoom untuk 1 Titik Lokasi (dari Nominatim)
+const LOCATION_AREA_ZOOM = 13.5; // Zoom untuk 1 Titik Lokasi (dari Nominatim)
 
 
 // Terima 'map' sebagai prop
