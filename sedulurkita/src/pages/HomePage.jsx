@@ -15,15 +15,15 @@ export default function HomePage() {
         // 6. Data dari API perlu di-transform (fix snake_case & JSON)
         const transformedData = response.data.map(umkm => ({
           ...umkm,
-          priceFrom: umkm.price_from,
-          images: Array.isArray(umkm.images) ? umkm.images : JSON.parse(umkm.images || '[]')
-        }));
-        setFeatured(transformedData);
-      })
-      .catch(error => {
-        console.error("Error fetching featured UMKM:", error);
-      });
-  }, []);
+            priceFrom: umkm.price_from || umkm.price_min,
+            images: Array.isArray(umkm.images) ? umkm.images : JSON.parse(umkm.images || '[]')
+          }));
+          setFeatured(transformedData);
+        })
+        .catch(error => {
+          console.error("Error fetching featured UMKM:", error);
+        });
+    }, []);
 
   return (
     <div className="container mx-auto px-4 py-12">

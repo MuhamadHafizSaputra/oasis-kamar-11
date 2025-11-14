@@ -106,8 +106,7 @@ export async function getUmkmInBounds(bounds) {
     
     const transformedData = response.data.map(umkm => ({
       ...umkm,
-      priceFrom: umkm.price_from,
-      // Perbaiki juga parsing JSON di sini
+     priceFrom: umkm.price_from || umkm.price_min, 
       images: Array.isArray(umkm.images) ? umkm.images : JSON.parse(umkm.images || '[]'),
     }));
     
