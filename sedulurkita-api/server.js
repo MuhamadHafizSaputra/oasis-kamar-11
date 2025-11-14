@@ -3,6 +3,7 @@ import 'dotenv/config'; // BARIS INI PALING ATAS
 import express from 'express';
 import cors from 'cors';
 import db from './db.js';
+// HAPUS 'import axios from 'axios';'
 
 const app = express();
 const port = 3001;
@@ -13,7 +14,10 @@ app.use(express.json());
 
 // --- API ENDPOINTS ---
 
+// HAPUS SEMUA ENDPOINT '/api/geocode' (MAPBOX) DARI SINI
+
 // 1. Endpoint untuk HomePage.jsx (Featured)
+// (Tidak berubah)
 app.get('/api/umkm/featured', async (req, res) => {
   console.log("Request received for /api/umkm/featured");
   try {
@@ -40,12 +44,11 @@ app.get('/api/umkm/search', async (req, res) => {
     let query;
     let queryParams = [`%${q}%`]; // $1
     
+    // --- PERBAIKAN DI SINI ---
+    // Hapus 'OR description ILIKE $1' DAN 'OR location ILIKE $1'
+    
     if (lat && lon) {
       console.log(`Calculating distance from: ${lat}, ${lon}`);
-      
-      // --- PERBAIKAN DI SINI ---
-      // Ubah 'AS distance' menjadi 'AS calculated_distance'
-      // Ubah 'ORDER BY distance' menjadi 'ORDER BY calculated_distance'
       query = `
         SELECT *, 
           ( 6371 * acos(
@@ -56,19 +59,23 @@ app.get('/api/umkm/search', async (req, res) => {
             * sin( radians( latitude ) )
           ) ) AS calculated_distance 
         FROM umkm
-        WHERE name ILIKE $1 OR description ILIKE $1
+        WHERE 
+            name ILIKE $1 
+            OR category ILIKE $1
+            OR subcategory ILIKE $1
         ORDER BY calculated_distance ASC; 
       `;
-      // --- AKHIR PERBAIKAN ---
-      
       queryParams.push(lat, lon); // $2 dan $3
     } else {
-      // Jika tidak, lakukan pencarian biasa
       query = `
         SELECT * FROM umkm
-        WHERE name ILIKE $1 OR description ILIKE $1;
+        WHERE 
+            name ILIKE $1 
+            OR category ILIKE $1
+            OR subcategory ILIKE $1;
       `;
     }
+    // --- AKHIR PERBAIKAN ---
 
     const result = await db.query(query, queryParams);
     res.json(result.rows);
@@ -79,7 +86,8 @@ app.get('/api/umkm/search', async (req, res) => {
   }
 });
 
-// 3. Endpoint untuk ProfilePage.jsx (HARUS SETELAH 'search')
+// 3. Endpoint untuk ProfilePage.jsx
+// (Tidak berubah)
 app.get('/api/umkm/:id', async (req, res) => {
   const { id } = req.params;
   
@@ -88,29 +96,25 @@ app.get('/api/umkm/:id', async (req, res) => {
   }
 
   try {
-    // === PERSIAPKAN SEMUA QUERY ===
     const umkmQuery = 'SELECT * FROM umkm WHERE id = $1';
     const reviewsQuery = 'SELECT * FROM reviews WHERE umkm_id = $1';
-    // === TAMBAHKAN QUERY PRODUK ===
     const productsQuery = 'SELECT * FROM products WHERE umkm_id = $1';
     
-    // === JALANKAN SEMUA QUERY SECARA BERSAMAAN ===
     const [umkmResult, reviewsResult, productsResult] = await Promise.all([
       db.query(umkmQuery, [id]),
       db.query(reviewsQuery, [id]),
-      db.query(productsQuery, [id]) // <-- Menjalankan query produk
+      db.query(productsQuery, [id])
     ]);
 
     if (umkmResult.rows.length === 0) {
       return res.status(404).json({ error: 'UMKM not found' });
     }
     
-    // === GABUNGKAN SEMUA HASIL ===
     const umkm = umkmResult.rows[0];
     umkm.reviewsList = reviewsResult.rows;
-    umkm.products = productsResult.rows; // <-- Menambahkan array produk
+    umkm.products = productsResult.rows; 
 
-    res.json(umkm); // <-- Mengirim data yang sudah lengkap
+    res.json(umkm);
     
   } catch (err) {
     console.error(err);
@@ -119,6 +123,7 @@ app.get('/api/umkm/:id', async (req, res) => {
 });
 
 // 4. Endpoint untuk ListPage.jsx (DynamicDataLoader)
+// (Tidak berubah)
 app.get('/api/umkm', async (req, res) => {
   const { minLng, minLat, maxLng, maxLat } = req.query;
   try {
