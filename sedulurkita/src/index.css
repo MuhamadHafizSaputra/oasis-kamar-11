@@ -13,9 +13,22 @@
   html {
     font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   }
+
+  #root {
+  width: 100%;       /* Memaksa lebar 100% */
+  max-width: none;   /* Menghapus batasan lebar maksimal */
+  margin: 0;         /* Menghapus margin otomatis */
+  padding: 0;        /* Menghapus padding bawaan */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
   
   body {
     @apply bg-brand-beige min-h-screen;
+    margin: 0;
+    padding: 0;
+    width: 100%;
   }
 
   h1, h2, h3, h4, .font-serif {

@@ -1,6 +1,7 @@
 // src/pages/HomePage.jsx
 import React, { useState, useEffect, useRef } from 'react'; 
 import { Link } from 'react-router-dom';
+
 import { 
   ArrowRight, 
   MapPin, 
@@ -14,8 +15,11 @@ import {
 } from 'lucide-react';
 
 import SearchBar from '../components/SearchBar.jsx';
+import { useDocumentTitle } from '../hooks/useDocumentTitle';
 
 export default function HomePage() {
+  // Panggil hook di dalam komponen, sebelum return
+  useDocumentTitle("SedulurKita - Temukan Cerita di Balik Produk");
   const [heroImage, setHeroImage] = useState(null); 
   const [heroImageAlt, setHeroImageAlt] = useState("Memuat gambar..."); 
 
@@ -71,29 +75,38 @@ export default function HomePage() {
   // --- LOGIKA SELESAI ---
 
   useEffect(() => {
-    fetch('https://sedulurkita-api.vercel.app/api/umkm/featured')
-      .then(response => {
-        if (!response.ok) throw new Error('Respon jaringan tidak OK');
-        return response.json();
-      })
-      .then(data => {
-        if (data && data.length > 0) {
-          const umkmUnggulan = data[0];
-          let images = umkmUnggulan.images;
-          if (typeof images === 'string') images = JSON.parse(images || "[]");
-          if (Array.isArray(images) && images.length > 0) {
-            setHeroImage(images[0]); 
-            setHeroImageAlt(umkmUnggulan.name);
+      const umkmIdForHero = 1; 
+      fetch(`https://sedulurkita-api.vercel.app/api/umkm/${umkmIdForHero}`)
+        .then(response => {
+          if (!response.ok) throw new Error('Respon jaringan tidak OK');
+          return response.json();
+        })
+        .then(data => {
+          // Data yang diterima adalah objek UMKM tunggal
+          if (data) {
+            let images = data.images;
+            if (typeof images === 'string') images = JSON.parse(images || "[]");
+            if (Array.isArray(images) && images.length > 0) {
+              setHeroImage(images[4]); // Ambil gambar pertama
+              setHeroImageAlt(data.name); // Gunakan nama UMKM sebagai alt text
+            } else {
+              // Fallback jika UMKM ini tidak punya gambar
+              setHeroImageAlt("Gambar tidak tersedia untuk " + data.name);
+              setHeroImage("https://images.unsplash.com/photo-1579546929518-e6b779f04177?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"); // Default fallback image
+            }
           } else {
-            setHeroImageAlt("Gambar tidak tersedia untuk " + umkmUnggulan.name);
+            // Fallback jika UMKM tidak ditemukan
+            setHeroImageAlt("UMKM tidak ditemukan.");
+            setHeroImage("https://images.unsplash.com/photo-1579546929518-e6b779f04177?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"); // Default fallback image
           }
-        }
-      })
-      .catch(error => {
-        console.error("Error fetching featured image:", error);
-        setHeroImageAlt("Gagal memuat gambar dari server.");
-      });
-  }, []); 
+        })
+        .catch(error => {
+          console.error("Error fetching hero image:", error);
+          setHeroImageAlt("Gagal memuat gambar dari server.");
+          // Default fallback image jika ada error fetching
+          setHeroImage("https://images.unsplash.com/photo-1579546929518-e6b779f04177?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+        });
+    }, []);
 
   return (
     <div className="bg-white text-gray-900 antialiased">
@@ -155,10 +168,15 @@ export default function HomePage() {
               onMouseMove={handleMouseMove}
             >
               
-              {/* Kartu 1 */}
+              {/* Kartu 1: Batik */}
               <div className="snap-center flex-shrink-0 w-80 bg-white rounded-lg shadow-xl overflow-hidden transform transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl animate-scroll-fade-up">
-                <div className="relative">
-                  <img src="https://images.unsplash.com/photo-1525934220630-b967b60b8b0a?auto=format&fit=crop&w=400&q=80" alt="Live Batik Making" className="w-full h-48 object-cover pointer-events-none" />
+                <div className="relative h-48">
+                  {/* URL GAMBAR DIPERBARUI */}
+                  <img 
+                    src="https://batikgiriloyo.com/wp-content/uploads/2013/08/Ibu-Ibu-Giriloyo.jpg" 
+                    alt="Live Batik Making" 
+                    className="w-full h-full object-cover pointer-events-none" 
+                  />
                   <span className="absolute top-3 left-3 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider animate-pulse">
                     LIVE
                   </span>
@@ -170,7 +188,6 @@ export default function HomePage() {
                     <MapPin className="w-4 h-4 mr-1.5 text-gray-400" />
                     Laweyan, Surakarta
                   </div>
-                  {/* UPDATE LINK KE /live/3 */}
                   <Link 
                     to="/live/3" 
                     className="mt-4 block w-full text-center bg-indigo-100 text-indigo-700 font-medium py-2 rounded-lg hover:bg-indigo-200 transition-colors pointer-events-auto"
@@ -180,10 +197,15 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* Kartu 2 */}
+              {/* Kartu 2: Gudeg (Memasak) */}
               <div className="snap-center flex-shrink-0 w-80 bg-white rounded-lg shadow-xl overflow-hidden transform transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl animate-scroll-fade-up" style={{ animationDelay: '0.1s' }}>
-                <div className="relative">
-                  <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=400&q=80" alt="Live Cooking Gudeg" className="w-full h-48 object-cover pointer-events-none" />
+                <div className="relative h-48">
+                  {/* URL GAMBAR DIPERBARUI */}
+                  <img 
+                    src="https://blue.kumparan.com/image/upload/fl_progressive,fl_lossy,c_fill,f_auto,q_auto:best,w_640/v1637409292/wxbg9pdljaolcc8wtumd.jpg" 
+                    alt="Live Cooking Gudeg" 
+                    className="w-full h-full object-cover pointer-events-none" 
+                  />
                   <span className="absolute top-3 left-3 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider animate-pulse">
                     LIVE
                   </span>
@@ -195,7 +217,6 @@ export default function HomePage() {
                     <MapPin className="w-4 h-4 mr-1.5 text-gray-400" />
                     Yogyakarta
                   </div>
-                  {/* UPDATE LINK KE /live/1 */}
                   <Link 
                     to="/live/1" 
                     className="mt-4 block w-full text-center bg-pink-100 text-pink-700 font-medium py-2 rounded-lg hover:bg-pink-200 transition-colors pointer-events-auto"
@@ -205,24 +226,28 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* Kartu 3 */}
+              {/* Kartu 3: Bakpia (GANTI KULIT KE BAKPIA) */}
               <div className="snap-center flex-shrink-0 w-80 bg-white rounded-lg shadow-xl overflow-hidden transform transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl animate-scroll-fade-up" style={{ animationDelay: '0.2s' }}>
-                <div className="relative">
-                  <img src="https://images.unsplash.com/photo-1605812863642-19e98b0a96b4?auto=format&fit=crop&w=400&q=80" alt="Live Leather Crafting" className="w-full h-48 object-cover pointer-events-none" />
+                <div className="relative h-48">
+                  {/* Gambar Bakpia yang menggugah selera */}
+                  <img 
+                    src="https://www.gudeg.net/cni-content/uploads/modules/posts/20191003113408.JPG" 
+                    alt="Live Pembuatan Bakpia" 
+                    className="w-full h-full object-cover pointer-events-none" 
+                  />
                   <span className="absolute top-3 left-3 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider animate-pulse">
                     LIVE
                   </span>
                 </div>
                 <div className="p-5 select-none">
-                  <h3 className="font-bold text-lg text-gray-900 truncate">Rina membuat dompet kulit</h3>
-                  <p className="text-sm text-gray-600 mt-1">Jaya Kulit Mandiri</p>
+                  <h3 className="font-bold text-lg text-gray-900 truncate">Proses oven Bakpia panas</h3>
+                  <p className="text-sm text-gray-600 mt-1">Bakpia Pathok 25</p>
                   <div className="flex items-center text-sm text-gray-500 mt-3">
                     <MapPin className="w-4 h-4 mr-1.5 text-gray-400" />
-                    Sleman, Yogyakarta
+                    Pathuk, Yogyakarta
                   </div>
-                  {/* UPDATE LINK KE /live/31 */}
                   <Link 
-                    to="/live/31" 
+                    to="/live/6" 
                     className="mt-4 block w-full text-center bg-green-100 text-green-700 font-medium py-2 rounded-lg hover:bg-green-200 transition-colors pointer-events-auto"
                   >
                     Tonton Live
@@ -230,10 +255,15 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* Kartu 4 (Event) */}
+              {/* Kartu 4: Pasar (Event) */}
               <div className="snap-center flex-shrink-0 w-80 bg-white rounded-lg shadow-xl overflow-hidden transform transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl animate-scroll-fade-up" style={{ animationDelay: '0.3s' }}>
-                <div className="relative">
-                  <img src="https://images.unsplash.com/photo-1543088243-e35f83b23c0c?auto=format&fit=crop&w=400&q=80" alt="Market Day" className="w-full h-48 object-cover pointer-events-none" />
+                <div className="relative h-48">
+                   {/* URL GAMBAR DIPERBARUI */}
+                  <img 
+                    src="https://images.unsplash.com/photo-1533900298318-6b8da08a523e?q=80&w=2070&auto=format&fit=crop" 
+                    alt="Market Day" 
+                    className="w-full h-full object-cover pointer-events-none" 
+                  />
                   <span className="absolute top-3 left-3 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
                     EVENT
                   </span>
@@ -245,7 +275,6 @@ export default function HomePage() {
                     <MapPin className="w-4 h-4 mr-1.5 text-gray-400" />
                     Malioboro, Yogyakarta
                   </div>
-                  {/* UPDATE LINK KE /live/4 */}
                   <Link 
                     to="/live/4" 
                     className="mt-4 block w-full text-center bg-amber-100 text-amber-700 font-medium py-2 rounded-lg hover:bg-amber-200 transition-colors pointer-events-auto"
@@ -259,7 +288,7 @@ export default function HomePage() {
           </div>
         </section>
         
-        {/* ... SISA KODE SECTION LAIN DAN FOOTER TETAP SAMA SEPERTI SEBELUMNYA ... */}
+
         <section id="makers" className="py-16 md:py-32 bg-white">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 items-center">
@@ -267,7 +296,7 @@ export default function HomePage() {
                 className="rounded-lg overflow-hidden shadow-2xl animate-scroll-fade-up" 
               >
                 <img  
-                  src="https://images.unsplash.com/photo-1541696432-86034d618063?auto=format&fit=crop&w=800&q=80"
+                  src="https://hassa.co.id/wp-content/uploads/2024/09/batik-tulis-4.webp"
                   alt="Portrait of Ibu Dian, a batik maker"
                   className="w-full h-full object-cover"
                 />
@@ -307,7 +336,7 @@ export default function HomePage() {
                 to="/list?q=Kerajinan" 
                 className="relative h-96 rounded-lg overflow-hidden shadow-xl group animate-scroll-fade-up" 
               >
-                <img src="https://images.unsplash.com/photo-1578491793108-d1e3e05f560a?auto=format&fit=crop&w=500&q=80" alt="Handicrafts" className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-110" />
+                <img src="https://static.promediateknologi.id/crop/0x0:0x0/0x0/webp/photo/p2/222/2024/09/27/WhatsApp-Image-2024-09-26-at-152944-1681658266.jpeg" alt="Handicrafts" className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-110" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
                 <div className="absolute bottom-0 left-0 p-6">
                   <h3 className="text-3xl font-bold text-white font-serif">Pewaris Budaya</h3>

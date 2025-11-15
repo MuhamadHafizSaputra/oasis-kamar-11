@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext.jsx';
 import { useNavigate, Link } from 'react-router-dom';
+import { useDocumentTitle } from '../hooks/useDocumentTitle';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -8,6 +9,7 @@ export default function LoginPage() {
   const [error, setError] = useState('');
   const { login } = useAuth();
   const navigate = useNavigate();
+  useDocumentTitle("Masuk - SedulurKita");
 
   const handleSubmit = async (e) => {
     e.preventDefault();

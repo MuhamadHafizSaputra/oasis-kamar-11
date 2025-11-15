@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext.jsx';
 import { useNavigate, Link } from 'react-router-dom';
+import { useDocumentTitle } from '../hooks/useDocumentTitle';
 
 export default function RegisterPage() {
   const [name, setName] = useState('');
@@ -10,6 +11,7 @@ export default function RegisterPage() {
   const [error, setError] = useState('');
   const { register } = useAuth();
   const navigate = useNavigate();
+  useDocumentTitle("Daftar - SedulurKita");
 
   const handleSubmit = async (e) => {
     e.preventDefault();

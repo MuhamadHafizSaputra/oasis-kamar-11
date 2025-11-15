@@ -1,6 +1,7 @@
 // src/pages/AboutPage.jsx
 import React from 'react';
 import { SparklesIcon, HeartIcon, UsersIcon, GlobeAltIcon } from '@heroicons/react/24/outline';
+import { useDocumentTitle } from '../hooks/useDocumentTitle';
 
 // Data Misi
 const missions = [
@@ -41,6 +42,7 @@ const team = [
 ];
 
 export default function AboutPage() {
+  useDocumentTitle("Tentang Kami - SedulurKita");
   return (
     <div className="bg-brand-beige">
       {/* 1. Hero Section */}
