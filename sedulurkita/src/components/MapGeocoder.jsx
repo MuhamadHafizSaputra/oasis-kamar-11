@@ -1,42 +1,80 @@
 // src/components/MapGeocoder.jsx
 import { useState } from 'react';
 import maplibregl from 'maplibre-gl'; 
-import { useMap } from '@vis.gl/react-maplibre';
+// Hapus 'useMap'
 import { geocode, searchApiUmkm } from '../lib/api.js';
 
 const MAP_PADDING = { top: 100, bottom: 40, left: 40, right: 40 };
-const SPECIFIC_LOCATION_ZOOM = 16.5;
+const SPECIFIC_LOCATION_ZOOM = 16.5; // Zoom untuk 1 UMKM spesifik
+const LOCATION_AREA_ZOOM = 13.5; // Zoom untuk 1 Titik Lokasi (dari Nominatim)
 
-// (Helper getUserLocation TIDAK DIPERLUKAN LAGI DI FILE INI)
-// ... (Hapus atau biarkan saja, tidak akan dipanggil)
 
-export default function MapGeocoder({ setUmkm, setIsInSearchMode }) {
-  const { default: map } = useMap();
+// Terima 'map' sebagai prop
+export default function MapGeocoder({ setUmkm, setIsInSearchMode, userLocation, map }) {
+  // Hapus baris 'useMap()'
+  
   const [query, setQuery] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
+  // (Helper 'searchUmkmDatabase' tidak berubah)
+  const searchUmkmDatabase = async () => {
+    console.log(`Aturan 2 GAGAL. Mencoba Aturan 3 (Database) untuk: "${query}"`);
+    const foundUmkmList = await searchApiUmkm(
+      query, 
+      userLocation?.lat, 
+      userLocation?.lon
+    );
+
+    if (foundUmkmList && foundUmkmList.length > 0) {
+      console.log(`Aturan 3 (Database) SUKSES. Ditemukan ${foundUmkmList.length} UMKM.`);
+      setUmkm(foundUmkmList);
+      setIsInSearchMode(true); 
+      
+      if (foundUmkmList.length === 1) {
+        const umkm = foundUmkmList[0];
+        map.flyTo({
+          center: [umkm.longitude, umkm.latitude],
+          zoom: SPECIFIC_LOCATION_ZOOM,
+          padding: MAP_PADDING,
+          duration: 2000,
+        });
+      } else {
+        const bounds = new maplibregl.LngLatBounds();
+        foundUmkmList.forEach(umkm => {
+          bounds.extend([umkm.longitude, umkm.latitude]);
+        });
+        map.fitBounds(bounds, { padding: {top: 150, bottom: 50, left: 50, right: 50}, duration: 2000 });
+      }
+    } else {
+      console.log("Aturan 2 & 3 GAGAL. Tidak ditemukan.");
+      alert(`Lokasi atau UMKM "${query}" tidak ditemukan di area Jogja.`);
+    }
+  };
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!map) return;
+    if (!map) return; // Pengecekan 'map' dari prop
     
     if (query.trim().length === 0) {
-      setIsInSearchMode(false);
+      setIsInSearchMode(false); 
       map.fire('moveend'); 
       return;
     }
 
     setIsLoading(true);
 
-    // --- PERBAIKAN MASALAH 2 ---
-    // JANGAN minta lokasi saat mencari berdasarkan teks.
-    // Cukup panggil searchApiUmkm dengan 'null' untuk lat/lon.
-    console.log(`Mencari teks: ${query}`);
-    const foundUmkmList = await searchApiUmkm(query, null, null);
-    // --- AKHIR PERBAIKAN ---
+    // 1. Coba cari di Database UMKM TERLEBIH DAHULU (Aturan 3)
+    console.log(`Mencoba Aturan 3 (Database) untuk: "${query}"`);
+    const foundUmkmList = await searchApiUmkm(
+      query, 
+      userLocation?.lat, 
+      userLocation?.lon
+    );
 
     if (foundUmkmList && foundUmkmList.length > 0) {
-      // (Logika Aturan 3 tidak berubah)
-      console.log(`Ditemukan ${foundUmkmList.length} UMKM:`, foundUmkmList);
+      // **SUKSES UMKM (ATURAN 3: Contoh "Gudeg")**
+      console.log(`Aturan 3 (Database) SUKSES. Ditemukan ${foundUmkmList.length} UMKM.`);
       setUmkm(foundUmkmList);
       setIsInSearchMode(true); 
       if (foundUmkmList.length === 1) {
@@ -55,29 +93,39 @@ export default function MapGeocoder({ setUmkm, setIsInSearchMode }) {
         map.fitBounds(bounds, { padding: {top: 150, bottom: 50, left: 50, right: 50}, duration: 2000 });
       }
     } else {
-      // (Logika Aturan 2 tidak berubah)
-      console.log("UMKM API tidak ditemukan. Mencari sebagai lokasi...");
-      setIsInSearchMode(false);
-      const result = await geocode(query);
+      
+      // **GAGAL UMKM -> Coba cari sebagai LOKASI (Aturan 2)**
+      console.log(`Aturan 3 GAGAL. Mencoba Aturan 2 (Geocode) untuk: "${query}"`);
+      const geocodeResult = await geocode(query); // Ini memanggil Nominatim
 
-      if (result) {
-        const largeAreaTypes = ['administrative', 'boundary', 'city', 'region'];
-        const isLargeArea = largeAreaTypes.includes(result.type);
-        if (isLargeArea && result.boundingbox) {
-          const [minLat, maxLat, minLng, maxLng] = result.boundingbox.map(parseFloat);
+      if (geocodeResult) {
+        // **SUKSES LOKASI (ATURAN 2: Contoh "UGM", "UNY")**
+        console.log(`Aturan 2 (Nominatim) SUKSES.`);
+        setIsInSearchMode(false); 
+
+        // --- BACA FORMAT NOMINATIM ---
+        if (geocodeResult.boundingbox) {
+          // Kasus "UGM"
+          const [minLat, maxLat, minLng, maxLng] = geocodeResult.boundingbox.map(parseFloat);
           const bounds = [[minLng, minLat], [maxLng, maxLat]];
           map.fitBounds(bounds, { padding: MAP_PADDING, duration: 2000 });
-        } else {
-          const lon = parseFloat(result.lon);
-          const lat = parseFloat(result.lat);
+        
+        } else if (geocodeResult.lon && geocodeResult.lat) {
+          // Kasus "UNY" / "Malioboro" (Hanya titik)
+          const lon = parseFloat(geocodeResult.lon);
+          const lat = parseFloat(geocodeResult.lat);
           map.flyTo({
             center: [lon, lat],
-            zoom: SPECIFIC_LOCATION_ZOOM,
+            zoom: LOCATION_AREA_ZOOM, // Gunakan zoom 13.5
             padding: MAP_PADDING,
             duration: 2000,
           });
         }
+        // --- AKHIR FORMAT NOMINATIM ---
+        
       } else {
+        // **GAGAL SEMUA**
+        console.log("Aturan 2 & 3 GAGAL. Tidak ditemukan.");
         alert(`Lokasi atau UMKM "${query}" tidak ditemukan di area Jogja.`);
       }
     }
