@@ -20,7 +20,7 @@ const shopProducts = [
 export const umkmData = [
   {
     id: 1,
-    name: "Gudeg Yu Djum - Wijilan",
+    name: "Gudeg Yu Djum Wijilan 167",
     category: "Makanan",
     subcategory: "Gudeg Tradisional",
     phone: "0274512345",
@@ -31,7 +31,7 @@ export const umkmData = [
       { id: "r1", user: "Budi Santoso", rating: 5, text: "Gudegnya paling legendaris! ...", date: "2025-10-28" },
       { id: "r2", user: "Anita Wijaya", rating: 4, text: "Tempatnya klasik dan otentik. ...", date: "2025-10-25" },
     ],
-    owner: { name: "Keluarga Yu Djum", joined: "2024-01-15", verified: true },
+    owner: { name: "Yu Djum", joined: "2024-01-15", verified: true },
     rating: 99,
     reviews: 303,
     location: "Jl. Wijilan No. 167, Kraton",
@@ -40,16 +40,20 @@ export const umkmData = [
     latitude: -7.8053,
     longitude: 110.3708,
     images: [
-      "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
-      "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&auto=format&fit=crop&w=1981&q=80",
-      "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
-      "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
+      "https://homestaydijogja.net/wp-content/uploads/2024/07/Gudeg-Yu-Djum-Wijilan-167.jpg",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8R-dfiqCMCZz-IKAo5INnRSF3zrTu1iKtcADpiVPs_HmJAJ6QZXP3jVeidHisCcJdoUs&usqp=CAU",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRk90L6IKJov7qLO1GVpw8r1Bcq420urS-rRQ&s",
+      "https://statik.tempo.co/data/2019/02/17/id_820192/820192_720.jpg",
+      "https://i.gojekapi.com/darkroom/gofood-indonesia/v2/images/uploads/19dc5ee9-4256-4838-8c29-1f341c140884_Go-Biz_20211223_105032.jpeg"
     ],
-    description: "Pusat gudeg kering legendaris di Yogyakarta...",
+    description: "Gudeg Yu Djum adalah salah satu pelopor gudeg kering paling terkenal di Yogyakarta. Usaha ini bermula pada tahun 1950-an di sebuah dapur rumahan yang sederhana. Cita rasanya yang khas datang dari proses memasak tradisional menggunakan kayu bakar, santan pekat, serta bumbu-bumbu rempah yang diolah dalam waktu berjam-jam. Awalnya, produksi gudeg dilakukan dalam jumlah kecil dan dijual di sekitar lingkungan rumah. Namun karena rasa dan kualitasnya yang konsisten, warung ini semakin dikenal masyarakat. Popularitasnya terus berkembang berkat resep turun-temurun dan dedikasi keluarga dalam mempertahankan keaslian rasa gudeg kering Jogja. Seiring waktu, usaha rumahan tersebut berkembang menjadi beberapa cabang yang tersebar di Yogyakarta. Meskipun kini melayani pelanggan dalam skala besar, proses masak tradisional tetap dipertahankan. Itulah yang membuat Gudeg Yu Djum tetap menjadi ikon kuliner Jogja yang legendaris, baik bagi warga lokal maupun wisatawan.",
     details: { type: "Restoran", facilities: ["Parkir", "Toilet", "Area Makan Luas", "Mushola"] },
     tags: ["family_owned", "preserves_cultural_heritage", "locally_sourced_materials"],
-    video_url: videoMakanan,
-    products: foodProducts,
+    video_url: "https://www.youtube.com/embed/KokmnrwBYZQ?si=3II_yWN0EtZvc7QX&amp;controls=0",
+    products: [
+      { id: "p1", name: "Nasi Gudeg", price: 35000, description: "Nasi Gudeg yang disajikan lengkap dengan nasi dicampur dengan kuah santan kental (areh), ayam kampung, telur, tempe, tahu dan sambal goreng krecek. Nasi Gudeg biasanya langsung dinikmati ditempat bersama temen atau keluarga.", image_url: "https://gudegyudjum.com/storage/app/public/img/home/card___gudeg-yu-djum-jogja-kendil-kuliner-khas-jogja__63a0815050e02__80.jpg" },
+      { id: "p2", name: "Gudeg Kendil ", price: 45000, description: "Gudeg Kendil adalah salah satu cara penyajian yang khas dari Gudeg. Dimana didalam kendil (kuali tanah liat) tersebut di masukkan beberapa komponen daripada Gudeg tersebut. Yaitu Gudeg (sayur nangka), Telur, Ayam, Krecek (sambal goreng kulit sapi).", image_url: "https://gudegyudjum.com/storage/app/public/img/home/card___gudeg-yu-djum-jogja-kendil-kuliner-khas-jogja__63a08190c7600__80.jpg" }
+    ],
   },
   {
     id: 2,
@@ -70,18 +74,24 @@ export const umkmData = [
     latitude: -7.7827,
     longitude: 110.3672,
     images: [
-      "https://images.unsplash.com/photo-1606843043322-c1f31f90b63c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
-      "https://images.unsplash.com/photo-1511920183353-52326045634b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
+      "https://gdb.voanews.com/509F8AB2-D0B0-4269-B9E7-B6447FC579D3_w1080_h608_b.jpg",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUgUVs__HPlytDUWWHJdzIkLw1tNxlCpLNDg&s",
+      "https://www.nescafe.com/id/sites/default/files/2023-09/Proses%20Pengolahan%20Biji%20Kopi%20Sebelum%20Horizontal%20Reference%20Image.jpg",
+      "https://nutracomesindotama.co.id/image/cache/catalog/Blog-images/barista-960x540.jpg",
+      "https://live.staticflickr.com/3138/2778609368_2c569ae095_z.jpg"
     ],
-    description: "Pelopor Kopi Joss (kopi dengan arang) di Yogyakarta. ...",
+    description: "Kopi Joss adalah salah satu minuman khas Yogyakarta yang dikenal karena keunikannya: secuil arang panas membara dicelupkan langsung ke dalam segelas kopi hitam. Minuman ini berasal dari angkringan legendaris Lik Man, yang berlokasi di kawasan Stasiun Tugu, Yogyakarta. Asal mula Kopi Joss bermula pada tahun 1980-an, ketika Lik Man, seorang pedagang angkringan generasi pertama, bereksperimen untuk memberikan sensasi berbeda pada kopi hitam yang ia jual. Ceritanya, suatu malam Lik Man melihat para pelanggan yang mengeluh sakit perut atau kembung setelah minum kopi. Menurut pengalaman tradisional Jawa, arang panas dipercaya dapat membantu meredakan gangguan pencernaan dan menetralkan zat tertentu. Dari situlah muncul ide sederhana namun unik: memasukkan arang panas langsung ke dalam gelas kopi. Ketika arang menyentuh kopi, terdengar bunyi “joss!” yang kemudian menginspirasi nama minuman tersebut: Kopi Joss. Walaupun terlihat ekstrem, proses ini tidak membuat kopi terasa gosong. Justru, arang panas membuat suhu kopi lebih stabil dan memberikan rasa yang lebih halus serta kurang asam. Keunikan ini segera menarik perhatian pengunjung lokal maupun wisatawan, dan Kopi Joss pun menjadi ikon baru dari angkringan Yogyakarta. Hari ini, Kopi Joss Lik Man dikenal sebagai pelopor kopi arang dan menjadi agenda wajib bagi wisatawan yang datang ke Jogja. Popularitasnya membuat konsep kopi arang diadaptasi oleh sejumlah angkringan lain, tetapi angkringan Lik Man tetap menjadi yang paling legendaris karena merupakan tempat asal mula minuman unik ini.",
     details: { type: "Angkringan", facilities: ["Tempat Duduk Lesehan", "Toilet Umum Terdekat"] },
     tags: ["preserves_cultural_heritage", "small_batch"],
-    video_url: videoMakanan,
-    products: foodProducts,
+    video_url: "https://www.youtube.com/embed/mTbxB_UtvvU?si=6KMYdEeP-p2DP1EV&amp;controls=0",
+    products: [
+      { id: "p1", name: "Sate Kulit", price: 3000, description: "Tambahan yang sempurna untuk hidangan utama.", image_url: "https://i.gojekapi.com/darkroom/gofood-indonesia/v2/images/uploads/8ac00ace-bddd-48a7-b1dc-d9c4e023136a_b83533f0-29fd-46e2-bcd5-a08286359d29_master-menu-item-image_1585727135664.jpg?auto=format" },
+      { id: "p2", name: "Sate Usus", price: 3000, description: "Tambahan yang sempurna untuk hidangan utama.", image_url: "https://i.gojekapi.com/darkroom/gofood-indonesia/v2/images/uploads/3f4de994-f3ba-476b-87a1-2f8a6d066d98_6bacbf50-bcf5-40e3-89b2-3970232d4809_master-menu-item-image_1577084272487.jpg?auto=format" }
+    ],
   },
   {
     id: 3,
-    name: "Mirota Batik Malioboro",
+    name: "Hamzah Batik Malioboro",
     category: "Belanja",
     subcategory: "Batik & Kerajinan",
     phone: "0274588524",
@@ -89,7 +99,7 @@ export const umkmData = [
     paymentMethods: ["Tunai", "QRIS", "Debit", "Kartu Kredit"],
     lastUpdated: "2025-10-15",
     reviewsList: [/* ... */],
-    owner: { name: "Mirota Group", joined: "2024-01-20", verified: true },
+    owner: { name: "Keluarga Hamzah", joined: "2024-01-20", verified: true },
     rating: 97,
     reviews: 1200,
     location: "Jl. Malioboro No.9",
@@ -98,14 +108,20 @@ export const umkmData = [
     latitude: -7.7949,
     longitude: 110.3659,
     images: [
-      "https://images.unsplash.com/photo-1578491793108-d1e3e05f560a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
-      "https://images.unsplash.com/photo-1620799140414-b291c3d9b736?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
+      "https://hamzahbatik.co.id/wp-content/uploads/2024/07/foto-toko.jpg",
+      "https://asset-2.tribunnews.com/jogja/foto/bank/originals/PROFIL-Hamzah-Sulaeman-Pengusaha-dan-Seniman-Pemilik-Raminten-Ikon-Legendaris-Wisata-Jogja.jpg",
+      "https://www.jnjbatik.com/wp-content/uploads/2016/11/10-Alat-dan-Bahan-Untuk-Membuat-Batik-Tulis.jpg",
+      "https://www.rinso.com/images/h0nadbhvm6m4/17RmARrAatDIJ0x2DxsGSc/68f28770f0815e43ef8408c6751dcefb/MDIuX1JpbnNvX09rdG9iZXJfSGVhZGVyLmpwZw/1000w-668h/pembatik-pemula.jpg",
+      "https://down-id.img.susercontent.com/file/id-11134207-7rbka-m7w0egccli4t08@resize_w450_nl.webp"
     ],
-    description: "Toko souvenir dan batik terlengkap di Malioboro. ...",
+    description: "Hamzah Batik, yang sebelumnya dikenal dengan nama Mirota Batik, didirikan pada tahun 1979 dengan konsep awal sebagai “Malioboro Baru”, sebuah pasar kecil yang terdiri dari beberapa kios atau stand. Pada masa itu, pusat keramaian kawasan Malioboro masih terpusat di sekitar toko Ramai di bagian utara, sehingga area “Malioboro Baru” masih relatif sepi pengunjung. Hamzah, pendiri usaha ini, memulai langkahnya dengan menyewa tiga stand yang menawarkan produk batik dan kerajinan tangan. Seiring berjalannya waktu, usaha tersebut mengalami perkembangan pesat, ditandai dengan bertambahnya jumlah stand yang disewa. Perkembangan ini terus berlanjut hingga akhirnya Mirota Batik tumbuh dan dikenal luas oleh masyarakat. Nama “Mirota Batik” diambil dari nama usaha milik orang tua Hamzah pada tahun 1950-an, yaitu “Mirota”, yang merupakan singkatan dari Minuman, Roti, dan Tawar. Usaha tersebut berlokasi di kawasan Kotabaru dan bergerak di bidang penjualan bahan pokok dan makanan, seperti gula, kopi, mentega, dan roti tawar. Pada tahun 2004, toko Mirota Batik mengalami musibah kebakaran di tengah tingginya jumlah pengunjung. Untuk sementara waktu, operasional toko dipindahkan ke Mirota Gallery yang terletak di Jalan Malioboro, sambil menunggu proses renovasi bangunan utama. Satu tahun kemudian, pembangunan gedung baru Hamzah Batik Malioboro selesai dengan desain tiga lantai dan luas bangunan mencapai 802 m².",
     details: { type: "Toko Oleh-oleh", facilities: ["AC", "Toilet", "Lift", "Rest Area"] },
     tags: ["locally_sourced_materials", "preserves_cultural_heritage", "empowers_women", "family_owned"],
-    video_url: videoKerajinan,
-    products: shopProducts,
+    video_url: "https://www.youtube.com/embed/86B__OoXu1c?si=TZlgVuawreMQZguF&amp;controls=0",
+    products: [
+      { id: "p1", name: "Hamzah Batik - Outer Lily", price: 288000, description: "Batik paling populer dan direkomendasikan.", image_url: "https://down-id.img.susercontent.com/file/id-11134207-7rbk5-m7ll4ylwk56sa3.webp" },
+      { id: "p2", name: "Hamzah Batik - Hem Seri Gallus", price: 465750, description: "Batik paling populer dan direkomendasikan.", image_url: "https://down-id.img.susercontent.com/file/id-11134207-7rbkb-m7u75ihaeobmd7.webp" }
+    ],
   },
   {
     id: 4,
@@ -126,14 +142,20 @@ export const umkmData = [
     latitude: -7.7984,
     longitude: 110.3662,
     images: [
-      "https://images.unsplash.com/photo-1543088243-e35f83b23c0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
-      "https://images.unsplash.com/photo-1599586120428-c6f34a26e033?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
+      "https://jogjacagar.jogjaprov.go.id/assets/uploads/files/foto/pasar-beringharjo/35b3255cf258f2e224937897c2900a74.png",
+      "https://jogjacagar.jogjaprov.go.id/assets/uploads/files/foto/pasar-beringharjo/35b3255cf258f2e224937897c2900a74.png",
+      "https://www.jnjbatik.com/wp-content/uploads/2016/11/10-Alat-dan-Bahan-Untuk-Membuat-Batik-Tulis.jpg",
+      "https://www.rinso.com/images/h0nadbhvm6m4/17RmARrAatDIJ0x2DxsGSc/68f28770f0815e43ef8408c6751dcefb/MDIuX1JpbnNvX09rdG9iZXJfSGVhZGVyLmpwZw/1000w-668h/pembatik-pemula.jpg",
+      "https://down-id.img.susercontent.com/file/id-11134207-7rbka-m7w0egccli4t08@resize_w450_nl.webp"
     ],
-    description: "Pasar tradisional terbesar dan tertua di Yogyakarta. ...",
+    description: "Pasar Beringharjo didirikan secara formal oleh Keraton Ngayogyakarta Hadiningrat, dengan aktifitas pasar yang berjalan sejak masa Sri Sultan Hamengku Buwono I, dan kemudian dibangun secara permanen (kios/los) dengan bantuan kolonial Belanda pada 1925. Jadi “pembuat” utama adalah Keraton Yogyakarta (melalui sultan), dengan pelaksanaan pembangunan fisik oleh perusahaan beton Belanda.",
     details: { type: "Pasar Tradisional", facilities: ["Toilet Umum", "Area Parkir Luas", "ATM Center"] },
     tags: ["locally_sourced_materials", "preserves_cultural_heritage", "community_empowerment"],
-    video_url: videoKerajinan,
-    products: shopProducts,
+    video_url: "https://www.youtube.com/embed/xsgyxe7GOWw?si=oMFOag6uGJcFSDR5&amp;controls=0",
+    products: [
+      { id: "p1", name: "Batik - Outer", price: 50000, description: "Batik paling populer dan direkomendasikan.", image_url: "https://down-id.img.susercontent.com/file/id-11134207-7rbk5-m7ll4ylwk56sa3.webp" },
+      { id: "p2", name: "Batik - Hem", price: 45000, description: "Batik paling populer dan direkomendasikan.", image_url: "https://down-id.img.susercontent.com/file/id-11134207-7rbkb-m7u75ihaeobmd7.webp" }
+    ],
   },
   {
     id: 5,
@@ -260,7 +282,7 @@ export const umkmData = [
     paymentMethods: ["Tunai", "QRIS", "Debit", "Kartu Kredit"],
     lastUpdated: "2025-10-25",
     reviewsList: [/* ... */],
-    owner: { name: "ViaVia Group", joined: "2024-03-11", verified: true },
+    owner: { name: "Mie Cornoedus", joined: "2024-03-11", verified: true },
     rating: 96,
     reviews: 230,
     location: "Prawirotaman",
@@ -269,14 +291,20 @@ export const umkmData = [
     latitude: -7.8166,
     longitude: 110.3705,
     images: [
-      "https://images.unsplash.com/photo-1563050158-a0c3021a8a29?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
-      "https://images.unsplash.com/photo-1509735837536-83d38b552d0e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2-efjHhSqR_0DOc1CvaxKnfn3fh9ONIcdrA&s",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkHaWsaLF2ciFj8bgPcXn1EWhTYCgY7pukaA&s",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcST4B0rauchiMri_C0adW2HcQoHHJ-RLiWc3w&s",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTamQImSKYsVBbnlJDk-6Ca6UCXoCrO1genTA&s",
+      "https://viaviajogja.com/wp-content/uploads/2020/06/small-baguette-600x600.jpg"
     ],
-    description: "Bakery yang menjual roti-roti artisan, kue, dan produk organik. ...",
+    description: "Mie Cornoedus adalah bagian dari sekelompok pemandu wisata untuk sebuah agen perjalanan Belgia yang terkenal dengan tur dan ekspedisinya yang penuh petualangan serta pendiriannya tentang pariwisata yang bertanggung jawab. Ia juga berpartisipasi dalam memberikan pelatihan kepada pemandu wisata baru dan secara rutin berkumpul untuk membahas teknik pelatihan dan filosofi perjalanan. Beberapa dari mereka memiliki ide untuk mendirikan kafe pelancong di Belgia, yang dapat mempromosikan cara pandang yang berbeda terhadap dunia melalui berbagai kegiatan. Hal ini menginspirasinya dan beberapa orang lainnya untuk berpikir lebih global dan mereka melihat konsep serupa di berbagai belahan dunia. Kafe ini dapat menjadi pusat bagi para pelancong, komunitas lokal, dan tempat untuk belajar tentang kehidupan sehari-hari kontemporer. Dengan kata lain, mereka bercita-cita menjadi tempat pertemuan lintas budaya dan menerapkan ide-ide pariwisata berkelanjutan. Ia datang ke Yogyakarta pada tahun 1995 dengan tujuan mendirikan ViaVia di sini.",
     details: { type: "Bakery", facilities: ["Kafe", "Toko Organik", "Wifi"] },
     tags: ["social_enterprise", "eco_friendly", "small_batch", "locally_sourced_materials", "empowers_women", "natural_dyes"],
-    video_url: videoMakanan,
-    products: foodProducts,
+    video_url: "https://www.youtube.com/embed/h2I9W2KxnZc?si=lUlkcvNrAJdvujzI&amp;controls=0",
+    products: [
+      { id: "p1", name: "Whole Wheat Baguette", price: 35000, description: "Whole Wheat Baguette A long, wide loaf made from local organic whole wheat, topped with a blend of black and white sesame seeds.", image_url: "https://viaviajogja.com/wp-content/uploads/2020/06/whole-wheat-baguette-600x600.jpg" },
+      { id: "p2", name: "Panettone", price: 55000, description: "Panettone A classic Italian sweet bread made with sourdough starter and processed in slow long fermintation mixed with dried fruits and almond", image_url: "https://viaviajogja.com/wp-content/uploads/2024/12/Panettone-600x600.jpg" }
+    ],
   },
   {
     id: 10,
@@ -288,7 +316,7 @@ export const umkmData = [
     paymentMethods: ["Tunai", "QRIS", "Debit"],
     lastUpdated: "2025-10-30",
     reviewsList: [/* ... */],
-    owner: { name: "Tempo Gelato", joined: "2024-01-30", verified: true },
+    owner: { name: "Rudy Christian Festraets", joined: "2024-01-30", verified: true },
     rating: 98,
     reviews: 1500,
     location: "Prawirotaman",
@@ -297,14 +325,20 @@ export const umkmData = [
     latitude: -7.817,
     longitude: 110.37,
     images: [
-      "https://images.unsplash.com/photo-1567197343946-f63ee142353a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
-      "https://images.unsplash.com/photo-1627999138243-91285731f82f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSS_29CNF0BuMbgBj9fxrnOWZu3iO9e5r8_Lw&s",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSS_29CNF0BuMbgBj9fxrnOWZu3iO9e5r8_Lw&s",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmA7WuAhHofYIPlJvEpyaAJr9tosHPZPCing&s",
+      "https://asset.kompas.com/crops/LCKAS9-tNwDS8LLtMOjocBLNjqU=/0x0:1000x667/750x500/data/photo/2020/06/11/5ee24346c170f.jpg",
+      "https://tempogelato.com/gallery/ice-cream-cone-tempo-gelato.jpg"
     ],
-    description: "Kedai gelato paling populer di Jogja ...",
+    description: "TEMPO GELATO, merupakan outlet gelato yang berdiri di tiga tempat di Kota Jogja. Berawal dari sebuah outlet kecil Tempo Gelato Prawirotaman pada tahun 2015 dengan nuansa Industrial eropa dan sentuhan khas rural (pedesaan) Indonesia. Yang menjadikan Outlet pertama ini sebagai salah satu icon-nya Kota Jogja. Pertengahan 2019, dengan persiapan yang matang, outlet Tempo Gelato Prawirotaman akhirnya direlokasi menjadi sebuah outlet yang lebih besar dengan daya tampung yang lebih banyak. Dan tetap menjadi salah satu kebanggaan Kota Jogja. Hal ini semua bisa terwujud berkat kerja keras tim project Tempo Gelato dan juga terutama support dari pelanggan setia Tempo Gelato.",
     details: { type: "Kedai Gelato", facilities: ["AC", "Toilet", "Area Duduk Indoor & Outdoor"] },
     tags: ["family_owned", "small_batch"],
-    video_url: videoMakanan,
-    products: foodProducts,
+    video_url: "https://www.youtube.com/embed/PPmHep0byXg?si=aDO8C4fGxrscUsdD&amp;controls=0",
+    products: [
+      { id: "p1", name: "Cone", price: 35000, description: "Max 2 rasa", image_url: "https://tempogelato.com/gallery/cone-tempo-gelato.jpg" },
+      { id: "p2", name: "Cup Medium", price: 5000, description: "Max 3 rasa", image_url: "https://tempogelato.com/gallery/tempo-gelato-cone.jpg" }
+    ],
   },
   {
     id: 11,
@@ -381,14 +415,20 @@ export const umkmData = [
     latitude: -7.8037,
     longitude: 110.3662,
     images: [
-      "https://images.unsplash.com/photo-1626700051175-68151f005a88?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
-      "https://images.unsplash.com/photo-1625938135216-9b1611c38d37?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
+      "https://asset-2.tribunnews.com/surabaya/foto/bank/images/PROFIL-Warung-Bakmi-Pak-Pele-Yogyakarta-yang-Dikunjungi-Presiden-Jokowi-Milik-Mantan-Pesepak-Bola.jpg",
+      "https://assets.promediateknologi.id/crop/0x0:0x0/750x500/webp/photo/2023/06/03/WhatsApp-Image-2023-06-03-at-122718-2532582213.jpeg",
+      "https://manunggalperkasa.co.id/wp-content/uploads/2025/06/id-11134207-7qul8-lifcrm7dseg18e.jpg",
+      "https://asset.kompas.com/crops/Wp0KstNkkQLxTi9q-mmuqenZtnc=/0x2181:3360x4421/1200x800/data/photo/2021/05/24/60ab13c0b68eb.jpg",
+      "https://adisutjipto-airport.co.id/frontend/uploads/defaults/cLF5dt20170314143513.jpg"
     ],
-    description: "Bakmi Jawa legendaris di dekat Kraton. ...",
+    description: "Pemilik warung, Suharjiman (70) yang lebih dikenal dengan nama Pak Pele menceritakan kisahnya kepada detikJateng. Ia mulai berjualan bakmi jawa sejak tahun 1983. Saat itu usianya baru menginjak 25 tahun. Ia mengatakan asal usul penggunaan nama Pele untuk warungnya. Pertama, karena kecintaannya akan sepak bola. Kedua, lantaran ia mengidolakan legenda sepak bola asal Brazil, Pele.",
     details: { type: "Warung Kaki Lima", facilities: ["Lesehan", "Area Makan Terbuka"] },
     tags: ["preserves_cultural_heritage", "small_batch", "family_owned"],
-    video_url: videoMakanan,
-    products: foodProducts,
+    video_url: "https://www.youtube.com/embed/4c_-K4_XGkI?si=IWT3anWu3SVCapig&amp;controls=0",
+    products: [
+      { id: "p1", name: "Bakmie Goreng Kuning", price: 20000, description: "Paling populer dan direkomendasikan.", image_url: "https://i.gojekapi.com/darkroom/gofood-indonesia/v2/images/uploads/d277d4b6-e178-49d3-aae9-433027b7faf9_c7a686e7-8950-4e70-b425-e0da83d4dc69.jpg?auto=format" },
+      { id: "p2", name: "Magelangan", price: 20000, description: "Paling populer dan direkomendasikan.", image_url: "https://i.gojekapi.com/darkroom/gofood-indonesia/v2/images/uploads/942c818e-e53c-4311-9215-19d0b1a6ee28_1f27c880-c233-4036-91bb-e05e4de54def.jpg?auto=format" }
+    ],
   },
   {
     id: 14,
@@ -409,14 +449,20 @@ export const umkmData = [
     latitude: -7.8041,
     longitude: 110.3653,
     images: [
-      "https://images.unsplash.com/photo-1523381294911-8d3cead13475?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
-      "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
+      "https://img.harianjogja.com/posts/2020/10/10/1052187/dagadu.jpg",
+      "https://awsimages.detik.net.id/customthumb/2011/07/19/10/dagadu.jpg?w=600&q=90",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyhVumugl0w2FYijYO6AWgVKtNfP7xcuyYKA&s",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjzTiPahsivUFY3eCCbxQyloMXFgF7nJP0KQ&s",
+      "https://dagadu.co.id/cdn/shop/files/LivePro_Black_2.jpg?v=1759550120&width=493"
     ],
-    description: "Merek kaos ikonik Yogyakarta dengan desain yang cerdas...",
+    description: "PT. Aseli Dagadu berdiri tanggal 9 Januari 1994 di mana pertama kali berjualan di Mall Malioboro Yogyakarta setelah sebelumnya diawali dari beberapa kegiatan komunitas. Didirikan atau dimotori oleh mahasiswa dan alumni mahasiswa teknik arsitektur UGM yang mempunyai minat yang sama tentang kepariwisataan dan perkotaan. Dua puluh lima orang yang sering berkumpul dalam suatu kegiatan waktu itu bersama-sama mendirikan PT. Aseli Dagadu. Minat terhadap bidang kepariwisataan dan perkotaan, kesukaan desain grafis khususnya kaos, diskusi tentang teori dan realitas yang kerap dilakukan merupakan faktor internal pendorong didirikannya PT. Aseli Dagadu. Dari sisi eksternal, adanya penawaran untuk berjualan di mall malioboro menjadi sebuah kesempatan menjual kaos. Kaos menjadi pilihan karena produk inilah yang paling familiar dengan mereka saat itu.",
     details: { type: "Toko Pakaian", facilities: ["AC", "Kamar Pas", "Desain Toko Unik"] },
     tags: ["preserves_cultural_heritage", "locally_sourced_materials"],
-    video_url: videoKerajinan,
-    products: shopProducts,
+    video_url: "https://www.youtube.com/embed/UUOVcjKFrio?si=CQVpr29r6cOPYVSx&amp;controls=0",
+    products: [
+      { id: "p1", name: "Bakmie Goreng Kuning", price: 170000, description: "ilutrasi tentang Kerja Keras Bagai Kuda! Tanpa mengenal lelah dan menyerah. Gawa gambar wayang bertujuan agat tetap ada unsur klasik dalam desainnya. ", image_url: "https://dagadu.co.id/cdn/shop/files/2580-kuda_navy_brown_lp__2.jpg?v=1760327295&width=493" },
+      { id: "p2", name: "Dagadu Kaos Boxy Suradira Jayaningrat Lebur Dening Pangastuti - Navy", price: 190000, description: "Konsep ini diambil dari sebuah filosofi Jawa yang mengajarkan bahwa segala sifat keras hati, angkara murka, dan keberanian yang sombong dapat dikalahkan atau dihancurkan oleh kebijaksanaan, kelembutan, dan kesabaran Pesannya adalah tentang bagaimana kekuatan sejati bukanlah terletak pada kekerasan atau kesombongan, melainkan pada kelembutan dan kebajikan.", image_url: "https://dagadu.co.id/cdn/shop/files/2577-macan_navy__4.jpg?v=1760349642&width=493" }
+    ],
   },
   {
     id: 15,
@@ -456,7 +502,7 @@ export const umkmData = [
     paymentMethods: ["Tunai", "QRIS", "Debit", "Kartu Kredit"],
     lastUpdated: "2025-10-26",
     reviewsList: [/* ... */],
-    owner: { name: "Cokelat Monggo", joined: "2024-02-17", verified: true },
+    owner: { name: "Thierry Detournay", joined: "2024-02-17", verified: true },
     rating: 97,
     reviews: 300,
     location: "Tugu",
@@ -465,16 +511,19 @@ export const umkmData = [
     latitude: -7.7818,
     longitude: 110.367,
     images: [
-      "https://images.unsplash.com/photo-1511381939415-e3401f17b925?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
-      "https://images.unsplash.com/photo-1605287413136-253c55bd1cb3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
+      "https://awsimages.detik.net.id/community/media/visual/2023/11/17/chocolate-monggo-3_169.jpeg?w=1200",
+      "https://asset-2.tribunnews.com/jogja/foto/bank/images/wawancara-eksklusif-pendiri-cokelat-monggo-thierry-detournay-kenalkan-cokelat-yang-berkualitas.jpg",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAGyw4UIUBj_mfBjiagotKO7P2ddRH4Qdk-w&s",
+      "https://chocolatemonggo.com/wp-content/uploads/2023/06/8.-Pembuatan-Adonan-Isian-Pelumeran-Coklat-Filling-Preparation-Melting.jpg",
+      "https://chocolatemonggo.com/wp-content/uploads/2022/11/Chocolate-Monggo-Praline-Bar-Dark-Cokelat-Hitam-58-Coklat.jpg"
     ],
-    description: "Cokelat premium asli Jogja dengan berbagai varian rasa unik...",
+    description: "Thierry Detournay adalah seorang backpacker kewarganegaraan Belgia yang pada tahun 2001 silam menginjakkan kaki di Jogja. Ia seorang penyuka coklat. Ketika mencicipi coklat di Jogja, ia merasa kecewa karena coklat di negara ini terasa sangat manis, berbeda dengan coklat di negaranya, Belgia yang mempunyai rasa agak pahit. Dari situ, Thierry mencoba membuat sendiri coklat yang sesuai dengan seleranya. Dalam proses perjalanannya, Thierry bertemu dengan Edward Riando Picasauw, mahasiwa asal Maluku. Pertemuan kedua pria tersebut menghasilkan sebuah kerja sama dan pada tahun 2005 lahirlah Cokelat Monggo. Kata Monggo dipilih karena kata ini sangat familiar dan tipikal Jogja. Sebuah kata yang mudah diingat, didengar, dan unik. Monggo dalam bahasa Jawa berarti “silahkan” yang selalu digunakan oleh orang – orang Jogja/Jawa sambil mengacungkan ibu jari, ataupun ketika kita lewat di depan orang, serta pada saat kita mengundang orang masuk ke rumah atau meninggalkan rumah seseorang. Mulai dari awal proses Cokelat Monggo berdiri hingga sudah terkenal di berbagai daerah seperti sekarang ini, pembuatan dan produksi cokelat ini berada di Jogja dan menjadikan Thierry dijuluki sebagai pembuat cokelat pertama di Jogja. Pada awal mulanya proses produksi cokelat ini berada di daerah UGM. Karena berkembang semakin pesat dan menjadi sebuah industri yang membutuhkan tempat yang besar dan luas maka produksi dipindahkan ke Kotagede. Selain pabrik, di Kotagede ini juga terdapat showroom penjualan Cokelat Monggo.",
     details: { type: "Toko Cokelat", facilities: ["AC", "Tester Produk", "Kafe Kecil"] },
     tags: ["locally_sourced_materials", "small_batch", "eco_friendly", "social_enterprise", "preserves_cultural_heritage"],
-    video_url: videoMakanan,
+    video_url: "https://www.youtube.com/embed/6_QEx0KsRmk?si=_oMJrBP-rQ91Vm6L&amp;controls=0",
     products: [
-      { id: "p1", name: "Cokelat Batang 80g", price: 45000, description: "Varian rasa Dark, Milk, White, dan Rendang.", image_url: "https://images.unsplash.com/photo-1511381939415-e3401f17b925?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80" },
-      { id: "p2", name: "Praline (Isi 9)", price: 90000, description: "Cokelat premium dengan isian lembut.", image_url: "https://images.unsplash.com/photo-1605287413136-253c55bd1cb3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80" }
+      { id: "p1", name: "MILK CHOCOLATE 41% Of Cocoa - Bar 40g", price: 30000, description: "41% cocoa Milk chocolate bar, with a creamy texture, and a strong milky taste. This dark milk chocolate with a high percentage of cocoa is made with mild cocoa beans from West Indonesia. Their rounded taste makes it a better match with milk. Filled with calcium, this is a beneficial snack for your children’s growing bones.", image_url: "https://chocolatemonggo.com/wp-content/uploads/2022/11/Chocolate-Monggo-Bar-Milk-Cokelat-Susu-41-Coklat.jpg.webp" },
+      { id: "p2", name: "PRALINES BOX BALLOTIN 6pcs", price: 85000, description: "Are you looking for a sweet treat to indulge in or a gift to delight your loved ones? Look no further than our Pralines Box Ballotin from Chocolate Monggo. This delectable box features 6 pieces of expertly handcrafted pralines, each one a true work of art. Our pralines ballotin are made with the finest quality ingredients and the utmost care. We take pride in creating each piece to perfection, from the rich and creamy chocolate coating to the velvety smooth ganache filling. Every bite is a heavenly experience, with flavors that range from classic dark chocolate to nice fruits and nuts. Whether you're treating yourself or someone special, our Pralines Box Ballotin is a perfect choice. It's beautifully presented in an elegant ballotin box, making it a lovely gift for any occasion.", image_url: "https://chocolatemonggo.com/wp-content/uploads/2023/04/Chocolate-Monggo-Pralines-Box-Ballotine-6pcs.jpg.webp" }
     ],
   },
   {
@@ -809,7 +858,7 @@ export const umkmData = [
     paymentMethods: ["Tunai", "QRIS", "Debit"],
     lastUpdated: "2025-10-26",
     reviewsList: [/* ... */],
-    owner: { name: "Raminten Group", joined: "2024-02-19", verified: true },
+    owner: { name: "Keluarga Hamzah", joined: "2024-02-19", verified: true },
     rating: 95,
     reviews: 250,
     location: "Kotabaru",
@@ -818,14 +867,20 @@ export const umkmData = [
     latitude: -7.7839,
     longitude: 110.372,
     images: [
-      "https://images.unsplash.com/photo-1582298538104-fe2e74c2d561?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
-      "https://images.unsplash.com/photo-1599586120428-c6f34a26e033?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
+      "https://olaholehraminten.co.id/wp-content/uploads/2025/04/2-2.webp",
+      "https://asset-2.tribunnews.com/jogja/foto/bank/originals/PROFIL-Hamzah-Sulaeman-Pengusaha-dan-Seniman-Pemilik-Raminten-Ikon-Legendaris-Wisata-Jogja.jpg",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEdbJNCg4LB5EF7_jPC-jqrHQ_jzo85ejvQQ&s",
+      "https://static.promediateknologi.id/crop/0x0:0x0/750x500/webp/photo/p1/775/2024/07/18/bakpia-jogkem-831870113.jpeg",
+      "https://hamzahbatik.co.id/wp-content/uploads/2024/02/8408f137e7230f525fb146eb540538c7d338a5ae_s2_n2_y2.jpg"
     ],
-    description: "Toko oleh-oleh yang menjual pernak-pernik unik...",
+    description: "lah-oleh Raminten adalah salah satu pusat oleh-oleh terbaru di Yogyakarta, yang terletak di Kampung Wisata Ngampilan. Resmi dibuka pada 21 Desember 2024, tempat ini menjadi alternatif baru bagi para wisatawan yang ingin mencari oleh-oleh khas Jogja. Uniknya, Olah-oleh Raminten buka 24 jam setiap hari, jadi cocok banget untuk pengunjung yang datang siang, malam, bahkan dini hari. Konsep tempat ini tetap membawa nuansa budaya Jawa, sejalan dengan lini usaha Raminten lainnya.",
     details: { type: "Toko Oleh-oleh", facilities: ["AC", "Parkir"] },
     tags: ["family_owned", "preserves_cultural_heritage", "female_founded"],
-    video_url: videoKerajinan,
-    products: shopProducts,
+    video_url: "https://www.youtube.com/embed/Sqyd2r_xdJk?si=B3yKhlC94R-yBxVx&amp;controls=0",
+    products: [
+      { id: "p1", name: "Bakpia", price: 50000, description: "Bakpia Premium Raminten Rasa Coklat", image_url: "https://olaholehraminten.co.id/wp-content/uploads/2025/04/Bakpia-Premium-Coklat-Raminten-upl.webp" },
+      { id: "p2", name: "Keripik", price: 70000, description: "Keripik Sale Pisang Raminten", image_url: "https://olaholehraminten.co.id/wp-content/uploads/2025/04/Keripik-Sale-Pisang-upl.webp" }
+    ],
   },
   {
     id: 29,
