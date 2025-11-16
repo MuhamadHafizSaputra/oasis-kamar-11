@@ -3,12 +3,13 @@ import React from "react";
 import {
   AdjustmentsHorizontalIcon,
   ChevronDownIcon,
-  SparklesIcon, // <-- Impor ikon baru
+  SparklesIcon,
 } from "@heroicons/react/24/outline";
 
-// Helper component kecil untuk membuat dropdown kita rapi
-const FilterDropdown = ({ label, value, onChange, children }) => (
-  <div className="relative">
+// --- PERUBAHAN 1: Tambahkan 'className' sebagai prop ---
+const FilterDropdown = ({ label, value, onChange, children, className }) => (
+  // --- Terapkan 'className' di sini ---
+  <div className={`relative ${className}`}>
     <label htmlFor={`filter-${label}`} className="sr-only">
       {label}
     </label>
@@ -24,7 +25,6 @@ const FilterDropdown = ({ label, value, onChange, children }) => (
   </div>
 );
 
-// --- TAMBAHKAN PROPS 'onAdvancedFilterClick' ---
 export default function FilterBar({ activeFilters, setActiveFilters, onAdvancedFilterClick }) {
   
   const handleFilterChange = (key, value) => {
@@ -36,8 +36,16 @@ export default function FilterBar({ activeFilters, setActiveFilters, onAdvancedF
 
   return (
     <div className="py-4 border-b border-gray-200">
-      <div className="flex flex-wrap items-center gap-3">
-        <span className="flex items-center px-2 py-2 font-medium text-sm text-gray-700">
+      {/* --- PERUBAHAN 2: Modifikasi container ini ---
+        - 'flex-wrap' diubah menjadi 'flex-nowrap'
+        - 'overflow-x-auto' ditambahkan untuk scroll horizontal
+        - 'no-scrollbar' ditambahkan (dari index.css Anda) untuk menyembunyikan scrollbar
+        - 'pb-2' ditambahkan untuk memberi sedikit ruang di bawah
+      */}
+      <div className="flex flex-nowrap items-center gap-3 overflow-x-auto no-scrollbar pb-2">
+        
+        {/* --- PERUBAHAN 3: Tambahkan 'flex-shrink-0' agar teks tidak gepeng --- */}
+        <span className="flex flex-shrink-0 items-center px-2 py-2 font-medium text-sm text-gray-700">
           <AdjustmentsHorizontalIcon className="w-5 h-5 mr-2" />
           Filter:
         </span>
@@ -47,6 +55,7 @@ export default function FilterBar({ activeFilters, setActiveFilters, onAdvancedF
           label="Kategori"
           value={activeFilters.category}
           onChange={(e) => handleFilterChange("category", e.target.value)}
+          className="flex-shrink-0" // <-- Tambahkan flex-shrink-0
         >
           <option value="all">Semua Kategori</option>
           <option value="Makanan">Makanan</option>
@@ -60,6 +69,7 @@ export default function FilterBar({ activeFilters, setActiveFilters, onAdvancedF
           label="Harga"
           value={activeFilters.price}
           onChange={(e) => handleFilterChange("price", e.target.value)}
+          className="flex-shrink-0" // <-- Tambahkan flex-shrink-0
         >
           <option value="all">Semua Harga</option>
           <option value="murah">Murah (di bawah Rp 20rb)</option>
@@ -72,6 +82,7 @@ export default function FilterBar({ activeFilters, setActiveFilters, onAdvancedF
           label="Rating"
           value={activeFilters.rating}
           onChange={(e) => handleFilterChange("rating", Number(e.target.value))}
+          className="flex-shrink-0" // <-- Tambahkan flex-shrink-0
         >
           <option value={0}>Semua Rating</option>
           <option value={95}>95% +</option>
@@ -79,17 +90,19 @@ export default function FilterBar({ activeFilters, setActiveFilters, onAdvancedF
           <option value={80}>80% +</option>
         </FilterDropdown>
 
-        {/* --- TOMBOL FILTER LANJUTAN BARU --- */}
+        {/* Tombol Filter Lanjutan */}
         <button
-          onClick={onAdvancedFilterClick} // <-- Gunakan prop
-          className="flex items-center pl-4 pr-5 py-2 border rounded-full font-medium text-sm 
+          onClick={onAdvancedFilterClick}
+          // <-- Tambahkan flex-shrink-0
+          className="flex flex-shrink-0 items-center pl-4 pr-5 py-2 border rounded-full font-medium text-sm 
                      hover:bg-indigo-50 hover:border-indigo-300 text-indigo-700"
         >
           <SparklesIcon className="w-5 h-5 mr-1.5" />
           Filter Lanjutan
         </button>
-        {/* --- AKHIR TOMBOL BARU --- */}
         
+        {/* Spacer kecil di akhir agar tidak menempel di tepi */}
+        <div className="flex-shrink-0 w-1"></div>
       </div>
     </div>
   );

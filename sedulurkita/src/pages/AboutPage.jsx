@@ -3,6 +3,7 @@ import React from 'react';
 import { SparklesIcon, HeartIcon, UsersIcon, GlobeAltIcon } from '@heroicons/react/24/outline';
 import imageHafiz from '../data/myteam/image1.jpeg';
 import imageHasbi from '../data/myteam/image2.jpeg';
+import imageDavin from '../data/myteam/image3.jpeg';
 
 // Data Misi
 const missions = [
@@ -38,7 +39,7 @@ const team = [
   {
     name: 'Vincentius Davin Febrillianagata',
     role: 'UI/UX Designer',
-    imageUrl: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+    imageUrl: imageDavin,
   },
 ];
 
