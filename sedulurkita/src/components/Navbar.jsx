@@ -17,17 +17,17 @@ export default function Navbar() {
   return (
     <nav className="bg-white border-b border-gray-200 sticky top-0 z-50">
       <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center h-20">
+        {/* UBAH 1: Tinggi container dibuat h-16 (64px) di mobile, h-20 (80px) di desktop */}
+        <div className="flex justify-between items-center h-16 md:h-20">
           
-          {/* --- BAGIAN LOGO DIPERBARUI --- */}
-          {/* The text span is removed, leaving only the image inside the Link */}
+          {/* --- BAGIAN LOGO --- */}
           <Link to="/" className="flex items-center group" onClick={closeMenu}>
             <img 
               src="/images/LogoSedulurKita.png" 
               alt="Logo SedulurKita" 
-              className="h-10 w-auto object-contain" 
+              /* UBAH 2: Logo dibuat h-7 (28px) di mobile, kembali ke h-10 (40px) di desktop */
+              className="h-7 md:h-10 w-auto object-contain transition-all duration-200" 
             />
-            {/* The <span> tag with "SedulurKita" text has been removed */}
           </Link>
           {/* --- AKHIR BAGIAN LOGO --- */}
 
@@ -46,7 +46,6 @@ export default function Navbar() {
               Tentang Kami
             </Link>
 
-            {/* Logika Tampilan Login/Logout */}
             {isAuthenticated ? (
               <>
                 <Link to="/account" className="text-gray-700 hover:text-[#DA9A3D] font-medium">

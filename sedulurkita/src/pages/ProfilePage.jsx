@@ -12,6 +12,7 @@ import { getOptimizedImageUrl } from "../lib/imageUtils";
 // Import the custom hooks
 import { useCountUp } from "../hooks/useCountUp.js";
 import { useScrollAnimate } from "../hooks/useScrollAnimate.js";
+import { useDocumentTitle } from '../hooks/useDocumentTitle';
 
 // Helper untuk format Rupiah
 const formatCurrency = (value) =>
@@ -52,6 +53,9 @@ export default function ProfilePage() {
   const [umkm, setUmkm] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  // Tentukan judul: Jika data umkm ada, pakai namanya. Jika belum, pakai "Loading..."
+  const pageTitle = umkm ? `${umkm.name} - SedulurKita` : "Detail UMKM - SedulurKita";
+  useDocumentTitle(pageTitle);
 
   // Initialize the scroll-animation hook
   const addScrollAnimateRef = useScrollAnimate();

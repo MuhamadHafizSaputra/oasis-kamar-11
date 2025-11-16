@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { UserCircleIcon, CameraIcon } from '@heroicons/react/24/solid';
+import { useDocumentTitle } from '../hooks/useDocumentTitle';
 
 export default function AccountProfilePage() {
   const { user, updateProfile } = useAuth();
@@ -13,6 +14,8 @@ export default function AccountProfilePage() {
   
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState({ type: '', text: '' });
+
+  useDocumentTitle("Akun Saya - SedulurKita");
 
   // Isi form dengan data user saat ini ketika halaman dimuat
   useEffect(() => {

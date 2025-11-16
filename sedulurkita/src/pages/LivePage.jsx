@@ -1,6 +1,7 @@
 // src/pages/LivePage.jsx
 import React, { useState, useEffect, useRef } from "react";
 import { useParams, Link } from "react-router-dom";
+import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import { 
   PaperAirplaneIcon, 
   HeartIcon, 
@@ -25,6 +26,9 @@ export default function LivePage() {
   const [newMessage, setNewMessage] = useState("");
   const [isLoved, setIsLoved] = useState(false);
   const chatEndRef = useRef(null);
+  // Logika judul dinamis
+  const title = umkm ? `LIVE: ${umkm.name}` : "Nonton Live - SedulurKita";
+  useDocumentTitle(title);
 
   // Cari data UMKM berdasarkan ID
   useEffect(() => {

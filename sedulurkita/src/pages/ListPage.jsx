@@ -3,7 +3,8 @@ import React, { useState, useEffect, useRef } from "react";
 import { useSearchParams } from "react-router-dom";
 import FilterBar from "../components/FilterBar.jsx";
 import UmkmCard from "../components/UmkmCard.jsx";
-import FilterModal from "../components/FilterModal.jsx";
+import FilterModal from "../components/FilterModal.jsx"; // <-- 1. IMPOR MODAL
+import { useDocumentTitle } from '../hooks/useDocumentTitle';
 
 import maplibregl from "maplibre-gl";
 import { Map, Marker, Popup, GeolocateControl, useMap } from "@vis.gl/react-maplibre";
@@ -120,6 +121,7 @@ function GetMapInstance({ setMap }) {
 
 
 export default function ListPage() {
+  useDocumentTitle("Jelajahi UMKM - SedulurKita");
   const [listings, setListings] = useState([]);
   const [originalUmkm, setOriginalUmkm] = useState([]);
   const [filteredUmkm, setFilteredUmkm] = useState([]);
