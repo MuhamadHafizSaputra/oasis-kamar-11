@@ -1,7 +1,9 @@
 // src/pages/AboutPage.jsx
 import React from 'react';
 import { SparklesIcon, HeartIcon, UsersIcon, GlobeAltIcon } from '@heroicons/react/24/outline';
-import { useDocumentTitle } from '../hooks/useDocumentTitle';
+import imageHafiz from '../data/myteam/image1.jpeg';
+import imageHasbi from '../data/myteam/image2.jpeg';
+import imageDavin from '../data/myteam/image3.jpeg';
 
 // Data Misi
 const missions = [
@@ -27,22 +29,21 @@ const team = [
   {
     name: 'Muhammad Hafiz Saputra',
     role: 'Founder / CEO',
-    imageUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+    imageUrl: imageHafiz,
   },
   {
     name: 'Muhammad Khairul Hasbi',
     role: 'Database Administrator',
-    imageUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+    imageUrl: imageHasbi,
   },
   {
     name: 'Vincentius Davin Febrillianagata',
     role: 'UI/UX Designer',
-    imageUrl: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+    imageUrl: imageDavin,
   },
 ];
 
 export default function AboutPage() {
-  useDocumentTitle("Tentang Kami - SedulurKita");
   return (
     <div className="bg-brand-beige">
       {/* 1. Hero Section */}
